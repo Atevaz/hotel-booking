@@ -20,7 +20,6 @@ Future<void> main() async {
       await CacheHelper.init();
       bool? isDark =
           CacheHelper.getDataFromSharedPreference(key: 'isDark') ?? false;
-
       runApp(MyApp(
         appRouter: AppRouter(),
         isDark: isDark,

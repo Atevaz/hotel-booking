@@ -1,3 +1,4 @@
+import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomeLayout extends StatelessWidget {
@@ -5,6 +6,10 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size(double.infinity,kToolbarHeight),
+          child: MyAppBar(leadingIcon: Container(),)),
+    );
   }
 }

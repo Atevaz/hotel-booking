@@ -24,7 +24,6 @@ class DioHelper {
     dio!.options.headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization':'Bearer $token'??'',
     };
     return await dio!.post(url, data: body);
   }
@@ -32,9 +31,7 @@ class DioHelper {
   static Future<Response> getData(
       {required String url, required String token ,Map<String,dynamic>? query}) async {
     dio!.options.headers = {
-      //'Connection': 'keep-alive',
       'Accept': 'application/json',
-      'Authorization':'Bearer $token'??'',
     };
 
     return await dio!.get(url,queryParameters:query! );

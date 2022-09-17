@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 
-
 class MyAppBar extends StatelessWidget {
-
   final String title;
-  Widget? leadingIcon;
+  final Widget? leadingIcon;
+
   //Widget? actionIcon;
-  List<Widget>? actions;
-  final bool isBack ;
+  final List<Widget>? actions;
+  final bool isBack;
 
-
-
-      MyAppBar({
+  const MyAppBar({
     Key? key,
-        this.isBack = true,
+    this.isBack = true,
     this.title = '',
     this.leadingIcon,
     //this.actionIcon,
-  this.actions,
+    this.actions,
   }) : super(key: key);
 
   @override
@@ -25,19 +22,15 @@ class MyAppBar extends StatelessWidget {
     return AppBar(
       leading: IconButton(
           onPressed: () {
-            if(isBack == true) {
+            if (isBack == true) {
               Navigator.pop(context);
             }
           },
-
-          icon: leadingIcon!
-      ),
-      title:Text(
-          title
-      ),
+          icon: leadingIcon!),
+      title: Text(title),
       actions: actions,
       centerTitle: false,
-     // backgroundColor: AppColor.black,
+      // backgroundColor: AppColor.black,
     );
   }
 }

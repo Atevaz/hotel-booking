@@ -12,7 +12,7 @@ class SwitchButton extends StatefulWidget {
   const SwitchButton({Key? key}) : super(key: key);
 
   @override
-  _SwitchButtonState createState() => _SwitchButtonState();
+  State<SwitchButton> createState() => _SwitchButtonState();
 }
 
 class _SwitchButtonState extends State<SwitchButton> {

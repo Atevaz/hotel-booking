@@ -1,7 +1,6 @@
 import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
 import 'package:booking_hotel/business_logic/global_cubit/global_state.dart';
 import 'package:booking_hotel/presentation/router/app_router.dart';
-import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
 import 'package:booking_hotel/presentation/styles/constant.dart';
 import 'package:booking_hotel/presentation/styles/themes.dart';
 import 'package:flutter/material.dart';
@@ -13,19 +12,17 @@ import 'data/local/cache_helper.dart';
 import 'data/remote/dio_helper.dart';
 
 Future<void> main() async {
-  BlocOverrides.runZoned(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
-      await DioHelper.init();
-      await CacheHelper.init();
-      bool? isDark =
-          CacheHelper.getDataFromSharedPreference(key: 'isDark') ?? false;
-      runApp(MyApp(
-        appRouter: AppRouter(),
-        isDark: isDark,
-      ));
-    },
-    blocObserver: MyBlocObserver(),
+  Bloc.observer = MyBlocObserver();
+  WidgetsFlutterBinding.ensureInitialized();
+  await DioHelper.init();
+  await CacheHelper.init();
+  bool? isDark =
+      CacheHelper.getDataFromSharedPreference(key: 'isDark') ?? false;
+  runApp(
+    MyApp(
+      appRouter: AppRouter(),
+      isDark: isDark,
+    ),
   );
 }
 

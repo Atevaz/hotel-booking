@@ -9,7 +9,6 @@ class AppRouter {
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case AppRouterNames.rHomeLayoutRoute:
         return MaterialPageRoute(
             builder: (_) => const Test());

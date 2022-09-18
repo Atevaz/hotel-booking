@@ -11,7 +11,7 @@ class Test extends StatelessWidget {
       appBar: AppBar(
         title: Text('mohamed'),
       ),
-      body: TextButton(onPressed: () {}, child: Text('Test')),
+      body: Container(),
     );
   }
 }

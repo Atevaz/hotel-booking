@@ -9,7 +9,8 @@ class Test extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: SwitchButton(),
+
+      body: TextButton(onPressed: (){},child: Text('Test')),
     );
   }
 }

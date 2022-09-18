@@ -7,23 +7,23 @@ import 'colors.dart';
 ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.blue,
   scaffoldBackgroundColor: AppColor.whitesMoke,
-  bottomSheetTheme: BottomSheetThemeData(
+  bottomSheetTheme: const BottomSheetThemeData(
     backgroundColor: AppColor.green,
   ),
 
   appBarTheme: AppBarTheme(
     titleSpacing: 12,
     elevation: 0,
-    systemOverlayStyle: SystemUiOverlayStyle(
+    systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.white,
       statusBarIconBrightness: Brightness.dark,
     ),
-    actionsIconTheme: IconThemeData(
+    actionsIconTheme: const IconThemeData(
       color: Colors.black54,
 
     ),
     backgroundColor: AppColor.whitesMoke,
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.black54,
     ),
     titleTextStyle: TextStyle(
@@ -46,14 +46,14 @@ ThemeData lightTheme = ThemeData(
       fontFamily: 'Regular',
       fontSize: 17.sp,
     ),
-    selectedIconTheme: IconThemeData(
+    selectedIconTheme: const IconThemeData(
       size: 30,
     ),
-    unselectedIconTheme: IconThemeData(
+    unselectedIconTheme: const IconThemeData(
       size: 30,
     ),
   ),
-  iconTheme: IconThemeData(
+  iconTheme: const IconThemeData(
     color: AppColor.black,
   ),
   fontFamily: 'SemiBold',
@@ -73,7 +73,7 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: AppColor.black
   ),*/
   scaffoldBackgroundColor: AppColor.black,
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     titleSpacing: 12,
     //backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
@@ -109,20 +109,20 @@ ThemeData darkTheme = ThemeData(
       fontFamily: 'Regular',
       fontSize: 17.sp,
     ),
-    selectedIconTheme: IconThemeData(
+    selectedIconTheme: const IconThemeData(
       size: 30,
     ),
-    unselectedIconTheme: IconThemeData(
+    unselectedIconTheme: const IconThemeData(
       size: 30,
     ),
   ),
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     caption: TextStyle(
       color: Color(0xFFD4D4D4),
     ),
   ),
   fontFamily: 'SemiBold',
-  iconTheme: IconThemeData(color: AppColor.white),
+  iconTheme: const IconThemeData(color: AppColor.white),
   cardTheme: CardTheme(
     color: AppColor.darkGrey,
     elevation: 0,

@@ -14,10 +14,10 @@ class BuildNoInternetWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               'Can\'t connect .. check internet',
               style: TextStyle(
                 fontSize: 22,

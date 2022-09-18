@@ -8,8 +8,10 @@ class Test extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: TextButton(onPressed: (){},child: Text('Test')),
+      appBar: AppBar(
+        title: Text('mohamed'),
+      ),
+      body: TextButton(onPressed: () {}, child: Text('Test')),
     );
   }
 }

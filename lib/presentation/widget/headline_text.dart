@@ -8,34 +8,32 @@ class HeadLineText extends StatelessWidget {
   final Color? color;
   final double fontSize;
   final int maxLines;
-   bool? isUpper;
-  TextAlign? textAlign;
+  final bool? isUpper;
+  final TextAlign? textAlign;
   final TextOverflow overflow;
 
-
-  HeadLineText({
+  const HeadLineText({
+    Key? key,
     required this.text,
-    this.color ,
+    this.color,
     this.fontSize = 25,
     this.maxLines = 1,
     this.overflow = TextOverflow.ellipsis,
     this.isUpper = true,
     this.textAlign,
-
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      isUpper! ?  text.toUpperCase():text,
+      isUpper! ? text.toUpperCase() : text,
       style: TextStyle(
-        color: color??GlobalCubit.get(context).headLineTextColor,
-        fontFamily: 'SemiBold',
-        fontSize: fontSize.sp,
-          overflow: overflow
-      ),
-      maxLines:maxLines ,
-      textAlign:textAlign ,
+          color: color ?? GlobalCubit.get(context).headLineTextColor,
+          fontFamily: 'SemiBold',
+          fontSize: fontSize.sp,
+          overflow: overflow),
+      maxLines: maxLines,
+      textAlign: textAlign,
     );
   }
 }

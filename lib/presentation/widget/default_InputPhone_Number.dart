@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../business_logic/global_cubit/global_cubit.dart';
-import '../styles/colors.dart';
-import '../styles/constant.dart';
+import '../../core/styles/colors.dart';
+import '../../core/styles/constant.dart';
+
 
 
 class DefaultInputPhoneNumber extends StatelessWidget {

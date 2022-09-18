@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/styles/colors.dart';
+import '../../core/styles/constant.dart';
 import '../../data/local/cache_helper.dart';
-import '../../presentation/styles/colors.dart';
-import '../../presentation/styles/constant.dart';
+
 import 'global_state.dart';
 
 class GlobalCubit extends Cubit<GlobalState> {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../styles/colors.dart';
+import '../../core/styles/colors.dart';
+
 
 class BuildNoInternetWidget extends StatelessWidget {
   const BuildNoInternetWidget({Key? key}) : super(key: key);

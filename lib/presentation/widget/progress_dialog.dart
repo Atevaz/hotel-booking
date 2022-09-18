@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../business_logic/global_cubit/global_cubit.dart';
-import '../styles/colors.dart';
+import '../../core/styles/colors.dart';
 
 class ProgressDialog extends StatelessWidget {
   final String? message;

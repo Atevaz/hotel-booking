@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
-
-import '../../constants/constant.dart';
+import '../../core/styles/colors.dart';
+import '../../core/styles/constant.dart';
 import '../../data/local/cache_helper.dart';
-import '../styles/colors.dart';
-import '../styles/constant.dart';
+
 
 class SwitchButton extends StatefulWidget {
   const SwitchButton({Key? key}) : super(key: key);

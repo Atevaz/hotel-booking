@@ -9,9 +9,9 @@ class Test extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('mohamed'),
+        title: const Text('mohamed'),
       ),
-      body: TextButton(onPressed: () {}, child: Text('Test')),
+      body: TextButton(onPressed: () {}, child: const Text('Test')),
     );
   }
 }

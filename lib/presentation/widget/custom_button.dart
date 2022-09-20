@@ -5,7 +5,7 @@ import '../../core/styles/colors.dart';
 import 'headline_text.dart';
 
 
-class MyMaterialButton extends StatelessWidget {
+class MyButton extends StatelessWidget {
   final Color color;
 
   final void Function() onPressed;
@@ -16,9 +16,9 @@ class MyMaterialButton extends StatelessWidget {
   final bool isUpper ;
 
 
-  const MyMaterialButton({
+  const MyButton({
     Key? key,
-    this.color = Colors.blue,
+    this.color = AppColor.teal,
     required this.onPressed,
     required this.text,
      this.width = double.infinity,

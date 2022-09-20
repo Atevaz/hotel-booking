@@ -39,7 +39,7 @@ class GlobalCubit extends Cubit<GlobalState> {
       } else {
         cardColor = AppColor.white;
         backGroundOfToggleTap = AppColor.lightGrey;
-        regularTextColor = AppColor.lightGrey;
+        regularTextColor = AppColor.grey;
         headLineTextColor = AppColor.black;
         mediumTextColor = AppColor.black;
         colorOfFormField = AppColor.lightGrey;

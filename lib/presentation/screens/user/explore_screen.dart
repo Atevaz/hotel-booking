@@ -1,6 +1,7 @@
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/view/hotel_card.dart';
 import 'package:booking_hotel/presentation/view/my_app_bar.dart';
+import 'package:booking_hotel/presentation/widget/default_text_form_field.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,7 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final searchC = TextEditingController();
     return Scaffold(
       backgroundColor: AppColor.lightGrey,
       appBar: PreferredSize(
@@ -49,38 +51,13 @@ class ExploreScreen extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(30.r),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                            vertical: 20.h,
-                          ),
-                          hintText: "London...",
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.r),
-                            borderSide: const BorderSide(
-                              color: AppColor.teal,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.r),
-                            borderSide: const BorderSide(
-                              color: AppColor.white,
-                            ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.r),
-                            borderSide: const BorderSide(
-                              color: AppColor.white,
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: AppColor.white,
-                        ),
-                      ),
+                    child: MyFormField(
+                      borderRadius: 30.r,
+                      controller: searchC,
+                      prefix: null,
+                      validateText: searchC.text,
+                      inputType: TextInputType.text,
+                      hintText: "London...",
                     ),
                   ),
                   const SizedBox(
@@ -95,8 +72,8 @@ class ExploreScreen extends StatelessWidget {
                         //TODO
                       },
                       child: SizedBox(
-                        width: 60.w,
-                        height: 60.h,
+                        width: 50.w,
+                        height: 50.h,
                         child: Icon(
                           Icons.search,
                           color: AppColor.white,

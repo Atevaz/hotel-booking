@@ -1,4 +1,5 @@
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,13 +16,10 @@ class HomeHotelsHeadlineView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          "Best Deals",
-          style: TextStyle(
-            fontFamily: 'Avenir',
-            fontSize: 25.sp,
-            fontWeight: FontWeight.w900,
-          ),
+        HeadLineText(
+          text: "Best Deals",
+          fontSize: 25.sp,
+          isUpper: false,
         ),
         Material(
           color: AppColor.lightGrey,
@@ -29,14 +27,11 @@ class HomeHotelsHeadlineView extends StatelessWidget {
             onTap: viewAll,
             child: Row(
               children: [
-                Text(
-                  "View all",
-                  style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'Avenir',
-                    color: AppColor.teal,
-                  ),
+                HeadLineText(
+                  text: "View all",
+                  fontSize: 22.sp,
+                  color: AppColor.teal,
+                  isUpper: false,
                 ),
                 const SizedBox(
                   width: 8,

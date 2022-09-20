@@ -1,5 +1,6 @@
-import 'package:booking_hotel/presentation/widget/progress_dialog.dart';
-import 'package:booking_hotel/presentation/widget/switch_botton.dart';
+import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/view/home_views/home_hotels_view.dart';
+import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_view.dart';
 import 'package:flutter/material.dart';
 
 class Test extends StatelessWidget {
@@ -7,13 +8,14 @@ class Test extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('mohamed'),
+    return const Scaffold(
+      backgroundColor: AppColor.whitesMoke,
+      body: CustomScrollView(
+        slivers: [
+          HomeSliverAppBarView(),
+          HomeHotelsView(),
+        ],
       ),
-
-      body: TextButton(onPressed: () {}, child: const Text('Test')),
-
     );
   }
 }

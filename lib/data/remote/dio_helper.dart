@@ -7,8 +7,9 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: baseURL,
+        baseUrl: '$baseApiUrl$version',
         receiveDataWhenStatusError: true,
+        connectTimeout: 5000,
       ),
     );
   }

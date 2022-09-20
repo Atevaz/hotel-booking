@@ -22,7 +22,7 @@ class _SwitchButtonState extends State<SwitchButton> {
   Widget build(BuildContext context) {
     return FlutterSwitch(
       width: 70.0.w,
-      activeColor: AppColor.blue,
+      activeColor: AppColor.teal,
       inactiveColor: AppColor.grey,
       height: 35.0.h,
       valueFontSize: 20.0.sp,

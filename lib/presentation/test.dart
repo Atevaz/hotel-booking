@@ -1,4 +1,5 @@
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/view/toggle_booking_bar.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/progress_dialog.dart';
 import 'package:booking_hotel/presentation/widget/switch_botton.dart';
@@ -13,7 +14,12 @@ class Test extends StatelessWidget {
       appBar: AppBar(
       ),
 
-      body: TextButton(onPressed: () {}, child: const Text('Test')),
+      body: const Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: ToggleTabBar(),
+        ),
+      ),
 
     );
   }

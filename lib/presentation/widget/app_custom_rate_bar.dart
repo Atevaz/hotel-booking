@@ -16,7 +16,7 @@ class AppCustomRateBar extends StatelessWidget {
         }
         return Icon(
           data,
-          color: AppColor.green,
+          color: AppColor.teal,
         );
       }),
     );

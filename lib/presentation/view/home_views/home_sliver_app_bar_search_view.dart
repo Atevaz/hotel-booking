@@ -15,7 +15,7 @@ class HomeSliverAppBarSearchView extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: Icon(
             Icons.search,
-            color: AppColor.green,
+            color: AppColor.teal,
             size: 30.r,
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 15.h),
@@ -24,7 +24,7 @@ class HomeSliverAppBarSearchView extends StatelessWidget {
             color: AppColor.grey,
             fontSize: 20.sp,
           ),
-          fillColor: AppColor.whitesMoke,
+          fillColor: AppColor.lightGrey,
           filled: true,
           border: OutlineInputBorder(
             borderSide: BorderSide.none,

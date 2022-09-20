@@ -65,7 +65,7 @@ class HomeCardView extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.location_on,
-                                  color: AppColor.green,
+                                  color: AppColor.teal,
                                   size: 25.r,
                                 ),
                                 Text(
@@ -86,7 +86,7 @@ class HomeCardView extends StatelessWidget {
                                 }
                                 return Icon(
                                   data,
-                                  color: AppColor.green,
+                                  color: AppColor.teal,
                                 );
                               }),
                             )

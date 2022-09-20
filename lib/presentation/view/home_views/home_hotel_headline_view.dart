@@ -18,7 +18,7 @@ class HomeHotelsHeadlineView extends StatelessWidget {
           ),
         ),
         Material(
-          color: AppColor.whitesMoke,
+          color: AppColor.lightGrey,
           child: InkWell(
             onTap: () {},
             child: Row(
@@ -28,7 +28,7 @@ class HomeHotelsHeadlineView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.w900,
-                    color: AppColor.green,
+                    color: AppColor.teal,
                   ),
                 ),
                 const SizedBox(
@@ -36,7 +36,7 @@ class HomeHotelsHeadlineView extends StatelessWidget {
                 ),
                 const Icon(
                   Icons.arrow_forward,
-                  color: AppColor.green,
+                  color: AppColor.teal,
                 ),
               ],
             ),

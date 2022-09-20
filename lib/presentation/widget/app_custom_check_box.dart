@@ -28,7 +28,7 @@ class _AppCustomCheckBoxState extends State<AppCustomCheckBox> {
               color: AppColor.grey,
               width: 2.w,
             ),
-            activeColor: AppColor.green,
+            activeColor: AppColor.teal,
             checkColor: AppColor.white,
             value: checked,
             onChanged: (val) {

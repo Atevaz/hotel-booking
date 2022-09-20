@@ -9,9 +9,10 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: AppColor.whitesMoke,
+      backgroundColor: AppColor.lightGrey,
       body: CustomScrollView(
         slivers: [
+          //TODO create page view with indicator
           HomeSliverAppBarView(),
           HomeHotelsView(),
         ],

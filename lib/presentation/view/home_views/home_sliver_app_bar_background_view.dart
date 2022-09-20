@@ -1,4 +1,6 @@
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/widget/headline_text.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,30 +30,21 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              name,
-              style: TextStyle(
-                fontSize: 25.sp,
-                color: AppColor.white,
-                fontFamily: 'Avenir',
-                fontWeight: FontWeight.bold,
-              ),
+            HeadLineText(
+              text: name,
+              fontSize: 28.sp,
+              color: AppColor.white,
+              isUpper: false,
             ),
             SizedBox(
               height: 15.h,
             ),
             SizedBox(
               width: 250.w,
-              child: Text(
-                desc,
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  letterSpacing: 0.6.sp,
-                  height: 1.3.h,
-                  fontFamily: 'Avenir',
-                  color: AppColor.white,
-                  fontWeight: FontWeight.w400,
-                ),
+              child: MediumText(
+                text: desc,
+                fontSize: 20.sp,
+                color: AppColor.white,
               ),
             ),
             SizedBox(
@@ -59,7 +52,6 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-
                 primary: AppColor.teal,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.r),
@@ -70,14 +62,10 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
                 ),
               ),
               onPressed: viewHotels,
-              child: Text(
-                "View Hotel",
-                style: TextStyle(
-                  color: AppColor.white,
-                  fontSize: 20.sp,
-                  fontFamily: 'Avenir',
-                  fontWeight: FontWeight.w400,
-                ),
+              child: MediumText(
+                text: "View Hotel",
+                color: AppColor.white,
+                fontSize: 20.sp,
               ),
             )
           ],

@@ -1,4 +1,5 @@
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,13 +32,9 @@ class AppCustomCheckBox extends StatelessWidget {
             value: checked,
             onChanged: (val) => onTap(),
           ),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Avenir',
-            ),
+          MediumText(
+            text: text,
+            fontSize: 18.sp,
           )
         ],
       ),

@@ -25,10 +25,18 @@ class _HomeSliverAppBarViewState extends State<HomeSliverAppBarView> {
         child: Container(),
       ),
       flexibleSpace: Stack(
-        children: const [
-          HomeSliverAppBarImageView(),
-          HomeSliverAppBarBackgroundView(),
-          HomeSliverAppBarSearchView(),
+        children: [
+          const HomeSliverAppBarImageView(),
+          HomeSliverAppBarBackgroundView(
+            viewHotels: () {
+              //TODO
+            },
+          ),
+          HomeSliverAppBarSearchView(
+            searchHotels: () {
+              //TODO
+            },
+          ),
         ],
       ),
     );

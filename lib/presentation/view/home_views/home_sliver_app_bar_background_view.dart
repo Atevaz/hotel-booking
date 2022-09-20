@@ -3,7 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeSliverAppBarBackgroundView extends StatelessWidget {
-  const HomeSliverAppBarBackgroundView({Key? key}) : super(key: key);
+  const HomeSliverAppBarBackgroundView({
+    Key? key,
+    this.name = "Cape Town",
+    this.desc = "Extraordinary five-stars outdoor activities",
+    required this.viewHotels,
+  }) : super(key: key);
+
+  final String name;
+  final String desc;
+  final Function() viewHotels;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +29,11 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Cape Town",
+              name,
               style: TextStyle(
                 fontSize: 25.sp,
                 color: AppColor.white,
+                fontFamily: 'Avenir',
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -33,11 +43,12 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
             SizedBox(
               width: 250.w,
               child: Text(
-                "Extraordinary five-stars outdoor activities",
+                desc,
                 style: TextStyle(
                   fontSize: 20.sp,
                   letterSpacing: 0.6.sp,
                   height: 1.3.h,
+                  fontFamily: 'Avenir',
                   color: AppColor.white,
                   fontWeight: FontWeight.w400,
                 ),
@@ -48,7 +59,7 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColor.green,
+                backgroundColor: AppColor.teal,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.r),
                 ),
@@ -57,12 +68,13 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
                   horizontal: 30.w,
                 ),
               ),
-              onPressed: () {},
+              onPressed: viewHotels,
               child: Text(
                 "View Hotel",
                 style: TextStyle(
                   color: AppColor.white,
                   fontSize: 20.sp,
+                  fontFamily: 'Avenir',
                   fontWeight: FontWeight.w400,
                 ),
               ),

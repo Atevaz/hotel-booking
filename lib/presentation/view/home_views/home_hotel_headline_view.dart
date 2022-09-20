@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeHotelsHeadlineView extends StatelessWidget {
-  const HomeHotelsHeadlineView({Key? key}) : super(key: key);
+  const HomeHotelsHeadlineView({
+    Key? key,
+    required this.viewAll,
+  }) : super(key: key);
+
+  final Function() viewAll;
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +18,15 @@ class HomeHotelsHeadlineView extends StatelessWidget {
         Text(
           "Best Deals",
           style: TextStyle(
+            fontFamily: 'Avenir',
             fontSize: 25.sp,
             fontWeight: FontWeight.w900,
           ),
         ),
         Material(
-          color: AppColor.whitesMoke,
+          color: AppColor.lightGrey,
           child: InkWell(
-            onTap: () {},
+            onTap: viewAll,
             child: Row(
               children: [
                 Text(
@@ -28,7 +34,8 @@ class HomeHotelsHeadlineView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.w900,
-                    color: AppColor.green,
+                    fontFamily: 'Avenir',
+                    color: AppColor.teal,
                   ),
                 ),
                 const SizedBox(
@@ -36,7 +43,7 @@ class HomeHotelsHeadlineView extends StatelessWidget {
                 ),
                 const Icon(
                   Icons.arrow_forward,
-                  color: AppColor.green,
+                  color: AppColor.teal,
                 ),
               ],
             ),

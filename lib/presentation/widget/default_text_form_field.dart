@@ -80,7 +80,7 @@ class MyFormField extends StatelessWidget {
           borderSide: GlobalCubit.get(context).isDark
               ? BorderSide.none
               : BorderSide(
-                  color: AppColor.blue,
+                  color: AppColor.teal,
                 ),
         ),
         enabledBorder: OutlineInputBorder(

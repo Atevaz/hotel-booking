@@ -56,7 +56,7 @@ class DefaultInputPhoneNumber extends StatelessWidget {
               color: GlobalCubit.get(context).regularTextColor,
               fontSize: 16.sp
           ),
-          cursorColor: AppColor.blue,
+          cursorColor: AppColor.teal,
           textFieldController: controller,
           inputDecoration: InputDecoration(
             contentPadding: EdgeInsetsDirectional.only(bottom: 15,start: 0),

@@ -6,9 +6,9 @@ import 'colors.dart';
 
 ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.blue,
-  scaffoldBackgroundColor: AppColor.whitesMoke,
+  scaffoldBackgroundColor: AppColor.lightGrey,
   bottomSheetTheme: const BottomSheetThemeData(
-    backgroundColor: AppColor.green,
+    backgroundColor: AppColor.teal,
   ),
 
   appBarTheme: AppBarTheme(
@@ -22,7 +22,7 @@ ThemeData lightTheme = ThemeData(
       color: Colors.black54,
 
     ),
-    backgroundColor: AppColor.whitesMoke,
+    backgroundColor: AppColor.lightGrey,
     iconTheme: const IconThemeData(
       color: Colors.black54,
     ),
@@ -34,8 +34,8 @@ ThemeData lightTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    backgroundColor: AppColor.whitesMoke,
-    selectedItemColor: AppColor.blue,
+    backgroundColor: AppColor.lightGrey,
+    selectedItemColor: AppColor.teal,
     unselectedItemColor: AppColor.grey,
     elevation: 0,
     selectedLabelStyle: TextStyle(
@@ -98,7 +98,7 @@ ThemeData darkTheme = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
     backgroundColor: AppColor.black,
-    selectedItemColor: AppColor.blue,
+    selectedItemColor: AppColor.teal,
     unselectedItemColor: AppColor.white,
     elevation: 0,
     selectedLabelStyle: TextStyle(
@@ -124,7 +124,7 @@ ThemeData darkTheme = ThemeData(
   fontFamily: 'SemiBold',
   iconTheme: const IconThemeData(color: AppColor.white),
   cardTheme: CardTheme(
-    color: AppColor.darkGrey,
+    color: AppColor.black,
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(30.r),),

@@ -3,6 +3,7 @@ import 'package:booking_hotel/presentation/screens/shared/auth_layout/register_s
 import 'package:booking_hotel/presentation/screens/shared/filter_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
+
 import 'package:booking_hotel/presentation/screens/shared/profile_layout/change_password_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/profile_layout/profile_screen.dart';
 import 'package:booking_hotel/presentation/test.dart';
@@ -34,6 +35,7 @@ class AppRouter {
         );
       case AppRouterNames.rHomeLayoutRoute:
         return MaterialPageRoute(
+
           builder: (_) => const HomeLayoutScreen(),
         );
       default:

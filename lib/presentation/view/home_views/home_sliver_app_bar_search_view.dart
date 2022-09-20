@@ -12,6 +12,7 @@ class HomeSliverAppBarSearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return InkWell(
       onTap: searchHotels,
       child: Container(

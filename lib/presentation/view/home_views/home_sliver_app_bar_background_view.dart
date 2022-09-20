@@ -59,6 +59,7 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
+
                 primary: AppColor.teal,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.r),

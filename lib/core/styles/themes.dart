@@ -6,7 +6,7 @@ import 'colors.dart';
 
 ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.blue,
-  scaffoldBackgroundColor: AppColor.lightGrey,
+  scaffoldBackgroundColor: AppColor.white,
   bottomSheetTheme: const BottomSheetThemeData(
     backgroundColor: AppColor.teal,
   ),

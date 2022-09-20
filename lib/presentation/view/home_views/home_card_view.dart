@@ -77,6 +77,7 @@ class HomeCardView extends StatelessWidget {
                               color: AppColor.grey,
                             ),
                           ),
+
                         ],
                       ),
                       Row(

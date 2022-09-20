@@ -9,6 +9,7 @@ class HomeLayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       bottomNavigationBar: const BottomNavBar(),
       backgroundColor: AppColor.lightGrey,

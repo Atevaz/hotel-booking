@@ -10,9 +10,19 @@ class AppCustomRateBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: List.generate(5, (index) {
-        IconData data = Icons.star;
-        if (index+1 < rate) {
-          data = Icons.star_half;
+        double rating = rate % 5;
+        if (rating == 0) {
+          rating = 5;
+        }
+        final intRate = rating.toInt();
+        final decRate = int.parse(rating.toString().split(".")[1]);
+        IconData data;
+        if (index + 1 <= intRate) {
+          data = Icons.star_outlined;
+        } else if (index + 1 == intRate + 1 && decRate >= 5) {
+          data = Icons.star_half_outlined;
+        } else {
+          data = Icons.star_border_outlined;
         }
         return Icon(
           data,
@@ -22,5 +32,3 @@ class AppCustomRateBar extends StatelessWidget {
     );
   }
 }
-
-//create home view , update home screen and create checkbox and rate bar component

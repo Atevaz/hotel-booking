@@ -9,6 +9,7 @@ class MediumText extends StatelessWidget {
   final double fontSize;
   final int maxLines;
   final TextOverflow overflow;
+  final TextAlign? textAlign;
 
   const MediumText({
     Key? key,
@@ -17,17 +18,20 @@ class MediumText extends StatelessWidget {
     this.fontSize = 20,
     this.maxLines = 3,
     this.overflow = TextOverflow.ellipsis,
+    this.textAlign,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign,
       style: TextStyle(
-          color: color ?? GlobalCubit.get(context).mediumTextColor,
-          fontFamily: 'Medium',
-          fontSize: fontSize.sp,
-          overflow: overflow),
+        color: color ?? GlobalCubit.get(context).mediumTextColor,
+        fontFamily: 'Medium',
+        fontSize: fontSize.sp,
+        overflow: overflow,
+      ),
       maxLines: maxLines,
     );
   }

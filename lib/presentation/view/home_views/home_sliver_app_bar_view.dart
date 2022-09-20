@@ -19,16 +19,24 @@ class _HomeSliverAppBarViewState extends State<HomeSliverAppBarView> {
       systemOverlayStyle: SystemUiOverlayStyle.light,
       pinned: true,
       floating: true,
-      expandedHeight: 500.h,
+      expandedHeight: 450.h,
       bottom: PreferredSize(
-        preferredSize: Size(double.infinity.w, 150.h),
+        preferredSize: Size(double.infinity.w, 130.h),
         child: Container(),
       ),
       flexibleSpace: Stack(
-        children: const [
-          HomeSliverAppBarImageView(),
-          HomeSliverAppBarBackgroundView(),
-          HomeSliverAppBarSearchView(),
+        children: [
+          const HomeSliverAppBarImageView(),
+          HomeSliverAppBarBackgroundView(
+            viewHotels: () {
+              //TODO
+            },
+          ),
+          HomeSliverAppBarSearchView(
+            searchHotels: () {
+              //TODO
+            },
+          ),
         ],
       ),
     );

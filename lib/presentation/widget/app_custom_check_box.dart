@@ -2,24 +2,22 @@ import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppCustomCheckBox extends StatefulWidget {
-  const AppCustomCheckBox({Key? key}) : super(key: key);
+class AppCustomCheckBox extends StatelessWidget {
+  const AppCustomCheckBox({
+    Key? key,
+    required this.checked,
+    required this.text,
+    required this.onTap,
+  }) : super(key: key);
 
-  @override
-  State<AppCustomCheckBox> createState() => _AppCustomCheckBoxState();
-}
-
-class _AppCustomCheckBoxState extends State<AppCustomCheckBox> {
-  bool checked = false;
+  final bool checked;
+  final String text;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        setState(() {
-          checked = !checked;
-        });
-      },
+      onTap: onTap,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -31,17 +29,14 @@ class _AppCustomCheckBoxState extends State<AppCustomCheckBox> {
             activeColor: AppColor.teal,
             checkColor: AppColor.white,
             value: checked,
-            onChanged: (val) {
-              setState(() {
-                checked = !checked;
-              });
-            },
+            onChanged: (val) => onTap(),
           ),
           Text(
-            "Free Breakfast",
+            text,
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.w500,
+              fontFamily: 'Avenir',
             ),
           )
         ],

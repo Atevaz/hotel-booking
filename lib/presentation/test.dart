@@ -1,6 +1,4 @@
-import 'package:booking_hotel/core/styles/colors.dart';
-import 'package:booking_hotel/presentation/view/home_views/home_hotels_view.dart';
-import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_view.dart';
+import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
 import 'package:flutter/material.dart';
 
 class Test extends StatelessWidget {
@@ -8,14 +6,6 @@ class Test extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColor.lightGrey,
-      body: CustomScrollView(
-        slivers: [
-          HomeSliverAppBarView(),
-          HomeHotelsView(),
-        ],
-      ),
-    );
+    return const HomeLayoutScreen();
   }
 }

@@ -34,7 +34,7 @@ class _FilterScreenState extends State<FilterScreen> {
         SizedBox(
           height: 30.h,
         ),
-        const MediumText(text: 'Popular filter'),
+        const MediumText(text: 'Facilities'),
         SizedBox(
           height: 20.h,
         ),

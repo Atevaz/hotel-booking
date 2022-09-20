@@ -112,7 +112,11 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => Container(
                             width: 345,
-                            child: HomeCardView(),
+                            child: HomeCardView(
+                              onTap: (){
+                                /// todo routing
+                              },
+                            ),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 10.w,

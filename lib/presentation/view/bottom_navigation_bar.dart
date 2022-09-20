@@ -1,4 +1,5 @@
 import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
+import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -11,11 +12,13 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   //PageController pageController = PageController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+
+      selectedItemColor: AppColor.teal,
+      unselectedItemColor: AppColor.grey,
+
       currentIndex: GlobalCubit.get(context).currentIndex,
 
       onTap: (index) {
@@ -24,16 +27,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_balance_outlined),
-          label: 'Account',
+          icon: Icon(Icons.home_rounded),
+          label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.add_home_rounded),
-          label: 'My Card',
+          icon: Icon(Icons.bookmark_add_outlined),
+          label: 'Booking',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Settings',
+          icon: Icon(Icons.person_outlined),
+          label: 'Me',
         ),
       ],
     );

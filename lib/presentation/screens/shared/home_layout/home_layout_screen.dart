@@ -9,7 +9,7 @@ class HomeLayout extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size(double.infinity,kToolbarHeight),
-          child: MyAppBar(leadingIcon: Container(),)),
+          child: MyAppBar(isCompletedAppBar: true)),
     );
   }
 }

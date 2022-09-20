@@ -13,7 +13,7 @@ class HotelCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(children: [
-        Image.asset('assets/hotel.jpg'),
+        Image.asset('assets/images/hotel.jpg'),
         Row(
           children: const [
             HeadLineText(text: 'Grand Royal Hotel'),

@@ -16,6 +16,8 @@ class MyFormField extends StatelessWidget {
 
   final bool isPassword;
 
+  final double borderRadius;
+
   final bool readOnly;
 
   final TextInputType inputType;
@@ -29,6 +31,7 @@ class MyFormField extends StatelessWidget {
 
   MyFormField({
     Key? key,
+    this.borderRadius = 15 ,
     required this.controller,
     required this.validateText,
     this.suffixPressed,
@@ -76,15 +79,15 @@ class MyFormField extends StatelessWidget {
         ),
         border: InputBorder.none,
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0.r),
+          borderRadius: BorderRadius.circular(borderRadius.r),
           borderSide: GlobalCubit.get(context).isDark
               ? BorderSide.none
               : BorderSide(
-                  color: AppColor.blue,
+                  color: AppColor.teal,
                 ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0.r),
+          borderRadius: BorderRadius.circular(borderRadius.r),
           borderSide: GlobalCubit.get(context).isDark
               ? BorderSide.none
               : BorderSide(

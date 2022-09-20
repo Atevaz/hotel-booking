@@ -12,9 +12,9 @@ class GlobalCubit extends Cubit<GlobalState> {
 
   static GlobalCubit get(context) => BlocProvider.of(context);
   Color cardColor = AppColor.white;
-  Color colorOfFormField = AppColor.blueGrey;
-  Color backGroundOfToggleTap = AppColor.whitesMoke;
-  Color regularTextColor = AppColor.greyShade900;
+  Color colorOfFormField = AppColor.grey;
+  Color backGroundOfToggleTap = AppColor.lightGrey;
+  Color regularTextColor = AppColor.grey;
   Color headLineTextColor = AppColor.white;
   Color mediumTextColor = AppColor.white;
 
@@ -28,21 +28,21 @@ class GlobalCubit extends Cubit<GlobalState> {
     }
     CacheHelper.saveDataSharedPreference(key: 'isDark', value: isDark).then((value) {
       if (isDark) {
-        cardColor = AppColor.darkGrey;
-        colorOfFormField = AppColor.darkGrey;
+        cardColor = AppColor.black;
+        colorOfFormField = AppColor.black;
         backGroundOfToggleTap = AppColor.black;
-        regularTextColor = AppColor.lightShadeOfGray;
+        regularTextColor = AppColor.lightGrey;
         headLineTextColor = AppColor.white;
         mediumTextColor = AppColor.white;
         appMode = ThemeMode.dark;
         emit(AppChangeModeDarkState());
       } else {
         cardColor = AppColor.white;
-        backGroundOfToggleTap = AppColor.whitesMoke;
-        regularTextColor = AppColor.greyShade900;
+        backGroundOfToggleTap = AppColor.lightGrey;
+        regularTextColor = AppColor.grey;
         headLineTextColor = AppColor.black;
         mediumTextColor = AppColor.black;
-        colorOfFormField = AppColor.blueGrey;
+        colorOfFormField = AppColor.lightGrey;
         appMode = ThemeMode.light;
         emit(AppChangeModeLightState());
       }

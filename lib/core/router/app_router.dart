@@ -1,4 +1,5 @@
 import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
+import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
 import 'package:flutter/material.dart';
 
 import '../../presentation/test.dart';
@@ -11,7 +12,7 @@ class AppRouter {
     switch (settings.name) {
       case AppRouterNames.rHomeLayoutRoute:
         return MaterialPageRoute(
-            builder: (_) => const Test());
+            builder: (_) => OnBoardingScreen());
       default:
         return null;
     }

@@ -18,7 +18,7 @@ class HomeHotelsHeadlineView extends StatelessWidget {
       children: [
         HeadLineText(
           text: "Best Deals",
-          fontSize: 25.sp,
+          fontSize: 22.sp,
           isUpper: false,
         ),
         Material(
@@ -29,7 +29,7 @@ class HomeHotelsHeadlineView extends StatelessWidget {
               children: [
                 HeadLineText(
                   text: "View all",
-                  fontSize: 22.sp,
+                  fontSize: 20.sp,
                   color: AppColor.teal,
                   isUpper: false,
                 ),

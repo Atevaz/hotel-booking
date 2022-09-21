@@ -64,12 +64,12 @@ class HomeCardView extends StatelessWidget {
                         children: [
                           HeadLineText(
                             text: name,
-                            fontSize: 20.sp,
+                            fontSize: 19.sp,
                             isUpper: false,
                           ),
                           MediumText(
                             text: address,
-                            fontSize: 18.sp,
+                            fontSize: 17.sp,
                             color: AppColor.grey,
                           ),
                         ],
@@ -80,8 +80,10 @@ class HomeCardView extends StatelessWidget {
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Icon(
                                     Icons.location_on,
@@ -91,7 +93,7 @@ class HomeCardView extends StatelessWidget {
                                   MediumText(
                                     text: location,
                                     color: AppColor.grey,
-                                    fontSize: 16.sp,
+                                    fontSize: 15.sp,
                                   )
                                 ],
                               ),
@@ -103,12 +105,15 @@ class HomeCardView extends StatelessWidget {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               HeadLineText(
                                 text: "\$$price",
-                                fontSize: 25.sp,
+                                fontSize: 22.sp,
                                 isUpper: false,
                               ),
                               SizedBox(
@@ -116,7 +121,7 @@ class HomeCardView extends StatelessWidget {
                               ),
                               MediumText(
                                 text: "/per night",
-                                fontSize: 20.sp,
+                                fontSize: 16.sp,
                                 color: Colors.grey,
                               )
                             ],

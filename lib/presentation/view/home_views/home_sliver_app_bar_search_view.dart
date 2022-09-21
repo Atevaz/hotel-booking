@@ -31,7 +31,7 @@ class HomeSliverAppBarSearchView extends StatelessWidget {
             hintText: "Where are you going?",
             hintStyle: TextStyle(
               color: AppColor.grey,
-              fontSize: 20.sp,
+              fontSize: 18.sp,
               fontFamily: 'Avenir',
             ),
             fillColor: AppColor.lightGrey,

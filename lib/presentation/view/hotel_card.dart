@@ -57,7 +57,7 @@ class HotelCard extends StatelessWidget {
               Row(
                 children: const [
                   AppCustomRateBar(rate: 4.5),
-                  RegularText(text: '80Reviews')
+                  RegularText(text: ' 80 Reviews')
                 ],
               ),
             ],

@@ -17,9 +17,8 @@ class ProfileScreen extends StatelessWidget {
           subtitle: DefaultTextButton(
             text: 'View and Edit profile',
             onPressed: () {
-
-              Navigator.pushNamed(context, AppRouterNames.rUpdateProfileLayoutRoute);
-
+              Navigator.pushNamed(
+                  context, AppRouterNames.rUpdateProfileLayoutRoute);
             },
           ),
           trailing: const CircleAvatar(

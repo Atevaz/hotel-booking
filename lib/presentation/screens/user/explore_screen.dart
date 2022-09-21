@@ -183,9 +183,12 @@ class ExploreScreen extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemCount: 11,
-                  itemBuilder: (context, index) => HotelCard(),
+                  itemBuilder: (context, index) => HotelCard(
+                    onTap: () => Navigator.pushNamed(
+                        context, AppRouterNames.rHotelDetailsLayoutRoute),
+                  ),
                   separatorBuilder: (context, index) => SizedBox(
                     height: 10.h,
                   ),

@@ -1,16 +1,15 @@
-
 import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
 import 'package:booking_hotel/presentation/screens/shared/splash_screen.dart';
-
 
 import 'package:booking_hotel/presentation/screens/user/auth_layout/login_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/auth_layout/register_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/explore_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/filter_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
+import 'package:booking_hotel/presentation/screens/user/hotel_details.dart';
 import 'package:booking_hotel/presentation/screens/user/search_map.dart';
-import 'package:booking_hotel/presentation/screens/user/update_profile.dart';
+import 'package:booking_hotel/presentation/screens/user/profile_layout/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'app_router_names.dart';
 
@@ -45,17 +44,21 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const ExploreScreen(),
         );
-        case AppRouterNames.rUpdateProfileLayoutRoute:
+      case AppRouterNames.rUpdateProfileLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const UpdateProfile(),
         );
-        case AppRouterNames.rSearchMapLayoutRoute:
+      case AppRouterNames.rSearchMapLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const SearchMapScreen(),
         );
-        case AppRouterNames.rFilterLayoutRoute:
+      case AppRouterNames.rFilterLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const FilterScreen(),
+        );
+      case AppRouterNames.rHotelDetailsLayoutRoute:
+        return MaterialPageRoute(
+          builder: (_) => const HotelDetails(),
         );
       default:
         return null;

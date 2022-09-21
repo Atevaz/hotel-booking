@@ -6,6 +6,7 @@ import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
 import 'package:booking_hotel/presentation/screens/user/auth_layout/login_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/auth_layout/register_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/explore_screen.dart';
+import 'package:booking_hotel/presentation/screens/user/filter_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'app_router_names.dart';

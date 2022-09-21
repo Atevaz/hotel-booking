@@ -1,4 +1,6 @@
+import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyAppBar extends StatelessWidget {
 
@@ -36,15 +38,24 @@ class MyAppBar extends StatelessWidget {
       );
     }
     else{
-      return AppBar(
-        leading: IconButton(
-            onPressed: () {
-              if (isBack == true) {
-                Navigator.pop(context);
-              }
-            },
-            icon: leadingIcon),
-      );
+      if(isBack!)
+      {
+        return AppBar(
+          leading: IconButton(
+              onPressed: () {
+                if (isBack == true) {
+                  Navigator.pop(context);
+                }
+              },
+              icon: leadingIcon),
+        );
+      }
+      else {
+        return AppBar(
+          title: Text(title!),
+          titleSpacing: 25.w,
+        );
+      }
     }
 
   }

@@ -14,7 +14,7 @@ class SearchMapScreen extends StatefulWidget {
   const SearchMapScreen({Key? key}) : super(key: key);
 
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(53.909500999080755, -2.7780570134925746),
+    target: LatLng(31.1,30.1),
     zoom: 12,
   );
 
@@ -51,6 +51,7 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
       body: Stack(
         children: [
           GoogleMap(
+
             zoomControlsEnabled: false,
             mapToolbarEnabled: false,
             markers: markers,
@@ -61,7 +62,7 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
               setState(() {
                 markers.add(Marker(
                   markerId: MarkerId('1'),
-                  position: LatLng(53.909500999080755, -2.7780570134925746),
+                  position: LatLng(31.1,30.30),
                 ));
               });
             },
@@ -112,7 +113,7 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => Container(
                             width: 345,
-                            child: HomeCardView(),
+                            child: HomeCardView(onTap: () {},),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 10.w,

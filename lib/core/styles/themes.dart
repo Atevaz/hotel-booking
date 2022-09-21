@@ -15,12 +15,12 @@ ThemeData lightTheme = ThemeData(
     elevation: 0,
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      // statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.dark,
     ),
     actionsIconTheme: const IconThemeData(
       color: Colors.black54,
     ),
-    backgroundColor: AppColor.lightGrey,
+    backgroundColor: AppColor.white,
     iconTheme: const IconThemeData(
       color: Colors.black54,
     ),

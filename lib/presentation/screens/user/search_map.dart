@@ -51,7 +51,6 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
       body: Stack(
         children: [
           GoogleMap(
-
             zoomControlsEnabled: false,
             mapToolbarEnabled: false,
             markers: markers,
@@ -62,7 +61,7 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
               setState(() {
                 markers.add(Marker(
                   markerId: MarkerId('1'),
-                  position: LatLng(31.1,30.30),
+                  position: LatLng(53.909500999080755, -2.7780570134925746),
                 ));
               });
             },

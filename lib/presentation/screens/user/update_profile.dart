@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:booking_hotel/presentation/widget/slider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,19 +16,19 @@ class _UpdateProfileState extends State<UpdateProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: MyAppBar(
+          isCompletedAppBar: true,
+          title: 'Edit Profile',
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(top: 20, left: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.arrow_back_ios_rounded),
-              SizedBox(
-                height: 15,
-              ),
-              Text('Edit Profile',
-                  style:
-                      TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 15.h,
               ),
@@ -54,7 +55,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 ),
               ),
               SizedBox(
-                height: 25.h,
+                height: 30.h,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

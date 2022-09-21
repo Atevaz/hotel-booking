@@ -1,5 +1,7 @@
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
+import 'package:booking_hotel/presentation/widget/headline_text.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -60,24 +62,16 @@ class HomeCardView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            name,
-                            style: TextStyle(
-                              fontSize: 20.sp,
-                              fontFamily: 'Avenir',
-                              fontWeight: FontWeight.w800,
-                            ),
+                          HeadLineText(
+                            text: name,
+                            fontSize: 19.sp,
+                            isUpper: false,
                           ),
-                          Text(
-                            address,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontFamily: 'Avenir',
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.grey,
-                            ),
+                          MediumText(
+                            text: address,
+                            fontSize: 17.sp,
+                            color: AppColor.grey,
                           ),
-
                         ],
                       ),
                       Row(
@@ -86,49 +80,49 @@ class HomeCardView extends StatelessWidget {
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Icon(
                                     Icons.location_on,
                                     color: AppColor.teal,
                                     size: 25.r,
                                   ),
-                                  Text(
-                                    location,
-                                    style: TextStyle(
-                                      color: AppColor.grey,
-                                      fontFamily: 'Avenir',
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 17.sp,
-                                    ),
+                                  MediumText(
+                                    text: location,
+                                    color: AppColor.grey,
+                                    fontSize: 15.sp,
                                   )
                                 ],
+                              ),
+                              SizedBox(
+                                height: 5.h,
                               ),
                               AppCustomRateBar(
                                 rate: rate,
                               ),
                             ],
                           ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                "\$$price",
-                                style: TextStyle(
-                                  fontSize: 25.sp,
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: 'Avenir',
-                                ),
+                              HeadLineText(
+                                text: "\$$price",
+                                fontSize: 22.sp,
+                                isUpper: false,
                               ),
-                              Text(
-                                "/per night",
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Avenir',
-                                  color: Colors.grey,
-                                ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              MediumText(
+                                text: "/per night",
+                                fontSize: 16.sp,
+                                color: Colors.grey,
                               )
                             ],
                           ),

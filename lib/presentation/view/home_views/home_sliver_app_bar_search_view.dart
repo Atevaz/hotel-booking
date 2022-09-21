@@ -12,7 +12,6 @@ class HomeSliverAppBarSearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: searchHotels,
       child: Container(
@@ -25,11 +24,14 @@ class HomeSliverAppBarSearchView extends StatelessWidget {
               size: 30.r,
             ),
             enabled: false,
-            contentPadding: EdgeInsets.symmetric(vertical: 15.h),
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 15.h,
+              horizontal: 20.w,
+            ),
             hintText: "Where are you going?",
             hintStyle: TextStyle(
               color: AppColor.grey,
-              fontSize: 20.sp,
+              fontSize: 18.sp,
               fontFamily: 'Avenir',
             ),
             fillColor: AppColor.lightGrey,

@@ -1,7 +1,6 @@
+import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:booking_hotel/presentation/widget/last_search_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LastSearch extends StatefulWidget {
@@ -22,6 +21,13 @@ class _LastSearchState extends State<LastSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: MyAppBar(
+            isCompletedAppBar: true,
+            leadingIcon: const Icon(Icons.close),
+            title: 'Search'),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -29,15 +35,6 @@ class _LastSearchState extends State<LastSearch> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.close),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Text(
-                  'Search',
-                  style:
-                      TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold),
-                ),
                 SizedBox(
                   height: 15.h,
                 ),
@@ -56,7 +53,7 @@ class _LastSearchState extends State<LastSearch> {
                 SizedBox(
                   height: 15.h,
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 160.h,
                   child: ListView.separated(

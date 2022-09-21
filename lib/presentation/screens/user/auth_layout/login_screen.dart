@@ -3,6 +3,7 @@ import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_check_box.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/default_text_form_field.dart';
+import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,13 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Log in",
-                  style: TextStyle(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.w800,
-                    fontFamily: 'Avenir',
-                  ),
+                HeadLineText(
+                  text: "Log in",
+                  fontSize: 28.sp,
+                  color: AppColor.black,
                 ),
                 SizedBox(
                   height: 40.h,
@@ -61,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   inputType: TextInputType.emailAddress,
                   hintText: "Email Address",
                   prefix: Icons.email_outlined,
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 20.h,
@@ -78,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hidePass = !hidePass;
                     });
                   },
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 5.h,

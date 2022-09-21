@@ -1,11 +1,12 @@
 
 import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
+
+
 import 'package:booking_hotel/presentation/screens/user/auth_layout/login_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/auth_layout/register_screen.dart';
-import 'package:booking_hotel/presentation/screens/user/booking_screen.dart';
-
-import 'package:booking_hotel/presentation/screens/user/search_map.dart';
+import 'package:booking_hotel/presentation/screens/user/explore_screen.dart';
+import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'app_router_names.dart';
 
@@ -14,7 +15,7 @@ class AppRouter {
     switch (settings.name) {
       case AppRouterNames.rTestLayoutRoute:
         return MaterialPageRoute(
-          builder: (_) => const HomeLayoutScreen(),
+          builder: (_) => FilterScreen(),
         );
       case AppRouterNames.rOnBoardingLayoutRoute:
         return MaterialPageRoute(
@@ -34,8 +35,11 @@ class AppRouter {
       //   );
       case AppRouterNames.rHomeLayoutRoute:
         return MaterialPageRoute(
-
-          builder: (_) => const HomeLayoutScreen(),
+          builder: (_) => const HomeScreen(),
+        );
+      case AppRouterNames.rExploreLayoutRoute:
+        return MaterialPageRoute(
+          builder: (_) => const ExploreScreen(),
         );
       default:
         return null;

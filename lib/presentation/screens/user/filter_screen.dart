@@ -19,11 +19,9 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () {},
-        ),
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity,kToolbarHeight),
+        child: MyAppBar(isCompletedAppBar: false,isBack: true,leadingIcon: Icon(Icons.close),),
       ),
       body: Column(children: [
         const HeadLineText(text: 'Filter'),

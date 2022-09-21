@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/view/hotel_card.dart';
 import 'package:booking_hotel/presentation/view/my_app_bar.dart';
@@ -13,7 +14,6 @@ class ExploreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchC = TextEditingController();
     return Scaffold(
-      backgroundColor: AppColor.lightGrey,
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
         child: MyAppBar(
@@ -34,7 +34,9 @@ class ExploreScreen extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, AppRouterNames.rSearchMapLayoutRoute);
+              },
               icon: const Icon(
                 Icons.map,
                 color: AppColor.black,
@@ -152,7 +154,7 @@ class ExploreScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      //TODO
+                      Navigator.pushNamed(context, AppRouterNames.rFilterLayoutRoute);
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -178,18 +180,11 @@ class ExploreScreen extends StatelessWidget {
                 height: 20.h,
               ),
               Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
+                  physics: BouncingScrollPhysics(),
                   itemCount: 11,
-                  itemBuilder: (_, index) {
-                    EdgeInsets pad = EdgeInsets.zero;
-                    if (index != 10) {
-                      pad = EdgeInsets.only(bottom: 20.h);
-                    }
-                    return Padding(
-                      padding: pad,
-                      child: const HotelCard(),
-                    );
-                  },
+                  itemBuilder: (context, index) => HotelCard(),
+                  separatorBuilder:(context, index) => SizedBox(height: 10.h,),
                 ),
               ),
             ],

@@ -15,7 +15,7 @@ class HomeSliverAppBarSearchView extends StatelessWidget {
     return InkWell(
       onTap: searchHotels,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 50.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
         child: TextFormField(
           decoration: InputDecoration(
             prefixIcon: Icon(

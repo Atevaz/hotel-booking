@@ -1,3 +1,7 @@
+import 'package:booking_hotel/presentation/screens/user/booking_screen.dart';
+import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
+import 'package:booking_hotel/presentation/screens/user/profile_layout/profile_screen.dart';
+import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,6 +59,14 @@ class GlobalCubit extends Cubit<GlobalState> {
     currentIndex = index;
     emit(ChangeNavBarState());
   }
+
+  List<Widget> screens = [
+    HomeScreen(),
+    BookingScreen(),
+    ProfileScreen(),
+  ];
+
+
 
   Object? val = 'light';
 

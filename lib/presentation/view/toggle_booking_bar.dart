@@ -18,7 +18,7 @@ class _ToggleTabBarState extends State<ToggleTabBar> {
   Widget build(BuildContext context) {
     return FlutterToggleTab(
 // width in percent
-    width: 100,
+    width: 90,
       borderRadius: 20.r,
       height: 55.h,
 
@@ -39,6 +39,7 @@ class _ToggleTabBarState extends State<ToggleTabBar> {
           selectedIndex = index;
         });
       },
+      isScroll: false,
     );
   }
 }

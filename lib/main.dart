@@ -5,8 +5,7 @@ import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/constant.dart';
 import 'package:booking_hotel/core/styles/themes.dart';
 import 'package:booking_hotel/presentation/view/hotel_details.dart';
-import 'package:booking_hotel/presentation/view/last_search.dart';
-import 'package:booking_hotel/presentation/view/update_profile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

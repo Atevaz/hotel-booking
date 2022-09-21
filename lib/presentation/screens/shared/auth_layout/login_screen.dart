@@ -59,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   inputType: TextInputType.emailAddress,
                   hintText: "Email Address",
                   prefix: Icons.email_outlined,
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 20.h,
@@ -76,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hidePass = !hidePass;
                     });
                   },
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 5.h,

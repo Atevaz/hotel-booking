@@ -63,6 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   inputType: TextInputType.text,
                   hintText: "User Name",
                   prefix: Icons.text_fields_outlined,
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 20.h,
@@ -73,6 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   inputType: TextInputType.emailAddress,
                   hintText: "Email Address",
                   prefix: Icons.email_outlined,
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 20.h,
@@ -90,6 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hidePass = !hidePass;
                     });
                   },
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 20.h,
@@ -107,6 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hidePass = !hidePass;
                     });
                   },
+                  borderRadius: 30.r,
                 ),
                 SizedBox(
                   height: 20.h,

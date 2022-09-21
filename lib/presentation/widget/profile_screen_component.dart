@@ -11,6 +11,7 @@ class ProfileScreenComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {},
       title: MediumText(
         text: componentTitle,
       ),

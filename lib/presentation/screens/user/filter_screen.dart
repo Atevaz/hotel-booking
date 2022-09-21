@@ -20,68 +20,82 @@ class _FilterScreenState extends State<FilterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity,kToolbarHeight),
-        child: MyAppBar(isCompletedAppBar: false,isBack: true,leadingIcon: Icon(Icons.close),),
+        preferredSize: Size(double.infinity, kToolbarHeight),
+        child: MyAppBar(
+          isCompletedAppBar: false,
+          isBack: true,
+          leadingIcon: Icon(Icons.close),
+        ),
       ),
-      body: Column(children: [
-        const HeadLineText(text: 'Filter'),
-        SizedBox(
-          height: 20.h,
-        ),
-        const PriceSlider(),
-        SizedBox(
-          height: 30.h,
-        ),
-        const MediumText(text: 'Facilities'),
-        SizedBox(
-          height: 20.h,
-        ),
-        Row(
-          children: [
-            Column(
-              children: [
-                AppCustomCheckBox(
-                  checked: false,
-                  text: 'Free Breakfast',
-                  onTap: () {},
-                ),
-                AppCustomCheckBox(
-                  checked: false,
-                  text: 'Pool',
-                  onTap: () {},
-                ),
-                AppCustomCheckBox(
-                  checked: false,
-                  text: 'Free WIfi',
-                  onTap: () {},
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                AppCustomCheckBox(
-                  checked: false,
-                  text: 'Free Parking',
-                  onTap: () {},
-                ),
-                AppCustomCheckBox(
-                  checked: false,
-                  text: 'Air Conditioner',
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 30.h,
-        ),
-        const MediumText(text: 'Distance from city center'),
-        SliderWidget(),
-      ]),
-      bottomNavigationBar: MyButton(
-        text: 'Apply',
-        onPressed: () {},
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const HeadLineText(text: 'Filter'),
+          SizedBox(
+            height: 20.h,
+          ),
+          const PriceSlider(),
+          SizedBox(
+            height: 30.h,
+          ),
+          const MediumText(text: 'Facilities'),
+          SizedBox(
+            height: 20.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppCustomCheckBox(
+                    checked: false,
+                    text: 'Free Breakfast',
+                    onTap: () {},
+                  ),
+                  AppCustomCheckBox(
+                    checked: false,
+                    text: 'Pool',
+                    onTap: () {},
+                  ),
+                  AppCustomCheckBox(
+                    checked: false,
+                    text: 'Free WIfi',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppCustomCheckBox(
+                    checked: false,
+                    text: 'Free Parking',
+                    onTap: () {},
+                  ),
+                  AppCustomCheckBox(
+                    checked: false,
+                    text: 'Air Conditioner',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30.h,
+          ),
+          const MediumText(text: 'Distance from city center'),
+          SliderWidget(),
+          const Spacer(),
+          MyButton(
+            text: 'Apply',
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+        ]),
       ),
     );
   }

@@ -10,19 +10,21 @@ class PriceSlider extends StatefulWidget {
 class _PriceSliderState extends State<PriceSlider> {
   @override
   Widget build(BuildContext context) {
-    var selectedRange = const RangeValues(0, 1);
+    var selectedRange = const RangeValues(500, 2000);
 
     return RangeSlider(
       values: selectedRange,
-      onChanged: (RangeValues newRange) {
+      max: 5000,
+      divisions: 200,
+      labels: RangeLabels(
+        selectedRange.start.round().toString(),
+        selectedRange.end.round().toString(),
+      ),
+      onChanged: (RangeValues values) {
         setState(() {
-          selectedRange = newRange;
+          selectedRange = values;
         });
       },
-      min: 0,
-      max: 1000,
-      divisions: 50,
-      labels: RangeLabels('${selectedRange.start}', '${selectedRange.end}'),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:booking_hotel/data/models/auth_response/status_model.dart';
+import 'package:booking_hotel/data/models/common_models/status_model.dart';
 import 'package:booking_hotel/data/models/auth_response/user_model.dart';
 
 class AuthResponseModel {

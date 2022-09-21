@@ -27,6 +27,8 @@ dependencies:
   flutter_offline: ^2.1.0
   flutter_toggle_tab: ^1.2.0
   smooth_page_indicator: ^1.0.0+2
+  internet_connection_checker: ^0.0.1+4
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:

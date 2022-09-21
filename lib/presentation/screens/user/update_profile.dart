@@ -21,6 +21,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
         child: MyAppBar(
           isCompletedAppBar: true,
           title: 'Edit Profile',
+          isBack: true,
         ),
       ),
       body: SafeArea(

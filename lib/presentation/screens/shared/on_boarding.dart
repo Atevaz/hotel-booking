@@ -1,5 +1,6 @@
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/screens/user/auth_layout/register_screen.dart';
 import 'package:booking_hotel/presentation/widget/caption_of_onboarding.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
@@ -18,8 +19,15 @@ class BoardingModel {
   });
 }
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  int currentIndex = 0;
 
   final List<BoardingModel> boarding = [
     BoardingModel(
@@ -46,72 +54,74 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  color: AppColor.teal,
-                ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Image.asset(
+                'assets/images/logo.png',
+                color: AppColor.teal,
               ),
-              Expanded(
-                flex: 2,
-                child: PageView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  controller: boardController,
-                  itemBuilder: (context, index) =>
-                      buildOnBoarding(boarding[index]),
-                  itemCount: boarding.length,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SmoothPageIndicator(
+            ),
+            Expanded(
+              flex: 2,
+              child: PageView.builder(
+                physics: const BouncingScrollPhysics(),
                 controller: boardController,
-                count: boarding.length,
-                axisDirection: Axis.horizontal,
-                effect: const ExpandingDotsEffect(
-                    spacing: 4,
-                    radius: 10,
-                    dotWidth: 15,
-                    dotHeight: 5.0,
-                    activeDotColor: AppColor.teal),
+
+                itemBuilder: (context, index) {
+                  return buildOnBoarding(boarding[index]);
+                }
+                    ,
+                itemCount: boarding.length,
               ),
-              const SizedBox(
-                height: 10,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SmoothPageIndicator(
+              controller: boardController,
+              count: boarding.length,
+              axisDirection: Axis.horizontal,
+              effect: const ExpandingDotsEffect(
+                  spacing: 4,
+                  radius: 10,
+                  dotWidth: 15,
+                  dotHeight: 5.0,
+                  activeDotColor: AppColor.teal),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            MyButton(
+              text: 'Get Started'  ,
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                AppRouterNames.rLoginLayoutRoute,
               ),
-              MyButton(
-                text: 'Get Started',
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  AppRouterNames.rLoginLayoutRoute,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Don\'t has any account ?'),
-                  DefaultTextButton(
-                    onPressed: () => Navigator.pushNamed(
-                      context,
-                      AppRouterNames.rRegisterLayoutRoute,
-                    ),
-                    text: 'Register',
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Don\'t has any account ?'),
+                DefaultTextButton(
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRouterNames.rRegisterLayoutRoute,
+                    (route) => false,
                   ),
-                ],
-              ),
-            ],
-          ),
+                  text: 'Register',
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

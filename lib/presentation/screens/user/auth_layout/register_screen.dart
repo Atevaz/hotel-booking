@@ -32,19 +32,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.lightGrey,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColor.black,
-          ),
-        ),
-      ),
-      body: SafeArea(
+
+      body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 50.h),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -117,9 +108,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 MyButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushNamedAndRemoveUntil(
                       context,
-                      AppRouterNames.rLoginLayoutRoute,
+                      AppRouterNames.rHomeLayoutRoute,
+                      (route) => false,
                     );
                   },
                   text: "Sign up",
@@ -146,9 +138,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       textAlign: TextAlign.center,
                     ),
                     TextButton(
-                      onPressed: () => Navigator.pushReplacementNamed(
+                      onPressed: () => Navigator.pushNamedAndRemoveUntil(
                         context,
                         AppRouterNames.rLoginLayoutRoute,
+                        (route) => false,
                       ),
                       child: MediumText(
                         text: loginText,

@@ -23,7 +23,7 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
       background: Padding(
         padding: EdgeInsets.only(
           bottom: 30.h,
-          left: 30.w,
+          left: 20.w,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -54,7 +54,7 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: AppColor.teal,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.r),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
                 padding: EdgeInsets.symmetric(
                   vertical: 20.h,

@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_background_view.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_image_view.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_search_view.dart';
@@ -29,7 +30,7 @@ class _HomeSliverAppBarViewState extends State<HomeSliverAppBarView> {
           const HomeSliverAppBarImageView(),
           HomeSliverAppBarBackgroundView(
             viewHotels: () {
-              //TODO
+              Navigator.pushNamed(context, AppRouterNames.rExploreLayoutRoute);
             },
           ),
           HomeSliverAppBarSearchView(

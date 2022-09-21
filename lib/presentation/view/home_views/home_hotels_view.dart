@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_card_view.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_hotel_headline_view.dart';
 import 'package:flutter/material.dart';
@@ -19,17 +20,16 @@ class HomeHotelsView extends StatelessWidget {
           EdgeInsets insets = EdgeInsets.zero;
           Widget item = HomeCardView(
             onTap: () {
-              //TODO
+              /// routing
             },
           );
           if (index != 10) {
             insets = EdgeInsets.only(bottom: 25.h);
           }
           if (index == 0) {
-            insets = insets.copyWith(left: 15.w, right: 15.w);
             item = HomeHotelsHeadlineView(
               viewAll: () {
-                //TODO
+                Navigator.pushNamed(context, AppRouterNames.rExploreLayoutRoute);
               },
             );
           }

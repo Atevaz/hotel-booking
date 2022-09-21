@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset('assets/backpacker.jpg'),
+          Image.asset('assets/images/backpacker.jpg'),
           Column(
             children: [
               SizedBox(

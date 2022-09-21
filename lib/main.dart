@@ -53,10 +53,9 @@ class MyApp extends StatelessWidget {
             },
             builder: (context, state) {
               return MaterialApp(
-                home: HotelDetails(),
                 debugShowCheckedModeBanner: false,
                 // initialRoute: AppRouterNames.rOnBoardingLayoutRoute,
-                // onGenerateRoute: appRouter.onGenerateRoute,
+                onGenerateRoute: appRouter.onGenerateRoute,
                 theme: lightTheme,
                 themeMode: appMode,
                 darkTheme: darkTheme,

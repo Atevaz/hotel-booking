@@ -27,19 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.lightGrey,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColor.black,
-          ),
-        ),
-      ),
-      body: SafeArea(
+
+      body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.w),
+          padding: EdgeInsets.symmetric(
+              vertical: 50.h,
+              horizontal: 25.w),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -116,9 +109,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       textAlign: TextAlign.center,
                     ),
                     TextButton(
-                      onPressed: () => Navigator.pushReplacementNamed(
+                      onPressed: () => Navigator.pushNamedAndRemoveUntil(
                         context,
                         AppRouterNames.rRegisterLayoutRoute,
+                        (route) => false,
                       ),
                       child: const MediumText(
                         text: "Sign up",

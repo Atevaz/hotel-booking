@@ -14,34 +14,31 @@ class HomeHotelsHeadlineView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         HeadLineText(
           text: "Best Deals",
           fontSize: 22.sp,
           isUpper: false,
         ),
-        Material(
-          color: AppColor.lightGrey,
-          child: InkWell(
-            onTap: viewAll,
-            child: Row(
-              children: [
-                HeadLineText(
-                  text: "View all",
-                  fontSize: 20.sp,
-                  color: AppColor.teal,
-                  isUpper: false,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                const Icon(
-                  Icons.arrow_forward,
-                  color: AppColor.teal,
-                ),
-              ],
-            ),
+        Spacer(),
+        InkWell(
+          onTap: viewAll,
+          child: Row(
+            children: [
+              HeadLineText(
+                text: "View all",
+                fontSize: 20.sp,
+                color: AppColor.teal,
+                isUpper: false,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              const Icon(
+                Icons.arrow_forward,
+                color: AppColor.teal,
+              ),
+            ],
           ),
         ),
       ],

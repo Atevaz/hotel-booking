@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/profile_screen_component.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
@@ -15,7 +16,11 @@ class ProfileScreen extends StatelessWidget {
           title: const MediumText(text: 'Mohamed'),
           subtitle: DefaultTextButton(
             text: 'View and Edit profile',
-            onPressed: () {},
+            onPressed: () {
+
+              Navigator.pushNamed(context, AppRouterNames.rUpdateProfileLayoutRoute);
+
+            },
           ),
           trailing: const CircleAvatar(
             radius: 40,

@@ -1,7 +1,6 @@
 import 'package:booking_hotel/presentation/screens/user/booking_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/profile_screen.dart';
-import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +12,24 @@ import 'global_state.dart';
 
 class GlobalCubit extends Cubit<GlobalState> {
   GlobalCubit() : super(GlobalInitial());
+
+  // final TestApi repo;
+  // UserModel? user;
+  //
+  // Future getHotel() async {
+  //   emit(loading());
+  //   final result = await repo.getHotels();
+  //   result.fold(
+  //     (l) {
+  //       emit(err());
+  //     },
+  //     (r) {
+  //       // TODO
+  //       user = r;
+  //       emit(loaded());
+  //     },
+  //   );
+  // }
 
   static GlobalCubit get(context) => BlocProvider.of(context);
   Color cardColor = AppColor.white;
@@ -30,7 +47,8 @@ class GlobalCubit extends Cubit<GlobalState> {
     } else {
       isDark = !isDark;
     }
-    CacheHelper.saveDataSharedPreference(key: 'isDark', value: isDark).then((value) {
+    CacheHelper.saveDataSharedPreference(key: 'isDark', value: isDark)
+        .then((value) {
       if (isDark) {
         cardColor = AppColor.black;
         colorOfFormField = AppColor.black;
@@ -66,8 +84,6 @@ class GlobalCubit extends Cubit<GlobalState> {
     ProfileScreen(),
   ];
 
-
-
   Object? val = 'light';
 
   void changeValueOfRadioButton(value) {
@@ -83,13 +99,14 @@ class GlobalCubit extends Cubit<GlobalState> {
     emit(CloseThemeBottomSheet());
   }
 
-
   IconData suffixForPassword = Icons.visibility_outlined;
   bool obscureForPassword = true;
 
   void changePasswordVisibility() {
     obscureForPassword = !obscureForPassword;
-    suffixForPassword = obscureForPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    suffixForPassword = obscureForPassword
+        ? Icons.visibility_outlined
+        : Icons.visibility_off_outlined;
     emit(GlobalChangePasswordVisibilityState());
   }
 
@@ -98,10 +115,9 @@ class GlobalCubit extends Cubit<GlobalState> {
 
   void changeConfirmPasswordVisibility() {
     obscureForConfirmPassword = !obscureForConfirmPassword;
-    suffixForConfirmPassword = obscureForConfirmPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    suffixForConfirmPassword = obscureForConfirmPassword
+        ? Icons.visibility_outlined
+        : Icons.visibility_off_outlined;
     emit(GlobalChangeConfirmPasswordVisibilityState());
   }
-
-
 }
-

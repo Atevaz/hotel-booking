@@ -4,12 +4,13 @@ class AppRouterNames {
   static const rLoginLayoutRoute = '/login';
   static const rRegisterLayoutRoute = '/register';
   static const rHomeLayoutRoute = '/home';
+  static const rHotelDetailsLayoutRoute = '/hotel-details';
   static const rChangePasswordLayoutRoute = '/change-password';
   static const rSearchMapLayoutRoute = '/search_map';
   static const rFilterLayoutRoute = '/filter';
   static const rSettingsLayoutRoute = '/setting';
   static const rProfileLayoutRoute = '/profile';
-  static const rUpdateProfileLayoutRoute = '/profile';
+  static const rUpdateProfileLayoutRoute = '/profile-update';
   static const rBookingsLayoutRoute = '/bookings';
   static const rExploreLayoutRoute = '/explore';
 }

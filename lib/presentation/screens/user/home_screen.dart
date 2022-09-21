@@ -7,15 +7,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children:  [
-        CustomScrollView(
-          slivers: [
-            //TODO create page view with indicator
-            HomeSliverAppBarView(),
-            HomeHotelsView(),
-          ],
-        ),
+    return const CustomScrollView(
+      slivers: [
+        //TODO create page view with indicator
+        HomeSliverAppBarView(),
+        HomeHotelsView(),
       ],
     );
   }

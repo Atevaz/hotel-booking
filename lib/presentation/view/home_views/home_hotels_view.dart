@@ -19,9 +19,8 @@ class HomeHotelsView extends StatelessWidget {
         itemBuilder: (_, index, anim) {
           EdgeInsets insets = EdgeInsets.zero;
           Widget item = HomeCardView(
-            onTap: () {
-              /// routing
-            },
+            onTap: () => Navigator.pushNamed(
+                context, AppRouterNames.rHotelDetailsLayoutRoute),
           );
           if (index != 10) {
             insets = EdgeInsets.only(bottom: 25.h);
@@ -29,7 +28,8 @@ class HomeHotelsView extends StatelessWidget {
           if (index == 0) {
             item = HomeHotelsHeadlineView(
               viewAll: () {
-                Navigator.pushNamed(context, AppRouterNames.rExploreLayoutRoute);
+                Navigator.pushNamed(
+                    context, AppRouterNames.rExploreLayoutRoute);
               },
             );
           }

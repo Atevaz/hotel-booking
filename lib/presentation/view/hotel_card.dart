@@ -18,16 +18,18 @@ class HotelCard extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Column(children: [
-        Image.asset('assets/images/hotel.jpg',),
+        Image.asset(
+          'assets/images/hotel.jpg',
+        ),
         Padding(
-          padding:  EdgeInsets.all(8.0.r),
+          padding: EdgeInsets.all(15.0.r),
           child: Column(
             children: [
               Row(
-                children:  [
+                children: const [
                   MediumText(text: 'Grand Royal Hotel'),
                   Spacer(),
-                  MediumText(text: "180 \$"),
+                  MediumText(text: "\$180"),
                 ],
               ),
               Row(
@@ -35,14 +37,18 @@ class HotelCard extends StatelessWidget {
                   RichText(
                       text: const TextSpan(children: [
                     WidgetSpan(
-                      child: RegularText(text: 'Wembley, London'),
+                      child: RegularText(text: 'Haram, Giza'),
                     ),
                     WidgetSpan(
-                      child: Icon(Icons.location_on),
+                      child: Icon(
+                        Icons.location_on,
+                        color: AppColor.teal,
+                      ),
                     ),
                     WidgetSpan(child: RegularText(text: '2.0km to city'))
                   ])),
-
+                  const Spacer(),
+                  const RegularText(text: '/per night')
                 ],
               ),
               SizedBox(

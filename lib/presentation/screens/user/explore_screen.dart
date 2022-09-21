@@ -35,7 +35,8 @@ class ExploreScreen extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, AppRouterNames.rSearchMapLayoutRoute);
+                Navigator.pushNamed(
+                    context, AppRouterNames.rSearchMapLayoutRoute);
               },
               icon: const Icon(
                 Icons.map,
@@ -47,7 +48,7 @@ class ExploreScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(15),
           child: Column(
             children: [
               Row(
@@ -154,7 +155,8 @@ class ExploreScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, AppRouterNames.rFilterLayoutRoute);
+                      Navigator.pushNamed(
+                          context, AppRouterNames.rFilterLayoutRoute);
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -184,7 +186,9 @@ class ExploreScreen extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   itemCount: 11,
                   itemBuilder: (context, index) => HotelCard(),
-                  separatorBuilder:(context, index) => SizedBox(height: 10.h,),
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 10.h,
+                  ),
                 ),
               ),
             ],

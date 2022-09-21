@@ -1,7 +1,5 @@
 import 'package:booking_hotel/presentation/widget/last_search_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LastSearch extends StatefulWidget {
@@ -56,7 +54,7 @@ class _LastSearchState extends State<LastSearch> {
                 SizedBox(
                   height: 15.h,
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 160.h,
                   child: ListView.separated(

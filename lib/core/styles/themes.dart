@@ -6,21 +6,19 @@ import 'colors.dart';
 
 ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.blue,
-  scaffoldBackgroundColor: AppColor.lightGrey,
+  scaffoldBackgroundColor: AppColor.white,
   bottomSheetTheme: const BottomSheetThemeData(
     backgroundColor: AppColor.teal,
   ),
-
   appBarTheme: AppBarTheme(
     titleSpacing: 12,
     elevation: 0,
     systemOverlayStyle: const SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+      // statusBarIconBrightness: Brightness.dark,
     ),
     actionsIconTheme: const IconThemeData(
       color: Colors.black54,
-
     ),
     backgroundColor: AppColor.lightGrey,
     iconTheme: const IconThemeData(
@@ -57,14 +55,16 @@ ThemeData lightTheme = ThemeData(
     color: AppColor.black,
   ),
   fontFamily: 'SemiBold',
-  //cardColor: AppColor.white,
+  cardColor: AppColor.white,
   cardTheme: CardTheme(
     color: AppColor.white,
-      elevation: 0,
+    elevation: 0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(30.r),),
+      borderRadius: BorderRadius.all(
+        Radius.circular(30.r),
+      ),
     ),
-  )
+  ),
 );
 
 ThemeData darkTheme = ThemeData(
@@ -127,8 +127,9 @@ ThemeData darkTheme = ThemeData(
     color: AppColor.black,
     elevation: 0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(30.r),),
+      borderRadius: BorderRadius.all(
+        Radius.circular(30.r),
+      ),
     ),
-  )
-
+  ),
 );

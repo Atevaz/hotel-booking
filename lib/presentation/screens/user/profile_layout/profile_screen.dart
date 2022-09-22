@@ -81,6 +81,12 @@ class ProfileScreen extends StatelessWidget {
                   Icons.settings,
                   size: 30,
                 )),
+            const ProfileScreenComponent(
+                componentTitle: 'Logout',
+                componentIcon: Icon(
+                  Icons.logout,
+                  size: 30,
+                )),
           ]),
         ),
       ),

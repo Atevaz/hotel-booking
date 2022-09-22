@@ -6,7 +6,6 @@ class AppRouterNames {
   static const rHomeLayoutRoute = '/home';
   static const rHotelDetailsLayoutRoute = '/hotel-details';
   static const rChangePasswordLayoutRoute = '/change-password';
-  static const rSearchMapLayoutRoute = '/search_map';
   static const rFilterLayoutRoute = '/filter';
   static const rSettingsLayoutRoute = '/setting';
   static const rProfileLayoutRoute = '/profile';

@@ -11,8 +11,8 @@ class BookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, kToolbarHeight),
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, kToolbarHeight),
         child: MyAppBar(
           isCompletedAppBar: false,
           isBack: false,

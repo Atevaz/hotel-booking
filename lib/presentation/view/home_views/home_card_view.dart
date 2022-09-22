@@ -15,9 +15,11 @@ class HomeCardView extends StatelessWidget {
     this.address = "Wembley, London",
     this.rate = 4.5,
     this.price = 180,
+    this.onDoubleTap,
   }) : super(key: key);
 
   final Function() onTap;
+  final Function()? onDoubleTap;
   final String image;
   final String name;
   final String location;
@@ -36,6 +38,7 @@ class HomeCardView extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       color: AppColor.white,
       child: InkWell(
+        onDoubleTap: onDoubleTap,
         onTap: onTap,
         child: SizedBox(
           height: 160.h,

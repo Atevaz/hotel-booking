@@ -2,17 +2,17 @@ import 'dart:convert';
 
 import 'package:booking_hotel/core/constants/shared_preferences_consts.dart';
 import 'package:booking_hotel/core/exceptions/shared_preference_exception.dart';
-import 'package:booking_hotel/core/shared_preferences/preferences_service.dart';
+import 'package:booking_hotel/core/shared_preferences/preference_helper.dart';
 import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 
 import 'local_contract.dart';
 
 class LocalAuthContractImpl implements LocalAuthContract {
   @override
-  SharedPreferencesService preferencesService;
+  PreferenceHelper cacheHelper;
 
   LocalAuthContractImpl({
-    required this.preferencesService,
+    required this.cacheHelper,
   });
 
   @override
@@ -20,7 +20,7 @@ class LocalAuthContractImpl implements LocalAuthContract {
     required String userData,
   }) async {
     try {
-      final result = await preferencesService.saveString(
+      final result = await cacheHelper.saveDataSharedPreference(
         key: Current_User_Key,
         value: userData,
       );
@@ -39,7 +39,7 @@ class LocalAuthContractImpl implements LocalAuthContract {
   @override
   Future<LoginParamModel> getUser() async {
     try {
-      final result = await preferencesService.getString(
+      final result = await cacheHelper.getString(
         key: Current_User_Key,
       );
       if (result == null) {
@@ -61,7 +61,7 @@ class LocalAuthContractImpl implements LocalAuthContract {
   @override
   Future<void> removeUser() async {
     try {
-      final result = await preferencesService.removeString(
+      final result = await cacheHelper.removeData(
         key: Current_User_Key,
       );
       if (!result) {

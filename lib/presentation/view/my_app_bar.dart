@@ -1,28 +1,26 @@
-import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyAppBar extends StatelessWidget {
-
   final bool isCompletedAppBar;
-  Widget leadingIcon ;
-  List<Widget>? actions;
-  String? title;
-  bool? isBack;
+  final Widget leadingIcon;
 
-   MyAppBar({
-    Key? key,
-     this.isCompletedAppBar = true,
-     this.title,
-     this.isBack,
-     this.leadingIcon = const Icon(Icons.arrow_back_ios),
-     this.actions
-  }) : super(key: key);
+  final List<Widget>? actions;
+  final String? title;
+  final bool? isBack;
+
+  const MyAppBar(
+      {Key? key,
+      this.isCompletedAppBar = true,
+      this.title,
+      this.isBack,
+      this.leadingIcon = const Icon(Icons.arrow_back_ios),
+      this.actions})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    if(isCompletedAppBar){
+    if (isCompletedAppBar) {
       return AppBar(
         leading: IconButton(
             onPressed: () {
@@ -36,10 +34,8 @@ class MyAppBar extends StatelessWidget {
         centerTitle: false,
         // backgroundColor: AppColor.black,
       );
-    }
-    else{
-      if(isBack!)
-      {
+    } else {
+      if (isBack!) {
         return AppBar(
           leading: IconButton(
               onPressed: () {
@@ -49,14 +45,12 @@ class MyAppBar extends StatelessWidget {
               },
               icon: leadingIcon),
         );
-      }
-      else {
+      } else {
         return AppBar(
           title: Text(title!),
           titleSpacing: 25.w,
         );
       }
     }
-
   }
 }

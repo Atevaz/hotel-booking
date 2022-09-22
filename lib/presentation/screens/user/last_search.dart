@@ -18,14 +18,15 @@ class _LastSearchState extends State<LastSearch> {
     'assets/images/villa.jpg',
   ];
   List<String> searchList = ['Hotels', 'Backpacker', 'Resort', 'Villa'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: MyAppBar(
+        child: const MyAppBar(
             isCompletedAppBar: true,
-            leadingIcon: const Icon(Icons.close),
+            leadingIcon: Icon(Icons.close),
             title: 'Search'),
       ),
       body: SafeArea(
@@ -96,11 +97,12 @@ class _LastSearchState extends State<LastSearch> {
                     ),
                   ],
                 ),
-                LastSearcWidget(
-                    title: 'London',
-                    status: '1 Room - 2 Adults',
-                    history: '12 - 22 DEC',
-                    image: 'assets/images/resort.jpg')
+                const LastSearchWidget(
+                  title: 'London',
+                  status: '1 Room - 2 Adults',
+                  history: '12 - 22 DEC',
+                  image: 'assets/images/resort.jpg',
+                )
               ],
             ),
           ),

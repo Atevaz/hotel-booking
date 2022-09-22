@@ -23,7 +23,7 @@ class _ToggleTabBarState extends State<ToggleTabBar> {
       height: 55.h,
 
       selectedIndex: selectedIndex,
-      selectedBackgroundColors: [AppColor.lightGrey,],
+      selectedBackgroundColors: const [AppColor.lightGrey,],
       isShadowEnable: false,
       selectedTextStyle: TextStyle(
           color: AppColor.teal,

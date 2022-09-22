@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LastSearcWidget extends StatelessWidget {
-  LastSearcWidget(
-      {super.key,
-      required this.title,
-      required this.status,
-      required this.history,
-      required this.image});
-  String title;
-  String status;
-  String history;
-  String image;
+class LastSearchWidget extends StatelessWidget {
+  const LastSearchWidget({
+    Key? key,
+    required this.title,
+    required this.status,
+    required this.history,
+    required this.image,
+  }) : super(key: key);
+  final String title;
+  final String status;
+  final String history;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 450.h,
       child: GridView.count(

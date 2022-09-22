@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class SliderWidget extends StatefulWidget {
-  SliderWidget({
+class SliderWidget extends StatelessWidget {
+  const SliderWidget({
     Key? key,
+    required this.currentValue,
+    required this.onChanged,
   }) : super(key: key);
 
-  @override
-  State<SliderWidget> createState() => _SliderWidgetState();
-}
-
-class _SliderWidgetState extends State<SliderWidget> {
-  double currentValue = 0;
+  final double currentValue;
+  final Function(double value) onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Slider(
       value: currentValue,
-      max: 100,
-      divisions: 4,
-      onChanged: ((value) {
-        setState(() {
-          currentValue = value;
-        });
-      }),
+      max: 5000,
+      divisions: 1000,
+      onChanged: onChanged,
     );
   }
 }

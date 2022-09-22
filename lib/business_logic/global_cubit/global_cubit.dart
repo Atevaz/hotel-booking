@@ -1,17 +1,20 @@
+import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/core/styles/constant.dart';
+import 'package:booking_hotel/data/repository/global/global_repository.dart';
 import 'package:booking_hotel/presentation/screens/user/booking_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/styles/colors.dart';
-import '../../core/styles/constant.dart';
-import '../../data/local/cache_helper.dart';
-
 import 'global_state.dart';
 
 class GlobalCubit extends Cubit<GlobalState> {
-  GlobalCubit() : super(GlobalInitial());
+  Locale locale = const Locale("en");
+  bool isDark = false;
+  final GlobalRepository globalRepository;
+
+  GlobalCubit({required this.globalRepository}) : super(GlobalInitial());
 
   // final TestApi repo;
   // UserModel? user;
@@ -39,35 +42,42 @@ class GlobalCubit extends Cubit<GlobalState> {
   Color headLineTextColor = AppColor.white;
   Color mediumTextColor = AppColor.white;
 
-  bool isDark = false;
+  Future<void> initApp() async {
+    isDark = await globalRepository.isDarkMode();
+    locale = await globalRepository.appLang();
+    _updateCurrentMode();
+    emit(GlobalInitState());
+  }
 
-  void changeAppMode({bool? fromCache}) {
-    if (fromCache != null) {
-      isDark = fromCache;
+  void _updateCurrentMode() {
+    if (isDark) {
+      cardColor = AppColor.black;
+      colorOfFormField = AppColor.black;
+      backGroundOfToggleTap = AppColor.black;
+      regularTextColor = AppColor.lightGrey;
+      headLineTextColor = AppColor.white;
+      mediumTextColor = AppColor.white;
+      appMode = ThemeMode.dark;
+      emit(AppChangeModeDarkState());
     } else {
-      isDark = !isDark;
+      cardColor = AppColor.white;
+      backGroundOfToggleTap = AppColor.lightGrey;
+      regularTextColor = AppColor.grey;
+      headLineTextColor = AppColor.black;
+      mediumTextColor = AppColor.black;
+      colorOfFormField = AppColor.lightGrey;
+      appMode = ThemeMode.light;
+      emit(AppChangeModeLightState());
     }
-    CacheHelper.saveDataSharedPreference(key: 'isDark', value: isDark)
-        .then((value) {
-      if (isDark) {
-        cardColor = AppColor.black;
-        colorOfFormField = AppColor.black;
-        backGroundOfToggleTap = AppColor.black;
-        regularTextColor = AppColor.lightGrey;
-        headLineTextColor = AppColor.white;
-        mediumTextColor = AppColor.white;
-        appMode = ThemeMode.dark;
-        emit(AppChangeModeDarkState());
-      } else {
-        cardColor = AppColor.white;
-        backGroundOfToggleTap = AppColor.lightGrey;
-        regularTextColor = AppColor.grey;
-        headLineTextColor = AppColor.black;
-        mediumTextColor = AppColor.black;
-        colorOfFormField = AppColor.lightGrey;
-        appMode = ThemeMode.light;
-        emit(AppChangeModeLightState());
-      }
+  }
+
+  Future<void> changeAppMode() async {
+    _updateCurrentMode();
+    final result = await globalRepository.saveMode(isDark: isDark);
+    result.fold((l) {
+      emit(AppModeSaveErrorState(l));
+    }, (r) {
+      emit(AppModeSavedState());
     });
   }
 
@@ -79,9 +89,9 @@ class GlobalCubit extends Cubit<GlobalState> {
   }
 
   List<Widget> screens = [
-    HomeScreen(),
-    BookingScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const BookingScreen(),
+    const ProfileScreen(),
   ];
 
   Object? val = 'light';

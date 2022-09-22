@@ -22,7 +22,6 @@ class RemoteAuthDataSourceImpl implements RemoteAuthDataSource {
       call: () async => await dioService.post(
         endPoint: loginEndPoint,
         data: loginModel.toJson(),
-        isMultipart: true,
       ),
     );
     final response = AuthResponseModel.fromMap(result);
@@ -35,7 +34,6 @@ class RemoteAuthDataSourceImpl implements RemoteAuthDataSource {
       call: () async => await dioService.post(
         endPoint: registerEndPoint,
         data: registerModel.toMap(),
-        isMultipart: true,
       ),
     );
     final response = AuthResponseModel.fromMap(result);

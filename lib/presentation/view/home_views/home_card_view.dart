@@ -4,6 +4,7 @@ import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:booking_hotel/core/constants/end_points.dart';
 
 class HomeCardView extends StatelessWidget {
   const HomeCardView({
@@ -49,7 +50,11 @@ class HomeCardView extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Image.network(
-                  myImage,
+                  image.contains("http")
+                      ? image
+                      : image.isNotEmpty
+                          ? "$baseApiUrl$apiImagesVersion/$image"
+                          : myImage,
                   fit: BoxFit.cover,
                 ),
               ),

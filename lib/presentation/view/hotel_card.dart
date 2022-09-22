@@ -40,11 +40,13 @@ class HotelCard extends StatelessWidget {
         onTap: onTap,
         child: Column(
           children: [
-            image.split(".").length == 2
-                ? Image.network("$baseApiUrl$apiImagesVersion/$image")
-                : Image.asset(
-                    'assets/images/hotel.jpg',
-                  ),
+            image.contains("http")
+                ? Image.network(image)
+                : !image.contains("assets") && image.isNotEmpty
+                    ? Image.network("$baseApiUrl$apiImagesVersion/$image")
+                    : Image.asset(
+                        'assets/images/hotel.jpg',
+                      ),
             Padding(
               padding: EdgeInsets.all(15.0.r),
               child: Column(

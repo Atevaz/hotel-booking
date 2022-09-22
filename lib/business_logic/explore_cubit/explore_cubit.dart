@@ -42,9 +42,17 @@ class ExploreCubit extends Cubit<ExploreState> {
 
   Future _initCubit() async {
     listC.addListener(_listScrollListener);
-    const param = SearchHotelParamsModel(
+    final param = SearchHotelParamsModel(
       count: 5,
       page: 1,
+      facilities: selectedFacilities != null
+          ? selectedFacilities!.map((e) => "${e.id}").toList()
+          : null,
+      minPrice: priceRange != null ? priceRange!.start : null,
+      maxPrice: priceRange != null ? priceRange!.end : null,
+      distance: distanceFilter,
+      latitude: distanceFilter != null ? myLocation!.latitude : null,
+      longitude: distanceFilter != null ? myLocation!.longitude : null,
     );
     await _getFacilities();
     await _searchHotels(param);
@@ -58,6 +66,14 @@ class ExploreCubit extends Cubit<ExploreState> {
         count: 5,
         page: page,
         name: searchC.text,
+        facilities: selectedFacilities != null
+            ? selectedFacilities!.map((e) => "${e.id}").toList()
+            : null,
+        minPrice: priceRange != null ? priceRange!.start : null,
+        maxPrice: priceRange != null ? priceRange!.end : null,
+        distance: distanceFilter,
+        latitude: distanceFilter != null ? myLocation!.latitude : null,
+        longitude: distanceFilter != null ? myLocation!.longitude : null,
       );
       _searchHotels(param, true);
     }
@@ -123,11 +139,14 @@ class ExploreCubit extends Cubit<ExploreState> {
     final param = SearchHotelParamsModel(
       count: 5,
       page: 1,
+      facilities: selectedFacilities != null
+          ? selectedFacilities!.map((e) => "${e.id}").toList()
+          : null,
       minPrice: priceRange != null ? priceRange!.start : null,
       maxPrice: priceRange != null ? priceRange!.end : null,
       distance: distanceFilter,
-      latitude: distance != null ? myLocation!.latitude : null,
-      longitude: distance != null ? myLocation!.longitude : null,
+      latitude: distanceFilter != null ? myLocation!.latitude : null,
+      longitude: distanceFilter != null ? myLocation!.longitude : null,
     );
     _searchHotels(param);
   }
@@ -173,6 +192,14 @@ class ExploreCubit extends Cubit<ExploreState> {
       page: page,
       name: searchType == 0 ? searchC.text : null,
       address: searchType == 1 ? searchC.text : null,
+      facilities: selectedFacilities != null
+          ? selectedFacilities!.map((e) => "${e.id}").toList()
+          : null,
+      minPrice: priceRange != null ? priceRange!.start : null,
+      maxPrice: priceRange != null ? priceRange!.end : null,
+      distance: distanceFilter,
+      latitude: distanceFilter != null ? myLocation!.latitude : null,
+      longitude: distanceFilter != null ? myLocation!.longitude : null,
     );
     _searchHotels(param);
   }

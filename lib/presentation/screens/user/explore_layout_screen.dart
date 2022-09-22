@@ -41,8 +41,8 @@ class ExploreLayoutScreen extends StatelessWidget {
                 actions: [
                   IconButton(
                     onPressed: explore.toggleSearchBar,
-                    icon: const Icon(
-                      Icons.search,
+                    icon: Icon(
+                      explore.showSearchBar ? Icons.close : Icons.search,
                       color: AppColor.black,
                     ),
                   ),
@@ -74,7 +74,14 @@ class ExploreLayoutScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              padding: EdgeInsets.only(
+                                left: 20.w,
+                                right: 20.w,
+                                top: explore.currentLayoutIndex == 0 &&
+                                        explore.showSearchBar
+                                    ? 10.h
+                                    : 0.h,
+                              ),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

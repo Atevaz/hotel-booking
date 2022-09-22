@@ -10,7 +10,7 @@ import 'package:booking_hotel/data/local/auth/local_contract.dart';
 import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 import 'package:booking_hotel/data/models/auth_params/register_param_model.dart';
 import 'package:booking_hotel/data/models/auth_response/auth_response_model.dart';
-import 'package:booking_hotel/data/remote/auth/remote_contract.dart';
+import 'package:booking_hotel/data/remote/auth/auth_data_source.dart';
 import 'package:dartz/dartz.dart';
 
 import 'repository_auth.dart';
@@ -22,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
   LocalAuthContract localAuth;
 
   @override
-  RemoteAuthContract remoteAuth;
+  RemoteAuthDataSource remoteAuth;
 
   @override
   NetworkService networkService;
@@ -34,28 +34,43 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<Either<String, AuthResponseModel>> login(
-    LoginParamModel? loginParamModel, [
-    bool cacheUser = false,
-  ]) async {
+  Future<Either<String, AuthResponseModel>> loginSaved() async {
     try {
       final connected = await networkService.isConnected;
       if (!connected) {
         throw NetworkException(message: Network_Connection_Error);
       }
-      LoginParamModel paramModel;
-      if (loginParamModel == null) {
-        final loginModel = await localAuth.getUser();
-        paramModel = LoginParamModel(
-          email: loginModel.email,
-          password: loginModel.password,
-        );
-      } else {
-        paramModel = loginParamModel;
+      final loginModel = await localAuth.getUser();
+      final result = await remoteAuth.login(loginModel);
+      final profile = await remoteAuth.getProfile(result.user.token);
+      result.user = profile.user;
+      return Right(result);
+    } on PreferenceException catch (e) {
+      return Left(e.message);
+    } on ServerException catch (e) {
+      return Left(e.message);
+    } on NetworkException catch (e) {
+      return Left(e.message);
+    }
+  }
+
+  @override
+  Future<Either<String, AuthResponseModel>> login(
+    LoginParamModel loginParamModel,
+    bool cacheUser,
+  ) async {
+    try {
+      final connected = await networkService.isConnected;
+      if (!connected) {
+        throw NetworkException(message: Network_Connection_Error);
       }
-      final result = await remoteAuth.login(paramModel);
+      final result = await remoteAuth.login(loginParamModel);
       if (cacheUser) {
-        await localAuth.cacheUser(userData: jsonEncode(paramModel.toJson()));
+        await localAuth.cacheUser(
+          userData: jsonEncode(
+            loginParamModel.toJson(),
+          ),
+        );
       }
       final profile = await remoteAuth.getProfile(result.user.token);
       result.user = profile.user;

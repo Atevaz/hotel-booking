@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:booking_hotel/presentation/view/my_app_bar.dart';
-import 'package:booking_hotel/presentation/widget/slider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +15,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: MyAppBar(
+        child: const MyAppBar(
           isCompletedAppBar: true,
           title: 'Edit Profile',
           isBack: true,
@@ -26,7 +23,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(top: 20, left: 25),
+          padding: const EdgeInsets.only(top: 20, left: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

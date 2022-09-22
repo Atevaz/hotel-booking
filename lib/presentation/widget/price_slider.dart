@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 
-class PriceSlider extends StatefulWidget {
-  const PriceSlider({Key? key}) : super(key: key);
+class PriceSlider extends StatelessWidget {
+  const PriceSlider({
+    Key? key,
+    required this.rangeValues,
+    required this.onChange,
+  }) : super(key: key);
 
-  @override
-  State<PriceSlider> createState() => _PriceSliderState();
-}
+  final RangeValues rangeValues;
+  final Function(RangeValues value) onChange;
 
-class _PriceSliderState extends State<PriceSlider> {
   @override
   Widget build(BuildContext context) {
-    var selectedRange = const RangeValues(500, 2000);
-
     return RangeSlider(
-      values: selectedRange,
+      values: rangeValues,
       max: 5000,
       divisions: 200,
       labels: RangeLabels(
-        selectedRange.start.round().toString(),
-        selectedRange.end.round().toString(),
+        rangeValues.start.round().toString(),
+        rangeValues.end.round().toString(),
       ),
-      onChanged: (RangeValues values) {
-        setState(() {
-          selectedRange = values;
-        });
-      },
+      onChanged: onChange,
     );
   }
 }

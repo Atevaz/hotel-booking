@@ -1,5 +1,6 @@
 const String baseApiUrl = 'http://api.mahmoudtaha.com';
 const String version = '/api';
+const String apiImagesVersion = '/images';
 const String registerEndPoint = '/auth/register';
 const String loginEndPoint = '/auth/login';
 const String profileGetEndPoint = '/auth/profile-info';

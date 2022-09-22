@@ -1,203 +1,83 @@
+import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/core/router/app_router_names.dart';
-import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/view/hotel_card.dart';
-import 'package:booking_hotel/presentation/view/my_app_bar.dart';
-import 'package:booking_hotel/presentation/widget/default_text_form_field.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExploreScreen extends StatelessWidget {
-  const ExploreScreen({Key? key}) : super(key: key);
+  const ExploreScreen({
+    Key? key,
+    this.err,
+    required this.explore,
+    required this.searching,
+  }) : super(key: key);
+
+  final String? err;
+  final ExploreCubit explore;
+  final bool searching;
 
   @override
   Widget build(BuildContext context) {
-    final searchC = TextEditingController();
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: AppBar().preferredSize,
-        child: MyAppBar(
-          title: "Explore",
-          leadingIcon: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.arrow_back,
-              color: AppColor.black,
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.favorite_border,
-                color: AppColor.black,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                    context, AppRouterNames.rSearchMapLayoutRoute);
-              },
-              icon: const Icon(
-                Icons.map,
-                color: AppColor.black,
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: MyFormField(
-                      borderRadius: 30.r,
-                      controller: searchC,
-                      prefix: null,
-                      validateText: searchC.text,
-                      inputType: TextInputType.text,
-                      hintText: "London...",
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  Material(
-                    shape: const CircleBorder(),
-                    color: AppColor.teal,
-                    clipBehavior: Clip.hardEdge,
-                    child: InkWell(
-                      onTap: () {
-                        //TODO
-                      },
-                      child: SizedBox(
-                        width: 50.w,
-                        height: 50.h,
-                        child: Icon(
-                          Icons.search,
-                          color: AppColor.white,
-                          size: 25.r,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MediumText(
-                        text: "Choose Date",
-                        fontSize: 20.sp,
-                        color: AppColor.grey,
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      MediumText(
-                        text: "09, May - 14, May",
-                        fontSize: 18.sp,
-                        color: AppColor.black,
-                      ),
-                    ],
-                  ),
-                  Container(
-                    color: AppColor.grey,
-                    width: 2.w,
-                    height: 50.h,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MediumText(
-                        text: "Number of Rooms",
-                        fontSize: 20.sp,
-                        color: AppColor.grey,
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      MediumText(
-                        text: "1 Room 2 People",
-                        fontSize: 18.sp,
-                        color: AppColor.black,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              const Divider(
-                color: AppColor.grey,
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MediumText(
-                    text: "530 Hotel Found",
-                    fontSize: 20.sp,
-                    color: AppColor.black,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(
-                          context, AppRouterNames.rFilterLayoutRoute);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: err == null
+          ? Column(
+              children: [
+                SizedBox(
+                  height: 25.h,
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    controller: explore.listC,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: searching
+                        ? explore.hotels.length + 1
+                        : explore.hotels.length,
+                    itemBuilder: (context, index) {
+                      if (index == explore.hotels.length) {
+                        return const Padding(
+                          padding: EdgeInsets.only(bottom: 20),
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                      return Padding(
+                        padding:
+                            !searching && index == explore.hotels.length - 1
+                                ? EdgeInsets.only(bottom: 20.h)
+                                : EdgeInsets.zero,
+                        child: HotelCard(
+                            name: explore.hotels[index].name,
+                            address: explore.hotels[index].address,
+                            price: explore.hotels[index].price,
+                            image: explore.hotels[index].images.isNotEmpty
+                                ? explore.hotels[index].images[0].image
+                                : "",
+                            rate: explore.hotels[index].rate,
+                            onTap: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              Navigator.pushNamed(
+                                context,
+                                AppRouterNames.rHotelDetailsLayoutRoute,
+                              );
+                            }),
+                      );
                     },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        MediumText(
-                          text: "Filter",
-                          fontSize: 20.sp,
-                          color: AppColor.black,
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        const Icon(
-                          Icons.format_align_left,
-                          color: AppColor.teal,
-                        )
-                      ],
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 20.h,
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Expanded(
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 11,
-                  itemBuilder: (context, index) => HotelCard(
-                    onTap: () => Navigator.pushNamed(
-                        context, AppRouterNames.rHotelDetailsLayoutRoute),
-                  ),
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 10.h,
                   ),
                 ),
+              ],
+            )
+          : Center(
+              child: MediumText(
+                text: err!,
+                color: Colors.red,
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

@@ -14,9 +14,9 @@ Future serverRequest({
       dynamic title = r.data['status']['title'];
 
       throw ServerException(
-        message: title is String ? title : r.data['status']['title']['ar'],
+        message: title is String ? title : r.data['status']['title']['en'],
         code: r.statusCode ?? 500,
-        error: r.data['status']['title']['en'],
+        error: r.data['status']['title']['ar'],
       );
     }
 

@@ -1,6 +1,7 @@
 import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 import 'package:booking_hotel/data/models/auth_params/register_param_model.dart';
 import 'package:booking_hotel/data/models/auth_response/auth_response_model.dart';
+import 'package:booking_hotel/data/models/auth_response/user_model.dart';
 import 'package:booking_hotel/data/repository/auth/repository_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
+  UserModel? user;
 
   AuthCubit({required this.authRepository}) : super(AuthInitial());
 
@@ -22,6 +24,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(LoginSavedLoadingErrorState(l));
       },
       (r) {
+        user = r.user;
         emit(LoginSavedLoadedState(r));
       },
     );
@@ -35,6 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(LoginLoadingErrorState(l));
       },
       (r) {
+        user = r.user;
         emit(LoginLoadedState(r));
       },
     );
@@ -48,6 +52,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(LogoutLoadingErrorState(l));
       },
       (r) {
+        user = null;
         emit(LogoutLoadedState());
       },
     );

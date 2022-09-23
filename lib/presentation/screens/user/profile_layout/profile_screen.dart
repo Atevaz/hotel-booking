@@ -1,7 +1,6 @@
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
-import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/profile_screen_component.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +79,12 @@ class ProfileScreen extends StatelessWidget {
                 componentTitle: 'Settings',
                 componentIcon: Icon(
                   Icons.settings,
+                  size: 30,
+                )),
+            const ProfileScreenComponent(
+                componentTitle: 'Logout',
+                componentIcon: Icon(
+                  Icons.logout,
                   size: 30,
                 )),
           ]),

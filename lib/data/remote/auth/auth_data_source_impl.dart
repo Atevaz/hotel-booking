@@ -6,13 +6,13 @@ import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 import 'package:booking_hotel/data/models/auth_params/register_param_model.dart';
 import 'package:booking_hotel/data/models/auth_response/auth_response_model.dart';
 
-import 'remote_contract.dart';
+import 'auth_data_source.dart';
 
-class RemoteAuthContractImpl implements RemoteAuthContract {
+class RemoteAuthDataSourceImpl implements RemoteAuthDataSource {
   @override
   DioService dioService;
 
-  RemoteAuthContractImpl({
+  RemoteAuthDataSourceImpl({
     required this.dioService,
   });
 

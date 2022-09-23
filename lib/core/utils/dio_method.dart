@@ -28,8 +28,8 @@ Future serverRequest({
 
     throw const ServerException(
       code: 100,
-      message: 'message Hello from primary exception',
-      error: 'err message',
+      message: "Server Request Failed!",
+      error: 'Server Error',
     );
   } catch (e) {
     ServerException exception = e as ServerException;

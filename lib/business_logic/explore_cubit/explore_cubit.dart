@@ -22,8 +22,8 @@ class ExploreCubit extends Cubit<ExploreState> {
   int page = 1;
   int searchType = 0;
   bool showSearchTypes = false;
-  RangeValues? priceRange;
-  List<FacilityModel>? selectedFacilities;
+  RangeValues? priceRangeFilter;
+  List<FacilityModel>? facilityListFilter;
   double? distanceFilter;
   int currentLayoutIndex = 0;
   late CameraPosition initialPosition;
@@ -45,11 +45,11 @@ class ExploreCubit extends Cubit<ExploreState> {
     final param = SearchHotelParamsModel(
       count: 5,
       page: 1,
-      facilities: selectedFacilities != null
-          ? selectedFacilities!.map((e) => "${e.id}").toList()
+      facilities: facilityListFilter != null
+          ? facilityListFilter!.map((e) => "${e.id}").toList()
           : null,
-      minPrice: priceRange != null ? priceRange!.start : null,
-      maxPrice: priceRange != null ? priceRange!.end : null,
+      minPrice: priceRangeFilter != null ? priceRangeFilter!.start : null,
+      maxPrice: priceRangeFilter != null ? priceRangeFilter!.end : null,
       distance: distanceFilter,
       latitude: distanceFilter != null ? myLocation!.latitude : null,
       longitude: distanceFilter != null ? myLocation!.longitude : null,
@@ -66,11 +66,11 @@ class ExploreCubit extends Cubit<ExploreState> {
         count: 5,
         page: page,
         name: searchC.text,
-        facilities: selectedFacilities != null
-            ? selectedFacilities!.map((e) => "${e.id}").toList()
+        facilities: facilityListFilter != null
+            ? facilityListFilter!.map((e) => "${e.id}").toList()
             : null,
-        minPrice: priceRange != null ? priceRange!.start : null,
-        maxPrice: priceRange != null ? priceRange!.end : null,
+        minPrice: priceRangeFilter != null ? priceRangeFilter!.start : null,
+        maxPrice: priceRangeFilter != null ? priceRangeFilter!.end : null,
         distance: distanceFilter,
         latitude: distanceFilter != null ? myLocation!.latitude : null,
         longitude: distanceFilter != null ? myLocation!.longitude : null,
@@ -132,18 +132,18 @@ class ExploreCubit extends Cubit<ExploreState> {
     double? distance,
     List<FacilityModel>? selectedFacilityList,
   ) {
-    selectedFacilities = selectedFacilityList;
+    facilityListFilter = selectedFacilityList;
     distanceFilter = distance;
-    priceRange = price;
+    priceRangeFilter = price;
     emit(ExploreUpdateUIState());
     final param = SearchHotelParamsModel(
       count: 5,
       page: 1,
-      facilities: selectedFacilities != null
-          ? selectedFacilities!.map((e) => "${e.id}").toList()
+      facilities: facilityListFilter != null
+          ? facilityListFilter!.map((e) => "${e.id}").toList()
           : null,
-      minPrice: priceRange != null ? priceRange!.start : null,
-      maxPrice: priceRange != null ? priceRange!.end : null,
+      minPrice: priceRangeFilter != null ? priceRangeFilter!.start : null,
+      maxPrice: priceRangeFilter != null ? priceRangeFilter!.end : null,
       distance: distanceFilter,
       latitude: distanceFilter != null ? myLocation!.latitude : null,
       longitude: distanceFilter != null ? myLocation!.longitude : null,
@@ -192,11 +192,11 @@ class ExploreCubit extends Cubit<ExploreState> {
       page: page,
       name: searchType == 0 ? searchC.text : null,
       address: searchType == 1 ? searchC.text : null,
-      facilities: selectedFacilities != null
-          ? selectedFacilities!.map((e) => "${e.id}").toList()
+      facilities: facilityListFilter != null
+          ? facilityListFilter!.map((e) => "${e.id}").toList()
           : null,
-      minPrice: priceRange != null ? priceRange!.start : null,
-      maxPrice: priceRange != null ? priceRange!.end : null,
+      minPrice: priceRangeFilter != null ? priceRangeFilter!.start : null,
+      maxPrice: priceRangeFilter != null ? priceRangeFilter!.end : null,
       distance: distanceFilter,
       latitude: distanceFilter != null ? myLocation!.latitude : null,
       longitude: distanceFilter != null ? myLocation!.longitude : null,

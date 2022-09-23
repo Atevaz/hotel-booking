@@ -47,10 +47,17 @@ class AppRouter {
           builder: (_) => const UpdateProfile(),
         );
       case AppRouterNames.rFilterLayoutRoute:
-        final result = settings.arguments as List<FacilityModel>?;
+        final result = settings.arguments as List<dynamic>?;
+        final facilities = result?[0] as List<FacilityModel>?;
+        final distanceFilter = result?[1] as double?;
+        final priceRangeFilter = result?[2] as RangeValues?;
+        final facilityListFilter = result?[3] as List<FacilityModel>?;
         return MaterialPageRoute(
           builder: (_) => FilterScreen(
-            facilities: result ?? [],
+            facilities: facilities ?? [],
+            facilitiesFilter: facilityListFilter,
+            priceRangeFilter: priceRangeFilter,
+            distanceFilter: distanceFilter,
           ),
         );
       case AppRouterNames.rHotelDetailsLayoutRoute:

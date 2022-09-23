@@ -1,6 +1,7 @@
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
 import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
+import 'package:booking_hotel/presentation/screens/shared/splash_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/auth_layout/login_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/auth_layout/register_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/explore_layout_screen.dart';
@@ -15,7 +16,7 @@ class AppRouter {
     switch (settings.name) {
       case AppRouterNames.rSplashLayoutRoute:
         return MaterialPageRoute(
-          builder: (_) => const OnBoardingScreen(),
+          builder: (_) => const SplashScreen(),
         );
       case AppRouterNames.rOnBoardingLayoutRoute:
         return MaterialPageRoute(

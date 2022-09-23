@@ -99,18 +99,20 @@ class ExploreLayoutScreen extends StatelessWidget {
                                       Navigator.pushNamed(
                                         context,
                                         AppRouterNames.rFilterLayoutRoute,
-                                        arguments: explore.facilities,
+                                        arguments: [
+                                          explore.facilities,
+                                          explore.distanceFilter,
+                                          explore.priceRangeFilter,
+                                          explore.facilityListFilter,
+                                        ],
                                       ).then((value) {
                                         final data = value as List<dynamic>;
-                                        final min = data[0] as double?;
-                                        final max = data[1] as double?;
+                                        final priceR = data[0] as RangeValues?;
                                         final facilityList =
-                                            data[2] as List<FacilityModel>?;
-                                        final distance = data[3] as double?;
+                                            data[1] as List<FacilityModel>?;
+                                        final distance = data[2] as double?;
                                         explore.updateFilterData(
-                                          min == null && max == null
-                                              ? null
-                                              : RangeValues(min!, max!),
+                                          priceR,
                                           distance,
                                           facilityList,
                                         );

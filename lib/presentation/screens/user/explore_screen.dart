@@ -74,6 +74,7 @@ class ExploreScreen extends StatelessWidget {
             )
           : Center(
               child: MediumText(
+                textAlign: TextAlign.center,
                 text: err!,
                 color: Colors.red,
               ),

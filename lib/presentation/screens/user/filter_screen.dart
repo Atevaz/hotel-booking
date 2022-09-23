@@ -10,20 +10,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({Key? key, required this.facilities}) : super(key: key);
+  const FilterScreen({
+    Key? key,
+    required this.facilities,
+    this.distanceFilter,
+    this.priceRangeFilter,
+    this.facilitiesFilter,
+  }) : super(key: key);
 
   final List<FacilityModel> facilities;
+  final double? distanceFilter;
+  final RangeValues? priceRangeFilter;
+  final List<FacilityModel>? facilitiesFilter;
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  var selectedFacilities = <FacilityModel>[];
-  static const defaultPriceRange = RangeValues(0, 0);
-  static const defaultDistance = 0.0;
-  var priceRange = defaultPriceRange;
-  var distance = defaultDistance;
+  late List<FacilityModel> selectedFacilities;
+  late RangeValues priceRange;
+
+  late double distance;
+
+  @override
+  void initState() {
+    distance = 0.0;
+    selectedFacilities = [];
+    priceRange = const RangeValues(0, 0);
+    if (widget.distanceFilter != null) {
+      distance = widget.distanceFilter!;
+    }
+    if (widget.facilitiesFilter != null) {
+      selectedFacilities = widget.facilitiesFilter!;
+    }
+    if (widget.priceRangeFilter != null) {
+      priceRange = widget.priceRangeFilter!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,17 +137,27 @@ class _FilterScreenState extends State<FilterScreen> {
             MyButton(
               text: 'Apply',
               onPressed: () {
-                List<dynamic> data = List.generate(4, (index) => null);
-                final min = priceRange.start;
-                final max = priceRange.end;
+                List<dynamic> data = List.generate(3, (index) => null);
+                final priceR = priceRange;
                 final facilityList = selectedFacilities;
                 final selectedDistance = distance;
-                if (min != max) {
-                  data[0] = min;
-                  data[1] = max;
-                }
-                data[2] = facilityList.isEmpty ? null : facilityList;
-                data[3] = selectedDistance == 0 ? null : selectedDistance;
+                data[0] = widget.priceRangeFilter != null &&
+                            (widget.priceRangeFilter!.start == priceR.start &&
+                                widget.priceRangeFilter!.end == priceR.end) ||
+                        widget.priceRangeFilter == null &&
+                            (priceR.start == 0 && priceR.end == 0)
+                    ? null
+                    : priceR;
+                data[1] = widget.facilitiesFilter != null &&
+                            widget.facilitiesFilter!.equals(facilityList) ||
+                        widget.facilitiesFilter == null && facilityList.isEmpty
+                    ? null
+                    : facilityList;
+                data[2] = widget.distanceFilter != null &&
+                            widget.distanceFilter == selectedDistance ||
+                        widget.distanceFilter == null && selectedDistance == 0
+                    ? null
+                    : selectedDistance;
                 Navigator.pop(context, data);
               },
             ),
@@ -133,5 +168,19 @@ class _FilterScreenState extends State<FilterScreen> {
         ),
       ),
     );
+  }
+}
+
+extension ListEquality<T> on List<T> {
+  bool equals(List<T> list) {
+    if (length != list.length) {
+      return false;
+    }
+    for (int i = 0; i < length; i++) {
+      if ([i] != list[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 }

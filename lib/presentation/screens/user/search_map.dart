@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:collection';
-
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_card_view.dart';

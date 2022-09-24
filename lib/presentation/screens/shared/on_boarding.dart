@@ -1,6 +1,5 @@
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
-import 'package:booking_hotel/presentation/screens/user/auth_layout/register_screen.dart';
 import 'package:booking_hotel/presentation/widget/caption_of_onboarding.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
@@ -20,7 +19,7 @@ class BoardingModel {
 }
 
 class OnBoardingScreen extends StatefulWidget {
-  OnBoardingScreen({Key? key}) : super(key: key);
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();

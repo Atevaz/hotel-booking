@@ -20,7 +20,7 @@ class HomeHotelsHeadlineView extends StatelessWidget {
           fontSize: 22.sp,
           isUpper: false,
         ),
-        Spacer(),
+        const Spacer(),
         InkWell(
           onTap: viewAll,
           child: Row(

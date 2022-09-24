@@ -14,9 +14,9 @@ Future serverRequest({
       dynamic title = r.data['status']['title'];
 
       throw ServerException(
-        message: title is String ? title : r.data['status']['title']['ar'],
+        message: title is String ? title : r.data['status']['title']['en'],
         code: r.statusCode ?? 500,
-        error: r.data['status']['title']['en'],
+        error: r.data['status']['title']['ar'],
       );
     }
 
@@ -28,8 +28,8 @@ Future serverRequest({
 
     throw const ServerException(
       code: 100,
-      message: 'message Hello from primary exception',
-      error: 'err message',
+      message: "Server Request Failed!",
+      error: 'Server Error',
     );
   } catch (e) {
     ServerException exception = e as ServerException;

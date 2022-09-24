@@ -3,7 +3,7 @@ import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 import 'package:booking_hotel/data/models/auth_params/register_param_model.dart';
 import 'package:booking_hotel/data/models/auth_response/auth_response_model.dart';
 
-abstract class RemoteAuthContract {
+abstract class RemoteAuthDataSource {
   late DioService dioService;
 
   Future<AuthResponseModel> login(LoginParamModel loginModel);

@@ -6,6 +6,7 @@ import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:booking_hotel/core/constants/end_points.dart';
 
 import '../../../core/constants/constant.dart';
 import '../../../data/models/hotel_data/data.dart';
@@ -20,9 +21,11 @@ class HomeCardView extends StatelessWidget {
     this.address = "Wembley, London",
     this.rate = 4.5,
     this.price = 180,
+    this.onDoubleTap,
   }) : super(key: key);
 
   final Function() onTap;
+  final Function()? onDoubleTap;
   final String image;
   final String name;
   final String location;
@@ -50,6 +53,7 @@ class HomeCardView extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       color: AppColor.white,
       child: InkWell(
+        onDoubleTap: onDoubleTap,
         onTap: onTap,
         child: SizedBox(
           height: 160.h,
@@ -60,7 +64,11 @@ class HomeCardView extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Image.network(
-                  myImage,
+                  image.contains("http")
+                      ? image
+                      : image.isNotEmpty
+                          ? "$baseApiUrl$apiImagesVersion/$image"
+                          : myImage,
                   fit: BoxFit.cover,
                 ),
               ),

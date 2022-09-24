@@ -4,8 +4,6 @@ import 'package:flutter_switch/flutter_switch.dart';
 
 import '../../core/styles/colors.dart';
 import '../../core/styles/constant.dart';
-import '../../data/local/cache_helper.dart';
-
 
 class SwitchButton extends StatefulWidget {
   const SwitchButton({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class SwitchButton extends StatefulWidget {
 }
 
 class _SwitchButtonState extends State<SwitchButton> {
-
   bool isFingerPrintOne = false;
 
   @override
@@ -32,8 +29,8 @@ class _SwitchButtonState extends State<SwitchButton> {
       showOnOff: true,
       onToggle: (val) {
         setState(() {
-          isFingerPrint = val ;
-          CacheHelper.saveDataSharedPreference(key: 'isFingerPrint', value: val);
+          isFingerPrint = val;
+          // PreferenceHelper.saveDataSharedPreference(key: 'isFingerPrint', value: val);
         });
       },
     );

@@ -16,10 +16,10 @@ class _HotelDetailsState extends State<HotelDetails> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: MyAppBar(
+        child: const MyAppBar(
           isCompletedAppBar: true,
           title: 'Reviews',
-          leadingIcon: const Icon(Icons.close),
+          leadingIcon: Icon(Icons.close),
           isBack: true,
         ),
       ),

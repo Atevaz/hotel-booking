@@ -1,24 +1,32 @@
-
 abstract class GlobalState {}
 
 class GlobalInitial extends GlobalState {}
+
+class GlobalInitState extends GlobalState {}
 
 class GlobalChangePasswordVisibilityState extends GlobalState {}
 
 class GlobalChangeConfirmPasswordVisibilityState extends GlobalState {}
 
+class LogOutSuccessState extends GlobalState {}
 
-class LogOutSuccessState  extends GlobalState {}
-
-class LogOutErrorState extends GlobalState
-{
+class LogOutErrorState extends GlobalState {
   final String error;
+
   LogOutErrorState(this.error);
 }
 
 class AppChangeModeDarkState extends GlobalState {}
 
 class AppChangeModeLightState extends GlobalState {}
+
+class AppModeSavedState extends GlobalState {}
+
+class AppModeSaveErrorState extends GlobalState {
+  final String message;
+
+  AppModeSaveErrorState(this.message);
+}
 
 class ChangeNavBarState extends GlobalState {}
 

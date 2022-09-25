@@ -1,6 +1,7 @@
 import 'package:booking_hotel/core/constants/end_points.dart';
 import 'package:booking_hotel/core/dio_service/dio_service.dart';
 import 'package:booking_hotel/core/utils/dio_method.dart';
+import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_reponse_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';

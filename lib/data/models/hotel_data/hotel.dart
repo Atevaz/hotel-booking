@@ -43,13 +43,13 @@ class Hotel {
     if (json['hotel_images'] != null) {
       hotelImages = <HotelImages>[];
       json['hotel_images'].forEach((v) {
-        hotelImages!.add(new HotelImages.fromJson(v));
+        hotelImages!.add(HotelImages.fromJson(v));
       });
     }
     if (json['hotel_facilities'] != null) {
       hotelFacilities = <HotelFacilities>[];
       json['hotel_facilities'].forEach((v) {
-        hotelFacilities!.add(new HotelFacilities.fromJson(v));
+        hotelFacilities!.add(HotelFacilities.fromJson(v));
       });
     }
   }

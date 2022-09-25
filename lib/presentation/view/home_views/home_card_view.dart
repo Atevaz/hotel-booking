@@ -12,7 +12,7 @@ import '../../../core/constants/constant.dart';
 import '../../../data/models/hotel_data/data.dart';
 
 class HomeCardView extends StatelessWidget {
-  HomeCardView({
+   HomeCardView({
     Key? key,
     required this.onTap,
     this.image = myImage,
@@ -32,15 +32,7 @@ class HomeCardView extends StatelessWidget {
   final String address;
   final double rate;
   final double price;
-  late Dio dio;
-  Future<List<dynamic>> getHotels() async {
-    Response response = await dio.get('http://api.mahmoudtaha.com/api/hotels',
-        queryParameters: {'page': 1, 'count': 10});
-    hotels = Hotel.fromJson(response.data);
-    print(hotels.id);
-    print(response.data.toString());
-    return [];
-  }
+
 
   static const String myImage =
       "https://images.unsplash.com/photo-1529619768328-e37af76c6fe5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80";
@@ -109,7 +101,6 @@ class HomeCardView extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      getHotels();
                                     },
                                     child: Icon(
                                       Icons.location_on,

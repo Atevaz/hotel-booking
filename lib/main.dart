@@ -1,6 +1,7 @@
 import 'package:booking_hotel/business_logic/auth_cubit/auth_cubit.dart';
 import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
 import 'package:booking_hotel/business_logic/global_cubit/global_state.dart';
+import 'package:booking_hotel/business_logic/hotels_cubit/hotels_cubit.dart';
 import 'package:booking_hotel/core/di/di.dart';
 import 'package:booking_hotel/core/router/app_router.dart';
 import 'package:booking_hotel/core/styles/constant.dart';
@@ -21,6 +22,9 @@ Future<void> main() async {
         ),
         BlocProvider(
           create: (_) => sl<AuthCubit>()..loginSaved(),
+        ),
+        BlocProvider(
+          create: (_) => sl<HotelsCubit>()..getHotels(5, 1),
         ),
       ],
       child: const MyApp(),

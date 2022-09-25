@@ -88,7 +88,7 @@ class ExploreLayoutScreen extends StatelessWidget {
                                 children: [
                                   MediumText(
                                     text:
-                                        "${explore.hotels.length} Hotel Found",
+                                        "${explore.searchHotels.length} Hotel Found",
                                     fontSize: 20.sp,
                                     color: AppColor.black,
                                   ),
@@ -147,7 +147,7 @@ class ExploreLayoutScreen extends StatelessWidget {
                                       searching: searching,
                                     )
                                   : SearchMapScreen(
-                                      hotels: explore.hotels,
+                                      hotels: explore.searchHotels,
                                       explore: explore,
                                       searching: searching,
                                       err: err,

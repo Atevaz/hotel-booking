@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:collection';
-
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_param_model/search_hotel_params_model.dart';
@@ -14,8 +13,9 @@ part 'explore_state.dart';
 
 class ExploreCubit extends Cubit<ExploreState> {
   final ExploreRepository exploreRepository;
+
   List<FacilityModel> facilities = [];
-  List<HotelModel> hotels = [];
+  List<HotelModel> searchHotels = [];
 
   final searchC = TextEditingController();
   final listC = ScrollController();
@@ -153,12 +153,12 @@ class ExploreCubit extends Cubit<ExploreState> {
 
   void onCreateMap(GoogleMapController c) {
     controller.complete(c);
-    for (int i = 0; i < hotels.length; i++) {
+    for (int i = 0; i < searchHotels.length; i++) {
       markers.add(Marker(
-        markerId: MarkerId('${hotels[i].id}'),
+        markerId: MarkerId('${searchHotels[i].id}'),
         position: LatLng(
-          hotels[i].latitude,
-          hotels[i].longitude,
+          searchHotels[i].latitude,
+          searchHotels[i].longitude,
         ),
       ));
     }
@@ -221,7 +221,7 @@ class ExploreCubit extends Cubit<ExploreState> {
     bool update = false,
   ]) async {
     if (!update) {
-      hotels.clear();
+      searchHotels.clear();
     }
     emit(SearchHotelsLoadingState());
     final result = await exploreRepository.searchHotels(
@@ -230,7 +230,7 @@ class ExploreCubit extends Cubit<ExploreState> {
     result.fold((l) {
       emit(SearchHotelsLoadingErrorState(l));
     }, (r) {
-      hotels.addAll(r);
+      searchHotels.addAll(r);
       emit(SearchHotelsLoadedState());
     });
   }

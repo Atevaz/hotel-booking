@@ -63,7 +63,7 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
               ),
               onPressed: viewHotels,
               child: MediumText(
-                text: "View Hotel",
+                text: "View Hotels",
                 color: AppColor.white,
                 fontSize: 20.sp,
               ),

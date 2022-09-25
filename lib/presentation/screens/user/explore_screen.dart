@@ -32,10 +32,10 @@ class ExploreScreen extends StatelessWidget {
                     controller: explore.listC,
                     physics: const BouncingScrollPhysics(),
                     itemCount: searching
-                        ? explore.hotels.length + 1
-                        : explore.hotels.length,
+                        ? explore.searchHotels.length + 1
+                        : explore.searchHotels.length,
                     itemBuilder: (context, index) {
-                      if (index == explore.hotels.length) {
+                      if (index == explore.searchHotels.length) {
                         return const Padding(
                           padding: EdgeInsets.only(bottom: 20),
                           child: Center(
@@ -45,23 +45,23 @@ class ExploreScreen extends StatelessWidget {
                       }
                       return Padding(
                         padding:
-                            !searching && index == explore.hotels.length - 1
+                            !searching && index == explore.searchHotels.length - 1
                                 ? EdgeInsets.only(bottom: 20.h)
                                 : EdgeInsets.zero,
                         child: HotelCard(
-                            name: explore.hotels[index].name,
-                            address: explore.hotels[index].address,
-                            price: explore.hotels[index].price,
-                            image: explore.hotels[index].images.isNotEmpty
-                                ? explore.hotels[index].images[0].image
+                            name: explore.searchHotels[index].name,
+                            address: explore.searchHotels[index].address,
+                            price: explore.searchHotels[index].price,
+                            image: explore.searchHotels[index].images.isNotEmpty
+                                ? explore.searchHotels[index].images[0].image
                                 : "",
-                            rate: explore.hotels[index].rate,
+                            rate: explore.searchHotels[index].rate,
                             onTap: () {
                               FocusManager.instance.primaryFocus?.unfocus();
                               Navigator.pushNamed(
                                 context,
                                 AppRouterNames.rHotelDetailsLayoutRoute,
-                                arguments: explore.hotels[index] ,
+                                arguments: explore.searchHotels[index] ,
                               );
                             }),
                       );

@@ -26,7 +26,10 @@ Future<void> main() async {
           create: (_) => sl<AuthCubit>()..loginSaved(),
         ),
         BlocProvider(
-          create: (_) => sl<BookingCubit>()..getUpcomingBooking()..getCompletedBooking()..getCancelledBooking(),
+          create: (_) => sl<BookingCubit>()
+            ..getUpcomingBooking()
+            ..getCompletedBooking()
+            ..getCancelledBooking(),
         ),
         BlocProvider(
           create: (_) => sl<ProfileCubit>()..getProfile(),

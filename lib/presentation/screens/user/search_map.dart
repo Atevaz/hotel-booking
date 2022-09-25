@@ -103,7 +103,7 @@ class SearchMapScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      if (index == explore.hotels.length) {
+                      if (index == explore.searchHotels.length) {
                         return const Padding(
                           padding: EdgeInsets.only(bottom: 20),
                           child: Center(

@@ -1,3 +1,4 @@
+import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/business_logic/hotels_cubit/hotels_cubit.dart';
 import 'package:booking_hotel/core/dio_service/dio.dart';
@@ -5,9 +6,13 @@ import 'package:booking_hotel/core/network_service/network.dart';
 import 'package:booking_hotel/core/shared_preferences/shared_preferences.dart';
 import 'package:booking_hotel/data/local/auth/auth.dart';
 import 'package:booking_hotel/data/remote/auth/auth.dart';
+import 'package:booking_hotel/data/remote/booking/booking_data_source.dart';
+import 'package:booking_hotel/data/remote/booking/booking_data_source_impl.dart';
 import 'package:booking_hotel/data/remote/explore/explore.dart';
 import 'package:booking_hotel/data/remote/hotels/hotels_data_source.dart';
 import 'package:booking_hotel/data/remote/hotels/hotels_data_source_impl.dart';
+import 'package:booking_hotel/data/repository/booking/repository_booking.dart';
+import 'package:booking_hotel/data/repository/booking/repositroy_booking_impl.dart';
 import 'package:booking_hotel/data/repository/explore/explore.dart';
 import 'package:booking_hotel/data/repository/hotels/hotels_repository.dart';
 import 'package:booking_hotel/data/repository/hotels/hotels_repository_impl.dart';
@@ -37,6 +42,11 @@ Future initApp() async {
     ),
   );
   sl.registerFactory(
+    () => BookingCubit(
+      repositoryBooking: sl(),
+    ),
+  );
+    sl.registerFactory(
     () => HotelsCubit(
       hotelsRepository: sl(),
     ),
@@ -58,6 +68,12 @@ Future initApp() async {
   sl.registerLazySingleton<ExploreRepository>(
     () => ExploreRepositoryImpl(
       exploreRemoteDataSource: sl(),
+      networkService: sl(),
+    ),
+  );
+  sl.registerLazySingleton<RepositoryBooking>(
+    () => RepositoryBookingImpl(
+      bookingDataSource: sl(),
       networkService: sl(),
     ),
   );
@@ -86,6 +102,11 @@ Future initApp() async {
   );
   sl.registerLazySingleton<RemoteExploreDataSource>(
     () => RemoteExploreDataSourceImpl(
+      dioService: sl(),
+    ),
+  );
+  sl.registerLazySingleton<BookingDataSource>(
+    () => BookingDataSourceImpl(
       dioService: sl(),
     ),
   );

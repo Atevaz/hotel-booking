@@ -1,4 +1,6 @@
+import 'package:booking_hotel/data/models/booking_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
+import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
 import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
 import 'package:booking_hotel/presentation/screens/shared/splash_screen.dart';
@@ -14,6 +16,7 @@ import 'app_router_names.dart';
 class AppRouter {
   static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+
       case AppRouterNames.rSplashLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
@@ -26,7 +29,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
-      case AppRouterNames.rLoginLayoutRoute:
+        case AppRouterNames.rLoginLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
         );
@@ -61,8 +64,9 @@ class AppRouter {
           ),
         );
       case AppRouterNames.rHotelDetailsLayoutRoute:
+        final hotel = settings.arguments as HotelModel;
         return MaterialPageRoute(
-          builder: (_) => const HotelDetails(),
+          builder: (_) => HotelDetails(hotel: hotel),
         );
       default:
         return null;

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:booking_hotel/core/constants/constant.dart';
 import 'package:booking_hotel/core/exceptions/network_exception.dart';
 import 'package:booking_hotel/core/exceptions/server_exception.dart';
 import 'package:booking_hotel/core/exceptions/shared_preference_exception.dart';
@@ -104,6 +105,7 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       final result = await remoteAuth.register(registerParamModel);
       return Right(result);
+
     } on ServerException catch (e) {
       return Left(e.message);
     } on NetworkException catch (e) {

@@ -11,7 +11,7 @@ class StatusModel {
 
   factory StatusModel.fromJson(Map<String, dynamic> json) {
     return StatusModel(
-      type: json['type'] as String,
+      type: json['type'] ?? 'error',
       arMessage: "${json['title']?['ar']}",
       enMessage: "${json['title']?['en']}",
     );

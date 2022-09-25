@@ -13,6 +13,8 @@ import 'package:booking_hotel/data/remote/explore/explore.dart';
 
 import 'package:booking_hotel/data/remote/hotels/hotels_data_source.dart';
 import 'package:booking_hotel/data/remote/hotels/hotels_data_source_impl.dart';
+import 'package:booking_hotel/data/remote/profile/profile_data_source.dart';
+import 'package:booking_hotel/data/remote/profile/profile_data_source_impl.dart';
 import 'package:booking_hotel/data/repository/booking/repository_booking.dart';
 import 'package:booking_hotel/data/repository/booking/repositroy_booking_impl.dart';
 import 'package:booking_hotel/data/repository/explore/explore.dart';
@@ -54,12 +56,11 @@ Future initApp() async {
   sl.registerFactory(
     () => ProfileCubit(
       profileRepository: sl(),
-),
-);
-    sl.registerFactory(
+    ),
+  );
+  sl.registerFactory(
     () => HotelsCubit(
       hotelsRepository: sl(),
-
     ),
   );
 
@@ -90,15 +91,15 @@ Future initApp() async {
   );
 
   sl.registerLazySingleton<ProfileRepository>(
-        () => ProfileRepositoryImpl(
-      profileDataSource:  sl(),
-),
-);
+    () => ProfileRepositoryImpl(
+      profileDataSource: sl(),
+      networkService: sl(),
+    ),
+  );
 
   sl.registerLazySingleton<HotelsRepository>(
     () => HotelsRepositoryImpl(
       hotelsDataSource: sl(),
-
       networkService: sl(),
     ),
   );
@@ -130,7 +131,7 @@ Future initApp() async {
     ),
   );
   sl.registerLazySingleton<ProfileDataSource>(
-        () => ProfileDataSourceImpl(
+    () => ProfileDataSourceImpl(
       dioService: sl(),
     ),
   );

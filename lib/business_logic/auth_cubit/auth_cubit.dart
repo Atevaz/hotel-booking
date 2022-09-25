@@ -35,6 +35,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(LoginLoadingErrorState(l));
       },
       (r) {
+
         emit(LoginLoadedState(r));
       },
     );

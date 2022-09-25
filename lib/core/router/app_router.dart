@@ -14,6 +14,7 @@ import 'app_router_names.dart';
 class AppRouter {
   static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+
       case AppRouterNames.rSplashLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
@@ -26,7 +27,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
-      case AppRouterNames.rLoginLayoutRoute:
+        case AppRouterNames.rLoginLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
         );

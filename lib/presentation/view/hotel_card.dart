@@ -34,7 +34,6 @@ class HotelCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      elevation: 5,
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: onTap,

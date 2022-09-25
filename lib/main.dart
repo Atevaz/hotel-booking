@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'business_logic/booking_cubit/booking_cubit.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initApp();
@@ -21,6 +23,9 @@ Future<void> main() async {
         ),
         BlocProvider(
           create: (_) => sl<AuthCubit>()..loginSaved(),
+        ),
+        BlocProvider(
+          create: (_) => sl<BookingCubit>()..getUpcomingBooking()..getCompletedBooking()..getCancelledBooking(),
         ),
       ],
       child: const MyApp(),

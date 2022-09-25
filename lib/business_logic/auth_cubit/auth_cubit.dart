@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/utils/string_extension.dart';
 import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 import 'package:booking_hotel/data/models/auth_params/register_param_model.dart';
 import 'package:booking_hotel/data/models/auth_response/auth_response_model.dart';
@@ -32,6 +33,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future login(LoginParamModel paramModel, bool rememberMe) async {
     emit(LoginLoadingState());
+    if (!paramModel.email.isValidEmail()) {
+      emit(LoginLoadingErrorState("Invalid email format!ad"));
+      return;
+    }
     final result = await authRepository.login(paramModel, rememberMe);
     result.fold(
       (l) {
@@ -60,6 +65,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future register(RegisterParamModel paramModel) async {
     emit(RegisterLoadingState());
+    if (!paramModel.email.isValidEmail()) {
+      emit(LoginLoadingErrorState("Invalid email format!ad"));
+      return;
+    }
     final result = await authRepository.register(paramModel);
     result.fold(
       (l) {

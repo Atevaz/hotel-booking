@@ -26,7 +26,6 @@ class HotelsDataSourceImpl implements HotelsDataSource {
     for (int i = 0; i < data.length; i++) {
       final model = Hotel.fromJson(data[i]);
       list.add(model);
-      print(data[i]);
     }
     return list;
   }

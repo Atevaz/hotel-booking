@@ -10,13 +10,13 @@ Future serverRequest({
     debugPrint("Response_Data => ${r.data}");
     debugPrint("Response_Code => ${r.statusCode}");
 
-    if (r.data['status']['type'] == '0') {
+    if (r.data['status']['type'] == '0' && r.data['data'] == null) {
       dynamic title = r.data['status']['title'];
 
       throw ServerException(
-        message: title is String ? title : r.data['status']['title']['en'],
+        message: title is String ? title : r.data['status']['title']?['ar'],
         code: r.statusCode ?? 500,
-        error: r.data['status']['title']['ar'],
+        error: r.data['status']['title']?['en'],
       );
     }
 

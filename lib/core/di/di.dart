@@ -1,5 +1,6 @@
 import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
+import 'package:booking_hotel/business_logic/profile_cubit/profile_cubit.dart';
 import 'package:booking_hotel/business_logic/hotels_cubit/hotels_cubit.dart';
 import 'package:booking_hotel/core/dio_service/dio.dart';
 import 'package:booking_hotel/core/network_service/network.dart';
@@ -9,6 +10,7 @@ import 'package:booking_hotel/data/remote/auth/auth.dart';
 import 'package:booking_hotel/data/remote/booking/booking_data_source.dart';
 import 'package:booking_hotel/data/remote/booking/booking_data_source_impl.dart';
 import 'package:booking_hotel/data/remote/explore/explore.dart';
+
 import 'package:booking_hotel/data/remote/hotels/hotels_data_source.dart';
 import 'package:booking_hotel/data/remote/hotels/hotels_data_source_impl.dart';
 import 'package:booking_hotel/data/repository/booking/repository_booking.dart';
@@ -16,6 +18,8 @@ import 'package:booking_hotel/data/repository/booking/repositroy_booking_impl.da
 import 'package:booking_hotel/data/repository/explore/explore.dart';
 import 'package:booking_hotel/data/repository/hotels/hotels_repository.dart';
 import 'package:booking_hotel/data/repository/hotels/hotels_repository_impl.dart';
+import 'package:booking_hotel/data/repository/profile/profile_repository.dart';
+import 'package:booking_hotel/data/repository/profile/profile_repository_impl.dart';
 import 'package:booking_hotel/data/repository/repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -46,9 +50,16 @@ Future initApp() async {
       repositoryBooking: sl(),
     ),
   );
+
+  sl.registerFactory(
+    () => ProfileCubit(
+      profileRepository: sl(),
+),
+);
     sl.registerFactory(
     () => HotelsCubit(
       hotelsRepository: sl(),
+
     ),
   );
 
@@ -77,9 +88,17 @@ Future initApp() async {
       networkService: sl(),
     ),
   );
+
+  sl.registerLazySingleton<ProfileRepository>(
+        () => ProfileRepositoryImpl(
+      profileDataSource:  sl(),
+),
+);
+
   sl.registerLazySingleton<HotelsRepository>(
     () => HotelsRepositoryImpl(
       hotelsDataSource: sl(),
+
       networkService: sl(),
     ),
   );
@@ -107,6 +126,11 @@ Future initApp() async {
   );
   sl.registerLazySingleton<BookingDataSource>(
     () => BookingDataSourceImpl(
+      dioService: sl(),
+    ),
+  );
+  sl.registerLazySingleton<ProfileDataSource>(
+        () => ProfileDataSourceImpl(
       dioService: sl(),
     ),
   );

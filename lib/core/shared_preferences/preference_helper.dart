@@ -55,6 +55,11 @@ class PreferenceHelper {
     return await prefs.remove(key);
   }
 
+  Future<bool> contains({required String key}) async {
+    final prefs = await preferencesProvider.get();
+    return prefs.containsKey(key);
+  }
+
   Future<bool> clearData() async {
     final prefs = await preferencesProvider.get();
     return prefs.clear();

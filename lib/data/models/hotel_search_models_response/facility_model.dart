@@ -1,4 +1,6 @@
-class FacilityModel {
+import 'package:equatable/equatable.dart';
+
+class FacilityModel extends Equatable {
   final int id;
   final String name;
   final String image;
@@ -16,4 +18,11 @@ class FacilityModel {
       image: map['image'] as String,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        image,
+      ];
 }

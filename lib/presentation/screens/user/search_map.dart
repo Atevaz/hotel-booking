@@ -146,6 +146,7 @@ class SearchMapScreen extends StatelessWidget {
                       color: AppColor.white,
                       child: Center(
                         child: MediumText(
+                          textAlign: TextAlign.center,
                           text: err!,
                           color: Colors.red,
                         ),

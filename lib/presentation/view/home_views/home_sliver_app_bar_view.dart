@@ -1,4 +1,5 @@
 import 'package:booking_hotel/core/router/app_router_names.dart';
+import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_background_view.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_image_view.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_search_view.dart';
@@ -6,14 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeSliverAppBarView extends StatefulWidget {
-  const HomeSliverAppBarView({Key? key}) : super(key: key);
+class HomeSliverAppBarView extends StatelessWidget {
+  const HomeSliverAppBarView({Key? key, required this.hotel}) : super(key: key);
 
-  @override
-  State<HomeSliverAppBarView> createState() => _HomeSliverAppBarViewState();
-}
+  final Hotel? hotel;
 
-class _HomeSliverAppBarViewState extends State<HomeSliverAppBarView> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -29,8 +27,13 @@ class _HomeSliverAppBarViewState extends State<HomeSliverAppBarView> {
         children: [
           const HomeSliverAppBarImageView(),
           HomeSliverAppBarBackgroundView(
+            name: hotel != null ? "${hotel!.name}" : '',
+            desc: hotel != null ? "${hotel!.description}" : '',
             viewHotels: () {
-              Navigator.pushNamed(context, AppRouterNames.rExploreLayoutRoute);
+              Navigator.pushNamed(
+                context,
+                AppRouterNames.rExploreLayoutRoute,
+              );
             },
           ),
           HomeSliverAppBarSearchView(

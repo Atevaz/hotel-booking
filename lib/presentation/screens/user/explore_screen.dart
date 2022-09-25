@@ -61,7 +61,7 @@ class ExploreScreen extends StatelessWidget {
                               Navigator.pushNamed(
                                 context,
                                 AppRouterNames.rHotelDetailsLayoutRoute,
-                                arguments: explore.hotels[index] ,
+                                arguments: explore.searchHotels[index] ,
                               );
                             }),
                       );

@@ -18,15 +18,6 @@ class GetFacilitiesLoadingErrorState extends ExploreState {
 }
 
 class SearchHotelsLoadingState extends ExploreState {}
-class GetHotelsLoadingState extends ExploreState {}
-class GetHotelsLoadedState extends ExploreState {}
-class GetHotelsLoadingErrorState extends ExploreState {
-  final String message;
-
-  GetHotelsLoadingErrorState(this.message);
-}
-
-
 
 class SearchHotelsLoadedState extends ExploreState {}
 

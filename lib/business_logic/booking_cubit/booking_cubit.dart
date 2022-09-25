@@ -1,5 +1,6 @@
 import 'package:booking_hotel/data/models/booking_model.dart';
 import 'package:booking_hotel/data/repository/booking/repository_booking.dart';
+import 'package:booking_hotel/presentation/widget/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,14 +42,13 @@ class BookingCubit extends Cubit<BookingState> {
 
   Future getUpcomingBooking() async {
     emit(GetUpcomingBookingLoadingState());
-    final result = await repositoryBooking.getBooking(token, 'upcomming', 10, 1);
+    final result = await repositoryBooking.getBooking(token, 'upcomming', 15, 1);
     result.fold(
           (l) {
         emit(GetUpcomingBookingErrorState());
       },
           (r) {
         upcommingBookingModel = r ;
-        debugPrint(' hotel name ===>> ${upcommingBookingModel!.data!.dataList![0].hotel!.hotelImages![0].image}');
         emit(GetUpcomingBookingSuccessState());
       },
     );
@@ -72,12 +72,14 @@ class BookingCubit extends Cubit<BookingState> {
   Future createBooking(int hotelId) async {
     emit(CreateBookingLoadingState());
     final result = await repositoryBooking.createBooking(token, hotelId);
+    debugPrint('my token ==>> $token');
     result.fold(
           (l) {
         emit(CreateBookingErrorState());
       },
           (r) {
         emit(CreateBookingSuccessState());
+        getUpcomingBooking();
       },
     );
   }

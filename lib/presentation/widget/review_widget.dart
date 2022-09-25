@@ -1,4 +1,6 @@
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
+import 'package:booking_hotel/presentation/widget/regular_text.dart';
 import 'package:booking_hotel/presentation/widget/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,76 +18,59 @@ class _ReviewWidgetState extends State<ReviewWidget> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
-        SizedBox(
-          height: 25.h,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
           children: [
-            Row(
+            Container(
+              width: 75.w,
+              height: 75.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r),
+                  image: const DecorationImage(
+                      image: AssetImage(
+                        'assets/images/woman.jpg',
+                      ),
+                      fit: BoxFit.cover)),
+            ),
+            SizedBox(
+              width: 15.w,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 75.w,
-                  height: 75.h,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      image: const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/woman.jpg',
-                          ),
-                          fit: BoxFit.cover)),
+                MediumText(
+                  text:'Alexia Jane',
                 ),
                 SizedBox(
-                  width: 15.w,
+                  height: 2.5.h,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                const RegularText(text: 'Last updated 20 Apr 2021'),
+                SizedBox(
+                  height: 2.5.h,
+                ),
+                Row(
                   children: [
-                    const Text(
-                      'Alexia Jane',
-                      style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                    RegularText(text:'$rating'),
                     SizedBox(
-                      height: 2.5.h,
+                      width: 2.w,
                     ),
-                    const Text('Last updated 20 Apr 2021'),
-                    SizedBox(
-                      height: 2.5.h,
-                    ),
-                    Row(
-                      children: [
-                        Text('$rating'),
-                        SizedBox(
-                          width: 2.w,
-                        ),
-                        StarRating(
-                          rating: rating,
-                          color: AppColor.teal,
-                          onRatingChanged: (rating) =>
-                              setState(() => this.rating = rating),
-                        )
-                      ],
+                    StarRating(
+                      rating: rating,
+                      color: AppColor.teal,
+                      onRatingChanged: (rating) =>
+                          setState(() => this.rating = rating),
                     )
                   ],
                 )
               ],
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            const Text(
-                'This is located in a great spot close shops, very quiet location'),
-            Container(
-              alignment: Alignment.centerRight,
-              child: const Icon(
-                Icons.arrow_right_alt,
-                size: 35,
-              ),
             )
           ],
-        )
+        ),
+        SizedBox(
+          height: 15.h,
+        ),
+        const RegularText(text: 'This is located in a great spot close shops, very quiet location',maxLines: 2,),
       ],
     );
   }

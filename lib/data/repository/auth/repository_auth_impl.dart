@@ -66,7 +66,6 @@ class AuthRepositoryImpl implements AuthRepository {
         throw NetworkException(message: Network_Connection_Error);
       }
       final result = await remoteAuth.login(loginParamModel);
-      token = result.user.token ;
       if (cacheUser) {
         await localAuth.cacheUser(
           userData: jsonEncode(

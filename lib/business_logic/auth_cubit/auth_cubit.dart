@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/constants/constant.dart';
 import 'package:booking_hotel/core/utils/string_extension.dart';
 import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 import 'package:booking_hotel/data/models/auth_params/register_param_model.dart';
@@ -26,6 +27,7 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (r) {
         user = r.user;
+        token = r.user.token ;
         emit(LoginSavedLoadedState(r));
       },
     );
@@ -44,6 +46,7 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (r) {
         user = r.user;
+        token = r.user.token ;
         emit(LoginLoadedState(r));
       },
     );

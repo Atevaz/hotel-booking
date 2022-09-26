@@ -1,4 +1,3 @@
-import 'package:booking_hotel/data/models/booking_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
 import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';

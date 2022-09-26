@@ -1,8 +1,6 @@
 import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
-import 'package:booking_hotel/data/models/booking_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
-import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
@@ -14,102 +12,130 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HotelDetails extends StatefulWidget {
-  const HotelDetails({super.key,required this.hotel});
+  const HotelDetails({super.key, required this.hotel});
 
-  final HotelModel hotel ;
+  final HotelModel hotel;
 
   @override
-  State<HotelDetails> createState() => _HotelDetailsState(hotel: hotel);
+  State<HotelDetails> createState() => _HotelDetailsState();
 }
 
 class _HotelDetailsState extends State<HotelDetails> {
-  final HotelModel hotel ;
-  _HotelDetailsState({required this.hotel});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BookingCubit, BookingState>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  builder: (context, state) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image(image: NetworkImage(hotel.images.isNotEmpty ? 'http://api.mahmoudtaha.com/images/${hotel.images[0].image}' :  'http://api.mahmoudtaha.com/images/83631662902917.png'),fit: BoxFit.cover,height: 300.h,width: double.infinity,),
-              Positioned(
-                top: 40.h,
-                left: 20.w,
-                child: InkWell(
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                  child: CircleAvatar(
-                      backgroundColor: AppColor.white.withOpacity(.8),
-                      radius: 25.r,
-                      child: Padding(
-                        padding:  EdgeInsets.only(left: 8.0.w),
-                        child: Icon(Icons.arrow_back_ios,color: AppColor.teal,size: 25.r,),
-                      )),
+              Stack(
+                children: [
+                  Image(
+                    image: NetworkImage(
+                      widget.hotel.images.isNotEmpty
+                          ? 'http://api.mahmoudtaha.com/images/${widget.hotel.images[0].image}'
+                          : 'http://api.mahmoudtaha.com/images/83631662902917.png',
+                    ),
+                    fit: BoxFit.cover,
+                    height: 300.h,
+                    width: double.infinity,
+                  ),
+                  Positioned(
+                    top: 40.h,
+                    left: 20.w,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                          backgroundColor: AppColor.white.withOpacity(.8),
+                          radius: 25.r,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8.0.w),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: AppColor.teal,
+                              size: 25.r,
+                            ),
+                          )),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                color: AppColor.lightGrey,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: 20.r, right: 20.r, left: 20.r, bottom: 20.r),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 11,
+                            child: HeadLineText(
+                              text: widget.hotel.name,
+                              maxLines: 2,
+                            ),
+                          ),
+                          const Spacer(),
+                          RegularText(
+                            text: '${widget.hotel.price.toInt()}\$/night',
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      MediumText(
+                        text: widget.hotel.address,
+                        color: AppColor.grey,
+                      ),
+                      Row(
+                        children: [
+                          AppCustomRateBar(rate: widget.hotel.rate),
+                          const RegularText(text: ' 80 Reviews')
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(20.r),
+                  child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) => const ReviewWidget(),
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 25.h,
+                      ),
+                      itemCount: 6,
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
-          Container(
-            color: AppColor.lightGrey,
-            child: Padding(
-              padding: EdgeInsets.only(top:20.r,right: 20.r,left: 20.r,bottom:20.r) ,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(child: HeadLineText(text: '${hotel.name}',maxLines: 2,),flex: 11,),
-                      Spacer(),
-                      RegularText(text: '${hotel.price.toInt()}\$/night',),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  MediumText(text: '${hotel.address}',color: AppColor.grey,),
-                  Row(
-                    children: [
-                      AppCustomRateBar(rate: hotel.rate),
-                      const RegularText(text: ' 80 Reviews')
-                    ],
-                  ),
-                ],
-              ),
+          floatingActionButton: Padding(
+            padding: EdgeInsets.only(left: 35.0.r),
+            child: MyButton(
+              text: 'Book now',
+              onPressed: () {
+                BookingCubit.get(context).createBooking(widget.hotel.id);
+              },
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding:  EdgeInsets.all(20.r),
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => ReviewWidget(),
-                  separatorBuilder: (context, index) => SizedBox(height: 25.h,),
-                  itemCount: 6,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: Padding(
-        padding:  EdgeInsets.only(left: 35.0.r),
-        child: MyButton(text: 'Book now', onPressed: () {
-          BookingCubit.get(context).createBooking(hotel.id);
-        },),
-      ),
+        );
+      },
     );
-  },
-);
   }
 }

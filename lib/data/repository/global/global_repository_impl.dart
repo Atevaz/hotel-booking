@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/constants/shared_preferences_consts.dart';
 import 'package:booking_hotel/core/exceptions/shared_preference_exception.dart';
 import 'package:booking_hotel/core/shared_preferences/preference_helper.dart';
@@ -46,7 +47,10 @@ class GlobalRepositoryImpl implements GlobalRepository {
   }
 
   @override
-  Future<Either<String, bool>> saveLang({required String locale}) async {
+  Future<Either<String, bool>> saveLang({
+    required String locale,
+    bool isEng = true,
+  }) async {
     try {
       final result = await helper.saveDataSharedPreference(
         key: Current_Language_Key,
@@ -54,16 +58,21 @@ class GlobalRepositoryImpl implements GlobalRepository {
       );
       if (!result) {
         throw const PreferenceException(
-            message: "Error saving app locale val!");
+          enMessage: Cache_Locale_En_Error,
+          arMessage: Cache_Locale_Ar_Error,
+        );
       }
       return Right(result);
-    } catch (e) {
-      return Left("$e");
+    } on PreferenceException catch (e) {
+      return Left(isEng ? e.enMessage : e.arMessage);
     }
   }
 
   @override
-  Future<Either<String, bool>> saveMode({required bool isDark}) async {
+  Future<Either<String, bool>> saveMode({
+    required bool isDark,
+    bool isEng = true,
+  }) async {
     try {
       final result = await helper.saveDataSharedPreference(
         key: Current_Theme_Mode_Key,
@@ -71,11 +80,13 @@ class GlobalRepositoryImpl implements GlobalRepository {
       );
       if (!result) {
         throw const PreferenceException(
-            message: "Error saving app is dark mode val!");
+          enMessage: Cache_ThemeMode_En_Error,
+          arMessage: Cache_ThemeMode_Ar_Error,
+        );
       }
       return Right(result);
-    } catch (e) {
-      return Left("$e");
+    } on PreferenceException catch (e) {
+      return Left(isEng ? e.enMessage : e.arMessage);
     }
   }
 }

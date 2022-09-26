@@ -5,7 +5,6 @@ import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/profile_screen_component.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,9 +14,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileCubit, ProfileState>(
+    return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if(state is ProfileInitial){
+        if (state is ProfileInitial) {
           ProfileCubit.get(context).getProfile();
         }
       },
@@ -109,8 +108,8 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

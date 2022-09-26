@@ -9,6 +9,7 @@ class MyFormField extends StatelessWidget {
   final IconData? suffix;
 
   final TextEditingController controller;
+  // final String? initialValue;
 
   //final VoidCallback? onTap ;
   final String validateText;
@@ -29,6 +30,7 @@ class MyFormField extends StatelessWidget {
   final Function()? suffixPressed;
 
   const MyFormField({
+
     Key? key,
     this.borderRadius = 15,
     required this.controller,
@@ -36,7 +38,7 @@ class MyFormField extends StatelessWidget {
     this.suffixPressed,
     this.isPassword = false,
     required this.inputType,
-    required this.hintText,
+    this.hintText,
     this.prefix,
     this.suffix,
     this.textAlign = TextAlign.start,
@@ -63,7 +65,9 @@ class MyFormField extends StatelessWidget {
         obscureText: isPassword,
         keyboardType: inputType,
         textAlign: textAlign,
+        // initialValue: initialValue,
         decoration: InputDecoration(
+
           suffixIcon: IconButton(
             onPressed: suffixPressed,
             icon: Icon(

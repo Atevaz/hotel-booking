@@ -20,92 +20,115 @@ class ProfileScreen extends StatelessWidget {
           ProfileCubit.get(context).getProfile();
         }
       },
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      builder: (context, state) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: ConditionalBuilder(
+              condition: ProfileCubit.get(context).userModel != null,
+              builder: (context) => SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Column(children: [
+                    Row(
                       children: [
-                        const HeadLineText(text: ' Mohamed'),
-                        DefaultTextButton(
-                          text: 'View and Edit profile',
-                          color: AppColor.grey,
-                          onPressed: () {
-                            Navigator.pushNamed(context,
-                                AppRouterNames.rUpdateProfileLayoutRoute);
-                          },
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            HeadLineText(
+                                text: ProfileCubit.get(context)
+                                    .userModel!
+                                    .user
+                                    .name),
+                            DefaultTextButton(
+                              text: 'View and Edit profile',
+                              color: AppColor.grey,
+                              onPressed: () {
+                                Navigator.pushNamed(context,
+                                    AppRouterNames.rUpdateProfileLayoutRoute);
+                              },
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                         CircleAvatar(
+                          radius: 40,
+                          backgroundImage:
+                              ProfileCubit.get(context).userModel!.user.image ==
+                                      null
+                                  ? AssetImage('assets/images/user.jpg')
+                                  : Image.network(ProfileCubit.get(context)
+                                      .userModel!
+                                      .user
+                                      .image!).image,
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    const CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage('assets/images/user.jpg'),
+                    SizedBox(height: 20.h),
+                    ProfileScreenComponent(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, AppRouterNames.rChangePasswordLayoutRoute);
+                      },
+                      componentTitle: 'Change Password',
+                      componentIcon: Icon(
+                        Icons.lock,
+                        size: 30,
+                      ),
                     ),
-                  ],
+                    const Divider(color: AppColor.grey),
+                    const ProfileScreenComponent(
+                      componentTitle: 'Invite Friend',
+                      componentIcon: Icon(
+                        Icons.people,
+                        size: 30,
+                      ),
+                    ),
+                    const Divider(color: AppColor.grey),
+                    const ProfileScreenComponent(
+                      componentTitle: 'Credit & Coupons',
+                      componentIcon: Icon(
+                        Icons.card_giftcard,
+                        size: 30,
+                      ),
+                    ),
+                    const Divider(color: AppColor.grey),
+                    const ProfileScreenComponent(
+                      componentTitle: 'Help Center',
+                      componentIcon: Icon(
+                        Icons.help,
+                        size: 30,
+                      ),
+                    ),
+                    const Divider(color: AppColor.grey),
+                    const ProfileScreenComponent(
+                      componentTitle: 'Payment',
+                      componentIcon: Icon(
+                        Icons.wallet,
+                        size: 30,
+                      ),
+                    ),
+                    const Divider(color: AppColor.grey),
+                    const ProfileScreenComponent(
+                      componentTitle: 'Settings',
+                      componentIcon: Icon(
+                        Icons.settings,
+                        size: 30,
+                      ),
+                    ),
+                    ProfileScreenComponent(
+                      onTap: AuthCubit.get(context).logout,
+                      componentTitle: 'Logout',
+                      componentIcon: Icon(
+                        Icons.logout,
+                        size: 30.r,
+                      ),
+                    ),
+                  ]),
                 ),
-                SizedBox(height: 20.h),
-                const ProfileScreenComponent(
-                  componentTitle: 'Change Password',
-                  componentIcon: Icon(
-                    Icons.lock,
-                    size: 30,
-                  ),
-                ),
-                const Divider(color: AppColor.grey),
-                const ProfileScreenComponent(
-                  componentTitle: 'Invite Friend',
-                  componentIcon: Icon(
-                    Icons.people,
-                    size: 30,
-                  ),
-                ),
-                const Divider(color: AppColor.grey),
-                const ProfileScreenComponent(
-                  componentTitle: 'Credit & Coupons',
-                  componentIcon: Icon(
-                    Icons.card_giftcard,
-                    size: 30,
-                  ),
-                ),
-                const Divider(color: AppColor.grey),
-                const ProfileScreenComponent(
-                  componentTitle: 'Help Center',
-                  componentIcon: Icon(
-                    Icons.help,
-                    size: 30,
-                  ),
-                ),
-                const Divider(color: AppColor.grey),
-                const ProfileScreenComponent(
-                  componentTitle: 'Payment',
-                  componentIcon: Icon(
-                    Icons.wallet,
-                    size: 30,
-                  ),
-                ),
-                const Divider(color: AppColor.grey),
-                const ProfileScreenComponent(
-                  componentTitle: 'Settings',
-                  componentIcon: Icon(
-                    Icons.settings,
-                    size: 30,
-                  ),
-                ),
-                ProfileScreenComponent(
-                  onTap: AuthCubit.get(context).logout,
-                  componentTitle: 'Logout',
-                  componentIcon: Icon(
-                    Icons.logout,
-                    size: 30.r,
-                  ),
-                ),
-              ],
+              ),
+              fallback: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
         ),

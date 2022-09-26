@@ -1,7 +1,11 @@
+import 'package:booking_hotel/business_logic/profile_cubit/profile_cubit.dart';
+import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/default_text_form_field.dart';
+import 'package:booking_hotel/presentation/widget/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -21,6 +25,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<ProfileCubit, ProfileState>(
+  listener: (context, state) {
+    if(state is ChangePasswordSuccessState) {
+      showToast(text: 'Password Changed', state: ToastStates.SUCCESS);
+      Navigator.pop(context);
+    }
+  },
+  builder: (context, state) {
     return Scaffold(
       backgroundColor: AppColor.lightGrey,
       appBar: AppBar(
@@ -74,7 +86,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   hintText: "Password",
                   isPassword: hidePass,
                   prefix: Icons.password_outlined,
-                  suffix: hidePass ? Icons.visibility_off : Icons.visibility,
+                  suffix:
+                  hidePass ? Icons.visibility_off : Icons.visibility,
                   suffixPressed: () {
                     setState(() {
                       hidePass = !hidePass;
@@ -91,7 +104,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   hintText: "Confirm Password",
                   isPassword: hidePass,
                   prefix: Icons.password_outlined,
-                  suffix: hidePass ? Icons.visibility_off : Icons.visibility,
+                  suffix:
+                  hidePass ? Icons.visibility_off : Icons.visibility,
                   suffixPressed: () {
                     setState(() {
                       hidePass = !hidePass;
@@ -103,7 +117,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 MyButton(
                   onPressed: () {
-                    //TODO
+                    ProfileCubit.get(context).changePassword(
+                      password: passC.text,
+                      confirmedPassword: confirmPassC.text,
+                      email:
+                      ProfileCubit.get(context).userModel!.user.email,
+                    );
                   },
                   text: "Apply",
                 ),
@@ -113,5 +132,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         ),
       ),
     );
+  },
+);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
+import 'package:booking_hotel/business_logic/profile_cubit/profile_cubit.dart';
 import 'package:booking_hotel/business_logic/hotels_cubit/hotels_cubit.dart';
 import 'package:booking_hotel/core/dio_service/dio.dart';
 import 'package:booking_hotel/core/network_service/network.dart';
@@ -36,7 +37,13 @@ Future initApp() async {
       repositoryBooking: sl(),
     ),
   );
-    sl.registerFactory(
+
+  sl.registerFactory(
+    () => ProfileCubit(
+      profileRepository: sl(),
+    ),
+  );
+  sl.registerFactory(
     () => HotelsCubit(
       hotelsRepository: sl(),
     ),
@@ -67,6 +74,14 @@ Future initApp() async {
       networkService: sl(),
     ),
   );
+
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(
+      profileDataSource: sl(),
+      networkService: sl(),
+    ),
+  );
+
   sl.registerLazySingleton<HotelsRepository>(
     () => HotelsRepositoryImpl(
       hotelsDataSource: sl(),
@@ -97,6 +112,11 @@ Future initApp() async {
   );
   sl.registerLazySingleton<BookingDataSource>(
     () => BookingDataSourceImpl(
+      dioService: sl(),
+    ),
+  );
+  sl.registerLazySingleton<ProfileDataSource>(
+    () => ProfileDataSourceImpl(
       dioService: sl(),
     ),
   );

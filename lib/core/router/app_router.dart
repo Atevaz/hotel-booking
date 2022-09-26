@@ -9,6 +9,7 @@ import 'package:booking_hotel/presentation/screens/user/auth_layout/register_scr
 import 'package:booking_hotel/presentation/screens/user/explore_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/filter_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/hotel_details.dart';
+import 'package:booking_hotel/presentation/screens/user/profile_layout/change_password_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'app_router_names.dart';
@@ -33,10 +34,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
         );
-      // case AppRouterNames.rChangePasswordLayoutRoute:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const ChangePasswordScreen(),
-      //   );
+      case AppRouterNames.rChangePasswordLayoutRoute:
+        return MaterialPageRoute(
+          builder: (_) => const ChangePasswordScreen(),
+        );
       case AppRouterNames.rHomeLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const HomeLayoutScreen(),

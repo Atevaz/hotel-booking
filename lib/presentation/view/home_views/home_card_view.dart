@@ -37,7 +37,7 @@ class HomeCardView extends StatelessWidget {
       elevation: 5.r,
       borderRadius: BorderRadius.circular(20.r),
       clipBehavior: Clip.hardEdge,
-      color: AppColor.white,
+      color: Theme.of(context).cardColor,
       child: InkWell(
         onDoubleTap: onDoubleTap,
         onTap: onTap,
@@ -92,13 +92,10 @@ class HomeCardView extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Icon(
-                                      Icons.location_on,
-                                      color: AppColor.teal,
-                                      size: 25.r,
-                                    ),
+                                  Icon(
+                                    Icons.location_on,
+                                    color: AppColor.teal,
+                                    size: 25.r,
                                   ),
                                   MediumText(
                                     text: location,
@@ -118,23 +115,25 @@ class HomeCardView extends StatelessWidget {
                           SizedBox(
                             width: 10.w,
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              HeadLineText(
-                                text: "\$$price",
-                                fontSize: 22.sp,
-                                isUpper: false,
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              MediumText(
-                                text: "/per night",
-                                fontSize: 16.sp,
-                                color: Colors.grey,
-                              )
-                            ],
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                HeadLineText(
+                                  text: "\$${price.toInt()}",
+                                  fontSize: 20.sp,
+                                  isUpper: false,
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                MediumText(
+                                  text: "/per night",
+                                  fontSize: 16.sp,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),

@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:booking_hotel/business_logic/profile_cubit/profile_cubit.dart';
+import 'package:booking_hotel/core/constants/end_points.dart';
 import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/default_text_form_field.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ class UpdateProfile extends StatefulWidget {
 
 class _UpdateProfileState extends State<UpdateProfile> {
   bool hidePass = true;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileState>(listener: (context, state) {
@@ -69,10 +72,16 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                           .image ==
                                       null
                                   ? const AssetImage('assets/images/user.jpg')
-                                  : Image.network(ProfileCubit.get(context)
-                                          .userModel!
-                                          .user
-                                          .image!)
+                                  : Image.network(!ProfileCubit.get(context)
+                                              .userModel!
+                                              .user
+                                              .image!
+                                              .contains("http")
+                                          ? "$baseApiUrl$apiImagesVersion/${ProfileCubit.get(context).userModel!.user.image!}"
+                                          : ProfileCubit.get(context)
+                                              .userModel!
+                                              .user
+                                              .image!)
                                       .image,
                           radius: 60,
                         ),
@@ -100,7 +109,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                                 onTap: () {
                                                   ProfileCubit.get(context)
                                                       .pickImage(
-                                                          ImageSource.camera);
+                                                          ImageSource.gallery);
                                                   Navigator.pop(context);
                                                 },
                                                 child: const ListTile(
@@ -113,7 +122,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                                 onTap: () {
                                                   ProfileCubit.get(context)
                                                       .pickImage(
-                                                          ImageSource.gallery);
+                                                          ImageSource.camera);
                                                 },
                                                 child: const ListTile(
                                                   leading:
@@ -144,28 +153,22 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Name',
-                        style: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.bold),
-                      ),
+                      const MediumText(text: 'Name'),
                       SizedBox(
                         height: 25.h,
                       ),
                       MyFormField(
-                        // initialValue: ProfileCubit.get(context).userModel!.user.name,
                         controller: ProfileCubit.get(context).nameController,
-                        validateText: "validateText",
+                        validateText:
+                            ProfileCubit.get(context).nameController.text,
                         inputType: TextInputType.text,
                         borderRadius: 30.r,
                       ),
                       SizedBox(
                         height: 30.h,
                       ),
-                      Text(
-                        'Email',
-                        style: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.bold),
+                      const MediumText(
+                        text: 'Email',
                       ),
                       SizedBox(
                         height: 30.h,
@@ -173,7 +176,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       MyFormField(
                         // initialValue: ProfileCubit.get(context).userModel!.user.email,
                         controller: ProfileCubit.get(context).emailController,
-                        validateText: "validateText",
+                        validateText:
+                            ProfileCubit.get(context).emailController.text,
                         inputType: TextInputType.emailAddress,
                         borderRadius: 30.r,
                       ),

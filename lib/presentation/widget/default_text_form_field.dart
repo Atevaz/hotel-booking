@@ -9,7 +9,6 @@ class MyFormField extends StatelessWidget {
   final IconData? suffix;
 
   final TextEditingController controller;
-  // final String? initialValue;
 
   //final VoidCallback? onTap ;
   final String validateText;
@@ -65,7 +64,6 @@ class MyFormField extends StatelessWidget {
         obscureText: isPassword,
         keyboardType: inputType,
         textAlign: textAlign,
-        // initialValue: initialValue,
         decoration: InputDecoration(
 
           suffixIcon: IconButton(

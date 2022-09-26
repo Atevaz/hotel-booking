@@ -51,7 +51,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           err = state.message;
         }
         return Scaffold(
-          backgroundColor: AppColor.lightGrey,
           body: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),

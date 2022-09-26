@@ -28,6 +28,18 @@ class AppModeSaveErrorState extends GlobalState {
   AppModeSaveErrorState(this.message);
 }
 
+class AppChangeLocaleArabicState extends GlobalState {}
+
+class AppChangeLocaleEnglishState extends GlobalState {}
+
+class AppLocaleSavedState extends GlobalState {}
+
+class AppLocaleSaveErrorState extends GlobalState {
+  final String message;
+
+  AppLocaleSaveErrorState(this.message);
+}
+
 class ChangeNavBarState extends GlobalState {}
 
 class ShowThemeBottomSheet extends GlobalState {}

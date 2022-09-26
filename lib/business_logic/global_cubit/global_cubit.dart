@@ -14,25 +14,9 @@ class GlobalCubit extends Cubit<GlobalState> {
   bool isDark = false;
   final GlobalRepository globalRepository;
 
-  GlobalCubit({required this.globalRepository}) : super(GlobalInitial());
-
-  // final TestApi repo;
-  // UserModel? user;
-  //
-  // Future getHotel() async {
-  //   emit(loading());
-  //   final result = await repo.getHotels();
-  //   result.fold(
-  //     (l) {
-  //       emit(err());
-  //     },
-  //     (r) {
-  //       // TODO
-  //       user = r;
-  //       emit(loaded());
-  //     },
-  //   );
-  // }
+  GlobalCubit({required this.globalRepository}) : super(GlobalInitial()) {
+    _initApp();
+  }
 
   static GlobalCubit get(context) => BlocProvider.of(context);
   Color cardColor = AppColor.white;
@@ -42,17 +26,29 @@ class GlobalCubit extends Cubit<GlobalState> {
   Color headLineTextColor = AppColor.white;
   Color mediumTextColor = AppColor.white;
 
-  Future<void> initApp() async {
+  Future<void> _initApp() async {
     isDark = await globalRepository.isDarkMode();
     locale = await globalRepository.appLang();
     _updateCurrentMode();
     emit(GlobalInitState());
   }
 
+  Future<void> changeAppLocale() async {
+    locale = locale == const Locale('ar', 'EG')
+        ? const Locale('en', 'US')
+        : const Locale('ar', 'EG');
+    final result = await globalRepository.saveLang(locale: locale.languageCode);
+    result.fold((l) {
+      emit(AppLocaleSaveErrorState(l));
+    }, (r) {
+      emit(AppLocaleSavedState());
+    });
+  }
+
   void _updateCurrentMode() {
     if (isDark) {
       cardColor = AppColor.black;
-      colorOfFormField = AppColor.black;
+      colorOfFormField = Colors.grey.shade900;
       backGroundOfToggleTap = AppColor.black;
       regularTextColor = AppColor.lightGrey;
       headLineTextColor = AppColor.white;
@@ -72,6 +68,7 @@ class GlobalCubit extends Cubit<GlobalState> {
   }
 
   Future<void> changeAppMode() async {
+    isDark = !isDark;
     _updateCurrentMode();
     final result = await globalRepository.saveMode(isDark: isDark);
     result.fold((l) {

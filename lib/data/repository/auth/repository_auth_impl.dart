@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:booking_hotel/core/constants/constant.dart';
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/exceptions/network_exception.dart';
 import 'package:booking_hotel/core/exceptions/server_exception.dart';
 import 'package:booking_hotel/core/exceptions/shared_preference_exception.dart';
@@ -17,8 +17,6 @@ import 'package:dartz/dartz.dart';
 import 'repository_auth.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final String Network_Connection_Error = "No internet connection!";
-
   @override
   LocalAuthContract localAuth;
 
@@ -35,11 +33,16 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<Either<String, AuthResponseModel>> loginSaved() async {
+  Future<Either<String, AuthResponseModel>> loginSaved({
+    bool isEng = true,
+  }) async {
     try {
       final connected = await networkService.isConnected;
       if (!connected) {
-        throw NetworkException(message: Network_Connection_Error);
+        throw const NetworkException(
+          arMessage: Network_Connection_Ar_Error,
+          enMessage: Network_Connection_En_Error,
+        );
       }
       final loginModel = await localAuth.getUser();
       final result = await remoteAuth.login(loginModel);
@@ -47,23 +50,27 @@ class AuthRepositoryImpl implements AuthRepository {
       result.user = profile.user;
       return Right(result);
     } on PreferenceException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     } on ServerException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     } on NetworkException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     }
   }
 
   @override
   Future<Either<String, AuthResponseModel>> login(
     LoginParamModel loginParamModel,
-    bool cacheUser,
-  ) async {
+    bool cacheUser, {
+    bool isEng = true,
+  }) async {
     try {
       final connected = await networkService.isConnected;
       if (!connected) {
-        throw NetworkException(message: Network_Connection_Error);
+        throw const NetworkException(
+          arMessage: Network_Connection_Ar_Error,
+          enMessage: Network_Connection_En_Error,
+        );
       }
       final result = await remoteAuth.login(loginParamModel);
       if (cacheUser) {
@@ -77,39 +84,44 @@ class AuthRepositoryImpl implements AuthRepository {
       result.user = profile.user;
       return Right(result);
     } on PreferenceException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     } on ServerException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     } on NetworkException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     }
   }
 
   @override
-  Future<Either<String, void>> logout() async {
+  Future<Either<String, void>> logout({
+    bool isEng = true,
+  }) async {
     try {
       return Right(await localAuth.removeUser());
     } on PreferenceException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     }
   }
 
   @override
   Future<Either<String, AuthResponseModel>> register(
-    RegisterParamModel registerParamModel,
-  ) async {
+    RegisterParamModel registerParamModel, {
+    bool isEng = true,
+  }) async {
     try {
       final connected = await networkService.isConnected;
       if (!connected) {
-        throw NetworkException(message: Network_Connection_Error);
+        throw const NetworkException(
+          arMessage: Network_Connection_Ar_Error,
+          enMessage: Network_Connection_En_Error,
+        );
       }
       final result = await remoteAuth.register(registerParamModel);
       return Right(result);
-
     } on ServerException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     } on NetworkException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     }
   }
 }

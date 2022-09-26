@@ -1,11 +1,9 @@
 class ServerException implements Exception {
-  final String message;
-  final int code;
-  final String error;
+  final String arMessage;
+  final String enMessage;
 
   const ServerException({
-    required this.message,
-    required this.code,
-    required this.error,
+    required this.enMessage,
+    required this.arMessage,
   });
 }

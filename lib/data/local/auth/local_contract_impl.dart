@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/constants/shared_preferences_consts.dart';
 import 'package:booking_hotel/core/exceptions/shared_preference_exception.dart';
 import 'package:booking_hotel/core/shared_preferences/preference_helper.dart';
@@ -25,14 +26,22 @@ class LocalAuthContractImpl implements LocalAuthContract {
         value: userData,
       );
       if (!result) {
-        throw const PreferenceException(message: Cache_User_Err);
+        throw const PreferenceException(
+          enMessage: Cache_User_En_Err,
+          arMessage: Cache_User_Ar_Err,
+        );
       }
     } catch (e) {
-      String message = "$e";
+      String arMessage = "$e";
+      String enMessage = "$e";
       if (e is PreferenceException) {
-        message = e.message;
+        arMessage = e.arMessage;
+        enMessage = e.enMessage;
       }
-      throw PreferenceException(message: message);
+      throw PreferenceException(
+        arMessage: arMessage,
+        enMessage: enMessage,
+      );
     }
   }
 
@@ -44,17 +53,23 @@ class LocalAuthContractImpl implements LocalAuthContract {
       );
       if (result == null) {
         throw const PreferenceException(
-          message: Get_User_Err,
+          arMessage: Get_User_Ar_Err,
+          enMessage: Get_User_En_Err,
         );
       }
       final loginModel = LoginParamModel.fromJson(jsonDecode(result));
       return loginModel;
     } catch (e) {
-      String message = "$e";
+      String arMessage = "$e";
+      String enMessage = "$e";
       if (e is PreferenceException) {
-        message = e.message;
+        arMessage = e.arMessage;
+        enMessage = e.enMessage;
       }
-      throw PreferenceException(message: message);
+      throw PreferenceException(
+        arMessage: arMessage,
+        enMessage: enMessage,
+      );
     }
   }
 
@@ -66,15 +81,19 @@ class LocalAuthContractImpl implements LocalAuthContract {
       );
       if (!result) {
         throw const PreferenceException(
-          message: Remove_User_Err,
-        );
+            arMessage: Remove_User_Ar_Err, enMessage: Remove_User_En_Err);
       }
     } catch (e) {
-      String message = "$e";
+      String arMessage = "$e";
+      String enMessage = "$e";
       if (e is PreferenceException) {
-        message = e.message;
+        arMessage = e.arMessage;
+        enMessage = e.enMessage;
       }
-      throw PreferenceException(message: message);
+      throw PreferenceException(
+        arMessage: arMessage,
+        enMessage: enMessage,
+      );
     }
   }
 }

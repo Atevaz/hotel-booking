@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/exceptions/network_exception.dart';
 import 'package:booking_hotel/core/exceptions/server_exception.dart';
 import 'package:booking_hotel/core/network_service/network_service.dart';
@@ -20,19 +21,25 @@ class HotelsRepositoryImpl implements HotelsRepository {
   });
 
   @override
-  Future<Either<String, List<Hotel>>> getHotels(
-      {required int count, required int page}) async {
+  Future<Either<String, List<Hotel>>> getHotels({
+    required int count,
+    required int page,
+    bool isEng = true,
+  }) async {
     try {
       final isConnected = await networkService.isConnected;
       if (!isConnected) {
-        throw const NetworkException(message: "No Internet Connection!");
+        throw const NetworkException(
+          arMessage: Network_Connection_Ar_Error,
+          enMessage: Network_Connection_En_Error,
+        );
       }
       final result = await hotelsDataSource.getHotels(count: count, page: page);
       return Right(result);
     } on NetworkException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     } on ServerException catch (e) {
-      return Left(e.message);
+      return Left(isEng ? e.enMessage : e.arMessage);
     } catch (e) {
       return Left("$e");
     }

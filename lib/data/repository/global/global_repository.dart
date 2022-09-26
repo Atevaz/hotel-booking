@@ -9,7 +9,13 @@ abstract class GlobalRepository {
 
   Future<Locale> appLang();
 
-  Future<Either<String, bool>> saveMode({required bool isDark});
+  Future<Either<String, bool>> saveMode({
+    required bool isDark,
+    bool isEng = true,
+  });
 
-  Future<Either<String, bool>> saveLang({required String locale});
+  Future<Either<String, bool>> saveLang({
+    required String locale,
+    bool isEng = true,
+  });
 }

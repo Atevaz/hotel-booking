@@ -11,16 +11,22 @@ abstract class AuthRepository {
   late RemoteAuthDataSource remoteAuth;
   late NetworkService networkService;
 
-  Future<Either<String, AuthResponseModel>> loginSaved();
+  Future<Either<String, AuthResponseModel>> loginSaved({
+    bool isEng = true,
+  });
 
   Future<Either<String, AuthResponseModel>> login(
     LoginParamModel loginParamModel,
-    bool cacheUser,
-  );
+    bool cacheUser, {
+    bool isEng = true,
+  });
 
-  Future<Either<String, void>> logout();
+  Future<Either<String, void>> logout({
+    bool isEng = true,
+  });
 
   Future<Either<String, AuthResponseModel>> register(
-    RegisterParamModel registerParamModel,
-  );
+    RegisterParamModel registerParamModel, {
+    bool isEng = true,
+  });
 }

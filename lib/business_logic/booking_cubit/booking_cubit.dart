@@ -1,6 +1,5 @@
 import 'package:booking_hotel/data/models/booking_model.dart';
 import 'package:booking_hotel/data/repository/booking/repository_booking.dart';
-import 'package:booking_hotel/presentation/widget/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,26 +14,31 @@ class BookingCubit extends Cubit<BookingState> {
 
   static BookingCubit get(BuildContext context) => BlocProvider.of(context);
 
-  BookingModel? completedBookingModel ;
-  BookingModel? upcommingBookingModel ;
-  BookingModel? cancelledBookingModel ;
-  int selectedBookingToggleTabBar = 0 ;
+  BookingModel? completedBookingModel;
 
-  void changeSelectedBookingTabBar(index){
-    selectedBookingToggleTabBar = index ;
+  BookingModel? upcommingBookingModel;
+
+  BookingModel? cancelledBookingModel;
+
+  int selectedBookingToggleTabBar = 0;
+
+  void changeSelectedBookingTabBar(index) {
+    selectedBookingToggleTabBar = index;
     emit(ChangeSelectedToggleTabBarState());
   }
 
   Future getCompletedBooking() async {
     emit(GetCompletedBookingLoadingState());
-    final result = await repositoryBooking.getBooking(token, 'completed', 10, 1);
+    final result =
+        await repositoryBooking.getBooking(token, 'completed', 10, 1);
     result.fold(
-          (l) {
+      (l) {
         emit(GetCompletedBookingErrorState());
       },
-          (r) {
-        completedBookingModel = r ;
-        debugPrint(' hotel name ===>> ${completedBookingModel!.data!.dataList![0].hotel!.hotelImages![0].image}');
+      (r) {
+        completedBookingModel = r;
+        debugPrint(
+            ' hotel name ===>> ${completedBookingModel!.data!.dataList!.isNotEmpty ? completedBookingModel!.data!.dataList![0].hotel!.name : ''}');
         emit(GetCompletedBookingSuccessState());
       },
     );
@@ -42,13 +46,16 @@ class BookingCubit extends Cubit<BookingState> {
 
   Future getUpcomingBooking() async {
     emit(GetUpcomingBookingLoadingState());
-    final result = await repositoryBooking.getBooking(token, 'upcomming', 15, 1);
+    final result =
+        await repositoryBooking.getBooking(token, 'upcomming', 15, 1);
     result.fold(
-          (l) {
+      (l) {
         emit(GetUpcomingBookingErrorState());
       },
-          (r) {
-        upcommingBookingModel = r ;
+      (r) {
+        upcommingBookingModel = r;
+        debugPrint(
+            ' hotel name ===>> ${upcommingBookingModel!.data!.dataList!.isNotEmpty ? upcommingBookingModel!.data!.dataList![0].hotel!.name : ''}');
         emit(GetUpcomingBookingSuccessState());
       },
     );
@@ -56,14 +63,16 @@ class BookingCubit extends Cubit<BookingState> {
 
   Future getCancelledBooking() async {
     emit(GetCancelledBookingLoadingState());
-    final result = await repositoryBooking.getBooking(token, 'cancelled', 10, 1);
+    final result =
+        await repositoryBooking.getBooking(token, 'cancelled', 10, 1);
     result.fold(
-          (l) {
+      (l) {
         emit(GetCancelledBookingErrorState());
       },
-          (r) {
-        cancelledBookingModel = r ;
-        debugPrint(' hotel name ===>> ${cancelledBookingModel!.data!.dataList![0].hotel!.hotelImages![0].image}');
+      (r) {
+        cancelledBookingModel = r;
+        debugPrint(
+            ' hotel name ===>> ${cancelledBookingModel!.data!.dataList!.isNotEmpty ? cancelledBookingModel!.data!.dataList![0].hotel!.name : ''}');
         emit(GetCancelledBookingSuccessState());
       },
     );
@@ -74,24 +83,24 @@ class BookingCubit extends Cubit<BookingState> {
     final result = await repositoryBooking.createBooking(token, hotelId);
     debugPrint('my token ==>> $token');
     result.fold(
-          (l) {
+      (l) {
         emit(CreateBookingErrorState());
       },
-          (r) {
+      (r) {
         emit(CreateBookingSuccessState());
         getUpcomingBooking();
       },
     );
   }
 
-  Future updateBooking(int hotelId , String type) async {
+  Future updateBooking(int hotelId, String type) async {
     emit(UpdateBookingLoadingState());
-    final result = await repositoryBooking.updateBooking(token, hotelId,type);
+    final result = await repositoryBooking.updateBooking(token, hotelId, type);
     result.fold(
-          (l) {
+      (l) {
         emit(UpdateBookingErrorState());
       },
-          (r) {
+      (r) {
         emit(UpdateBookingSuccessState());
       },
     );

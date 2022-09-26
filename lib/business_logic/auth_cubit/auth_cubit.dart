@@ -1,4 +1,5 @@
 import 'package:booking_hotel/core/constants/constant.dart';
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/utils/string_extension.dart';
 import 'package:booking_hotel/data/models/auth_params/login_param_model.dart';
 import 'package:booking_hotel/data/models/auth_params/register_param_model.dart';
@@ -18,7 +19,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   static AuthCubit get(BuildContext context) => BlocProvider.of(context);
 
-  Future loginSaved() async {
+  Future loginSaved({
+    bool isEng = true,
+  }) async {
     emit(LoginSavedLoadingState());
     final result = await authRepository.loginSaved();
     result.fold(
@@ -27,16 +30,24 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (r) {
         user = r.user;
-        token = r.user.token ;
+        token = r.user.token;
         emit(LoginSavedLoadedState(r));
       },
     );
   }
 
-  Future login(LoginParamModel paramModel, bool rememberMe) async {
+  Future login(
+    LoginParamModel paramModel,
+    bool rememberMe, {
+    bool isEng = true,
+  }) async {
     emit(LoginLoadingState());
-    if (!paramModel.email.isValidEmail()) {
-      emit(LoginLoadingErrorState("Invalid email format!ad"));
+    if (paramModel.email.isNotEmpty && !paramModel.email.isValidEmail()) {
+      emit(
+        LoginLoadingErrorState(
+          isEng ? Invalid_Email_Format_En_Err : Invalid_Email_Format_Ar_Err,
+        ),
+      );
       return;
     }
     final result = await authRepository.login(paramModel, rememberMe);
@@ -46,13 +57,15 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (r) {
         user = r.user;
-        token = r.user.token ;
+        token = r.user.token;
         emit(LoginLoadedState(r));
       },
     );
   }
 
-  Future logout() async {
+  Future logout({
+    bool isEng = true,
+  }) async {
     emit(LogoutLoadingState());
     final result = await authRepository.logout();
     result.fold(
@@ -66,10 +79,17 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future register(RegisterParamModel paramModel) async {
+  Future register(
+    RegisterParamModel paramModel, {
+    bool isEng = true,
+  }) async {
     emit(RegisterLoadingState());
-    if (!paramModel.email.isValidEmail()) {
-      emit(LoginLoadingErrorState("Invalid email format!ad"));
+    if (paramModel.email.isNotEmpty && !paramModel.email.isValidEmail()) {
+      emit(
+        RegisterLoadingErrorState(
+          isEng ? Invalid_Email_Format_En_Err : Invalid_Email_Format_Ar_Err,
+        ),
+      );
       return;
     }
     final result = await authRepository.register(paramModel);

@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/exceptions/server_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,9 @@ Future serverRequest({
     debugPrint("Response_Code => ${r.statusCode}");
 
     if (r.data['status']['type'] == '0' && r.data['data'] == null) {
-      dynamic title = r.data['status']['title'];
-
       throw ServerException(
-        message: title is String ? title : r.data['status']['title']?['ar'],
-        code: r.statusCode ?? 500,
-        error: r.data['status']['title']?['en'],
+        arMessage: '${r.data['status']['title']?['ar']}',
+        enMessage: '${r.data['status']['title']?['en']}',
       );
     }
 
@@ -27,17 +25,15 @@ Future serverRequest({
     debugPrint("Error_Type => ${e.type.toString()}");
 
     throw const ServerException(
-      code: 100,
-      message: "Server Request Failed!",
-      error: 'Server Error',
+      enMessage: Server_Request_En_Error,
+      arMessage: Server_Request_Ar_Error,
     );
   } catch (e) {
     ServerException exception = e as ServerException;
 
     throw ServerException(
-      code: exception.code,
-      message: exception.message,
-      error: e.error,
+      enMessage: exception.enMessage,
+      arMessage: exception.arMessage,
     );
   }
 }

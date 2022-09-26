@@ -11,5 +11,6 @@ abstract class HotelsRepository {
   Future<Either<String, List<Hotel>>> getHotels({
     required int count,
     required int page,
+    bool isEng = true,
   });
 }

@@ -1,7 +1,9 @@
 class PreferenceException implements Exception {
-  final String message;
+  final String arMessage;
+  final String enMessage;
 
   const PreferenceException({
-    required this.message,
+    required this.enMessage,
+    required this.arMessage,
   });
 }

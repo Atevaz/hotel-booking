@@ -136,7 +136,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ],
                           )
-                        : Container(),
+                        : state is RegisterLoadingState
+                            ? Padding(
+                                padding: EdgeInsets.only(top: 10.h),
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : Container(),
                     SizedBox(
                       height: 20.h,
                     ),

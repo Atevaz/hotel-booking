@@ -8,8 +8,8 @@ class Status {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['type'] = this.type;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['type'] = type;
     return data;
   }
 }

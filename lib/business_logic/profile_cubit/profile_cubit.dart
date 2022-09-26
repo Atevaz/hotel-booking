@@ -1,13 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:booking_hotel/core/constants/constant.dart';
 import 'package:booking_hotel/data/models/auth_response/auth_response_model.dart';
-import 'package:booking_hotel/data/models/auth_response/user_model.dart';
 import 'package:booking_hotel/data/repository/profile/profile_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 
 part 'profile_state.dart';
 

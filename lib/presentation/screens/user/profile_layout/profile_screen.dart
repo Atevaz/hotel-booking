@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                                   .user
                                   .image ==
                                   null
-                                  ? AssetImage('assets/images/user.jpg')
+                                  ? const AssetImage('assets/images/user.jpg')
                                   : Image
                                   .network(ProfileCubit
                                   .get(context)
@@ -84,7 +84,7 @@ class ProfileScreen extends StatelessWidget {
                                 AppRouterNames.rChangePasswordLayoutRoute);
                           },
                           componentTitle: 'Change Password',
-                          componentIcon: Icon(
+                          componentIcon: const Icon(
                             Icons.lock,
                             size: 30,
                           ),

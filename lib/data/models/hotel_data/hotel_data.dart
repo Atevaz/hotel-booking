@@ -9,14 +9,14 @@ class HotelData {
 
   HotelData.fromJson(Map<String, dynamic> json) {
     status =
-        json['status'] != null ? new Status.fromJson(json['status']) : null;
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+        json['status'] != null ? Status.fromJson(json['status']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.status != null) {
-      data['status'] = this.status!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (status != null) {
+      data['status'] = status!.toJson();
     }
     if (this.data != null) {
       data['data'] = this.data!.toJson();

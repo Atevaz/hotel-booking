@@ -68,7 +68,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                           .user
                                           .image ==
                                       null
-                                  ? AssetImage('assets/images/user.jpg')
+                                  ? const AssetImage('assets/images/user.jpg')
                                   : Image.network(ProfileCubit.get(context)
                                           .userModel!
                                           .user
@@ -103,7 +103,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                                           ImageSource.camera);
                                                   Navigator.pop(context);
                                                 },
-                                                child: ListTile(
+                                                child: const ListTile(
                                                   leading:
                                                       Icon(Icons.photo_library),
                                                   title: Text('Pick an image'),
@@ -115,7 +115,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                                       .pickImage(
                                                           ImageSource.gallery);
                                                 },
-                                                child: ListTile(
+                                                child: const ListTile(
                                                   leading:
                                                       Icon(Icons.camera_alt),
                                                   title:
@@ -129,7 +129,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                     },
                                   );
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.camera_alt,
                                   color: Colors.black,
                                 ),

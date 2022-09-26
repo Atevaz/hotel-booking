@@ -1,6 +1,6 @@
 class AppRouterNames {
   static const rSplashLayoutRoute = '/';
-  static const rOnBoardingLayoutRoute = '/';
+  static const rOnBoardingLayoutRoute = '/on-board';
   static const rLoginLayoutRoute = '/login';
   static const rRegisterLayoutRoute = '/register';
   static const rHomeLayoutRoute = '/home';

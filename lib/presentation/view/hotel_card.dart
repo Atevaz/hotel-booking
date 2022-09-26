@@ -2,7 +2,6 @@ import 'package:booking_hotel/core/constants/end_points.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
-import 'package:booking_hotel/presentation/widget/regular_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,7 +28,7 @@ class HotelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColor.lightGrey,
+      color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -63,7 +62,11 @@ class HotelCard extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             WidgetSpan(
-                              child: RegularText(text: address),
+                              child: MediumText(
+                                text: address,
+                                fontSize: 16,
+                                color: AppColor.grey,
+                              ),
                             ),
                             const WidgetSpan(
                               child: Icon(
@@ -72,13 +75,21 @@ class HotelCard extends StatelessWidget {
                               ),
                             ),
                             WidgetSpan(
-                              child: RegularText(text: '$distance km to city'),
+                              child: MediumText(
+                                text: '$distance km to city',
+                                fontSize: 16,
+                                color: AppColor.grey,
+                              ),
                             )
                           ],
                         ),
                       ),
                       const Spacer(),
-                      const RegularText(text: '/per night')
+                      const MediumText(
+                        text: '/per night',
+                        fontSize: 16,
+                        color: AppColor.grey,
+                      )
                     ],
                   ),
                   SizedBox(
@@ -87,7 +98,11 @@ class HotelCard extends StatelessWidget {
                   Row(
                     children: [
                       AppCustomRateBar(rate: rate),
-                      const RegularText(text: ' 80 Reviews')
+                      const MediumText(
+                        text: ' 80 Reviews',
+                        fontSize: 16,
+                        color: AppColor.grey,
+                      )
                     ],
                   ),
                 ],

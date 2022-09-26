@@ -129,6 +129,7 @@ class SearchMapScreen extends StatelessWidget {
                           onTap: () => Navigator.pushNamed(
                             context,
                             AppRouterNames.rHotelDetailsLayoutRoute,
+                            arguments: hotels[index],
                           ),
                         ),
                       );

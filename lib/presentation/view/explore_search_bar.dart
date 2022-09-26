@@ -50,9 +50,7 @@ class ExploreSearchBar extends StatelessWidget {
                         show: explore.showSearchTypes,
                         onChange: explore.updateSelectedSearchType,
                         currentValue: explore.searchType,
-                        color: explore.currentLayoutIndex == 0
-                            ? AppColor.grey
-                            : AppColor.white,
+                        color: Theme.of(context).cardColor,
                       ),
                     ],
                   ),

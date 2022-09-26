@@ -3,7 +3,7 @@ import 'package:booking_hotel/core/exceptions/network_exception.dart';
 import 'package:booking_hotel/core/exceptions/server_exception.dart';
 import 'package:booking_hotel/core/network_service/network_service.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
-import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
+import 'package:booking_hotel/data/models/hotel_search_models_response/hotels_response_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_param_model/search_hotel_params_model.dart';
 import 'package:booking_hotel/data/remote/explore/explore_data_source.dart';
 
@@ -47,7 +47,7 @@ class ExploreRepositoryImpl implements ExploreRepository {
   }
 
   @override
-  Future<Either<String, List<HotelModel>>> searchHotels({
+  Future<Either<String, HotelResponseModel>> searchHotels({
     required SearchHotelParamsModel searchHotelParamsModel,
     bool isEng = true,
   }) async {

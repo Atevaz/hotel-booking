@@ -10,13 +10,13 @@ import 'package:booking_hotel/presentation/screens/user/filter_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/hotel_details.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/change_password_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/update_profile.dart';
+import 'package:booking_hotel/presentation/screens/user/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'app_router_names.dart';
 
 class AppRouter {
   static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case AppRouterNames.rSplashLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
@@ -29,7 +29,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
-        case AppRouterNames.rLoginLayoutRoute:
+      case AppRouterNames.rLoginLayoutRoute:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
         );
@@ -49,6 +49,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const UpdateProfile(),
         );
+      case AppRouterNames.rSettingsLayoutRoute:
+        return MaterialPageRoute(builder: (_) => const SettingsScreen());
       case AppRouterNames.rFilterLayoutRoute:
         final result = settings.arguments as List<dynamic>?;
         final facilities = result?[0] as List<FacilityModel>?;

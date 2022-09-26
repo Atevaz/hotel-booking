@@ -3,7 +3,6 @@ import 'package:booking_hotel/core/dio_service/dio_service.dart';
 import 'package:booking_hotel/core/utils/dio_method.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_reponse_model.dart';
-import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotels_response_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_param_model/search_hotel_params_model.dart';
 
@@ -27,7 +26,7 @@ class RemoteExploreDataSourceImpl implements RemoteExploreDataSource {
   }
 
   @override
-  Future<List<HotelModel>> searchHotels({
+  Future<HotelResponseModel> searchHotels({
     required SearchHotelParamsModel searchHotelParamsModel,
   }) async {
     final result = await serverRequest(
@@ -37,6 +36,6 @@ class RemoteExploreDataSourceImpl implements RemoteExploreDataSource {
       ),
     );
     final model = HotelResponseModel.fromMap(result);
-    return model.hotels;
+    return model;
   }
 }

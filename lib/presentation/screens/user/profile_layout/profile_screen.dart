@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if(state is ProfileInitial){
+        if (state is ProfileInitial) {
           ProfileCubit.get(context).getProfile();
         }
       },
@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
         return Scaffold(
           body: SingleChildScrollView(
             child: ConditionalBuilder(
-              condition: ProfileCubit.get(context).userModel != null ,
+              condition: ProfileCubit.get(context).userModel != null,
               builder: (context) => SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -35,10 +35,11 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            HeadLineText(text: ProfileCubit
-                                .get(context)
-                                .userModel!
-                                .user.name),
+                            HeadLineText(
+                                text: ProfileCubit.get(context)
+                                    .userModel!
+                                    .user
+                                    .name),
                             DefaultTextButton(
                               text: 'View and Edit profile',
                               color: AppColor.grey,
@@ -50,16 +51,24 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                         const Spacer(),
-                        const CircleAvatar(
+                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: AssetImage('assets/images/user.jpg'),
+                          backgroundImage:
+                              ProfileCubit.get(context).userModel!.user.image ==
+                                      null
+                                  ? AssetImage('assets/images/user.jpg')
+                                  : Image.network(ProfileCubit.get(context)
+                                      .userModel!
+                                      .user
+                                      .image!).image,
                         ),
                       ],
                     ),
                     SizedBox(height: 20.h),
                     ProfileScreenComponent(
-                      onTap: (){
-                        Navigator.pushNamed(context, AppRouterNames.rChangePasswordLayoutRoute);
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, AppRouterNames.rChangePasswordLayoutRoute);
                       },
                       componentTitle: 'Change Password',
                       componentIcon: Icon(
@@ -108,9 +117,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     ProfileScreenComponent(
-                      onTap: AuthCubit
-                          .get(context)
-                          .logout,
+                      onTap: AuthCubit.get(context).logout,
                       componentTitle: 'Logout',
                       componentIcon: Icon(
                         Icons.logout,
@@ -120,7 +127,9 @@ class ProfileScreen extends StatelessWidget {
                   ]),
                 ),
               ),
-              fallback: (context) => const Center(child: CircularProgressIndicator(),),
+              fallback: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
         );

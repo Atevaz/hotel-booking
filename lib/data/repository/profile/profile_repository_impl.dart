@@ -1,3 +1,4 @@
+import 'package:booking_hotel/core/constants/constant.dart';
 import 'package:booking_hotel/core/exceptions/network_exception.dart';
 import 'package:booking_hotel/core/exceptions/server_exception.dart';
 import 'package:booking_hotel/core/network_service/network_service.dart';
@@ -7,6 +8,7 @@ import 'package:booking_hotel/data/remote/explore/explore_data_source.dart';
 import 'package:booking_hotel/data/remote/profile/profile_data_source.dart';
 
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import 'profile_repository.dart';
 
@@ -62,9 +64,21 @@ class ProfileRepositoryImpl extends ProfileRepository {
   }
 
   @override
-  Future<Either<String, AuthResponseModel>> updateProfile() {
-    // TODO: implement updateProfile
-    throw UnimplementedError();
+  Future<Either<String, AuthResponseModel>> updateProfile(String name, String email, MultipartFile? image) async {
+    try {
+      final isConnected = await networkService.isConnected;
+      if (!isConnected) {
+        throw const NetworkException(message: "No Internet Connection!");
+      }
+      final result = await profileDataSource.updateProfile(name, email, image);
+      return Right(result);
+    } on NetworkException catch (e) {
+      return Left(e.message);
+    } on ServerException catch (e) {
+      return Left(e.message);
+    } catch (e) {
+      return Left("$e");
+    }
+  }
   }
 
-}

@@ -2,8 +2,8 @@ class HotelFacilities {
   int? id;
   String? hotelId;
   String? facilityId;
-  Null? createdAt;
-  Null? updatedAt;
+  String? createdAt;
+  String? updatedAt;
 
   HotelFacilities(
       {this.id, this.hotelId, this.facilityId, this.createdAt, this.updatedAt});
@@ -17,12 +17,12 @@ class HotelFacilities {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['hotel_id'] = this.hotelId;
-    data['facility_id'] = this.facilityId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data =  <String, dynamic>{};
+    data['id'] = id;
+    data['hotel_id'] = hotelId;
+    data['facility_id'] = facilityId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -41,10 +41,10 @@ class Links {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['label'] = this.label;
-    data['active'] = this.active;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['url'] = url;
+    data['label'] = label;
+    data['active'] = active;
     return data;
   }
 }

@@ -55,9 +55,9 @@ ThemeData lightTheme = ThemeData(
     color: AppColor.black,
   ),
   fontFamily: 'SemiBold',
-  cardColor: AppColor.white,
+  cardColor: AppColor.lightGrey,
   cardTheme: CardTheme(
-    color: AppColor.white,
+    color: AppColor.lightGrey,
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
@@ -77,9 +77,11 @@ ThemeData darkTheme = ThemeData(
     titleSpacing: 12,
     //backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Color(0xff242526),
-        //HexColor('#18191a'),//#1c1c1c 0xff18191a
-        statusBarBrightness: Brightness.light),
+      statusBarColor: Colors.black,
+      // statusBarColor: Color(0xff242526),
+      //HexColor('#18191a'),//#1c1c1c 0xff18191a
+      statusBarBrightness: Brightness.light,
+    ),
     backgroundColor: AppColor.black,
     elevation: 0.0,
     iconTheme: IconThemeData(
@@ -97,7 +99,7 @@ ThemeData darkTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    backgroundColor: AppColor.black,
+    backgroundColor: const Color(0xff242526),
     selectedItemColor: AppColor.teal,
     unselectedItemColor: AppColor.white,
     elevation: 0,
@@ -122,9 +124,12 @@ ThemeData darkTheme = ThemeData(
     ),
   ),
   fontFamily: 'SemiBold',
-  iconTheme: const IconThemeData(color: AppColor.white),
+  iconTheme: const IconThemeData(
+    color: AppColor.white,
+  ),
+  cardColor: const Color(0xff242526),
   cardTheme: CardTheme(
-    color: AppColor.black,
+    color: const Color(0xff242526),
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(

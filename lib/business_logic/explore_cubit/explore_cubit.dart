@@ -20,6 +20,7 @@ class ExploreCubit extends Cubit<ExploreState> {
   final searchC = TextEditingController();
   final listC = ScrollController();
   int page = 1;
+  int totalPages = 0;
   int searchType = 0;
   bool showSearchTypes = false;
   RangeValues? priceRangeFilter;
@@ -65,7 +66,8 @@ class ExploreCubit extends Cubit<ExploreState> {
       final param = SearchHotelParamsModel(
         count: 5,
         page: page,
-        name: searchC.text,
+        name: searchType == 0 && searchC.text.isNotEmpty ? searchC.text : null,
+        address: searchType == 1 && searchC.text.isNotEmpty ? searchC.text : null,
         facilities: facilityListFilter != null
             ? facilityListFilter!.map((e) => "${e.id}").toList()
             : null,
@@ -75,7 +77,9 @@ class ExploreCubit extends Cubit<ExploreState> {
         latitude: distanceFilter != null ? myLocation!.latitude : null,
         longitude: distanceFilter != null ? myLocation!.longitude : null,
       );
-      _searchHotels(param, true);
+      if (page <= totalPages) {
+        _searchHotels(param, true);
+      }
     }
   }
 
@@ -220,9 +224,6 @@ class ExploreCubit extends Cubit<ExploreState> {
     SearchHotelParamsModel paramsModel, [
     bool update = false,
   ]) async {
-    if (!update) {
-      searchHotels.clear();
-    }
     emit(SearchHotelsLoadingState());
     final result = await exploreRepository.searchHotels(
       searchHotelParamsModel: paramsModel,
@@ -230,7 +231,11 @@ class ExploreCubit extends Cubit<ExploreState> {
     result.fold((l) {
       emit(SearchHotelsLoadingErrorState(l));
     }, (r) {
-      searchHotels.addAll(r);
+      if (!update) {
+        searchHotels.clear();
+      }
+      searchHotels.addAll(r.hotels);
+      totalPages = r.lastPage;
       emit(SearchHotelsLoadedState());
     });
   }

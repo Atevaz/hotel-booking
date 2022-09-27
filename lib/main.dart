@@ -20,7 +20,7 @@ Future<void> main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => sl<GlobalCubit>()..initApp(),
+          create: (context) => sl<GlobalCubit>(),
         ),
         BlocProvider(
           create: (_) => sl<AuthCubit>()..loginSaved(),

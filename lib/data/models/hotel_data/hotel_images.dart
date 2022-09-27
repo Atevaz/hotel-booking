@@ -2,8 +2,8 @@ class HotelImages {
   int? id;
   String? hotelId;
   String? image;
-  Null? createdAt;
-  Null? updatedAt;
+  String? createdAt;
+  String? updatedAt;
 
   HotelImages(
       {this.id, this.hotelId, this.image, this.createdAt, this.updatedAt});
@@ -17,12 +17,12 @@ class HotelImages {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['hotel_id'] = this.hotelId;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['hotel_id'] = hotelId;
+    data['image'] = image;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

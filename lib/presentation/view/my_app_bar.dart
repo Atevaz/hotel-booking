@@ -8,12 +8,14 @@ class MyAppBar extends StatelessWidget {
   final List<Widget>? actions;
   final String? title;
   final bool? isBack;
+  final bool centerTitle;
 
   const MyAppBar(
       {Key? key,
       this.isCompletedAppBar = true,
       this.title,
       this.isBack,
+      this.centerTitle = false,
       this.leadingIcon = const Icon(Icons.arrow_back_ios),
       this.actions})
       : super(key: key);
@@ -31,7 +33,7 @@ class MyAppBar extends StatelessWidget {
             icon: leadingIcon),
         title: title != null ? Text(title!) : const Text(''),
         actions: actions,
-        centerTitle: false,
+        centerTitle: centerTitle,
         // backgroundColor: AppColor.black,
       );
     } else {
@@ -44,6 +46,7 @@ class MyAppBar extends StatelessWidget {
                 }
               },
               icon: leadingIcon),
+          centerTitle: centerTitle,
         );
       } else {
         return AppBar(

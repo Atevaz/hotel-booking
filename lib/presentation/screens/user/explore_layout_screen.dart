@@ -43,7 +43,7 @@ class ExploreLayoutScreen extends StatelessWidget {
                     onPressed: explore.toggleSearchBar,
                     icon: Icon(
                       explore.showSearchBar ? Icons.close : Icons.search,
-                      color: AppColor.black,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                   ),
                   IconButton(
@@ -55,7 +55,7 @@ class ExploreLayoutScreen extends StatelessWidget {
                       explore.currentLayoutIndex == 0
                           ? Icons.map
                           : Icons.format_align_justify,
-                      color: AppColor.black,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                   ),
                 ],
@@ -90,7 +90,6 @@ class ExploreLayoutScreen extends StatelessWidget {
                                     text:
                                         "${explore.searchHotels.length} Hotel Found",
                                     fontSize: 20.sp,
-                                    color: AppColor.black,
                                   ),
                                   InkWell(
                                     onTap: () {

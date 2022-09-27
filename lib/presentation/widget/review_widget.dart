@@ -39,7 +39,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MediumText(
+                const MediumText(
                   text:'Alexia Jane',
                 ),
                 SizedBox(

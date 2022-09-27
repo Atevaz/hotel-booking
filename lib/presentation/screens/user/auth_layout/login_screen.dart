@@ -46,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
           err = state.message;
         }
         return Scaffold(
-          backgroundColor: AppColor.lightGrey,
           body: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 25.w),
@@ -58,7 +57,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     HeadLineText(
                       text: "Log in",
                       fontSize: 28.sp,
-                      color: AppColor.black,
                     ),
                     SizedBox(
                       height: 40.h,

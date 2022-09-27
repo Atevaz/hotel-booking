@@ -55,23 +55,23 @@ class Hotel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['price'] = this.price;
-    data['address'] = this.address;
-    data['longitude'] = this.longitude;
-    data['latitude'] = this.latitude;
-    data['rate'] = this.rate;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.hotelImages != null) {
-      data['hotel_images'] = this.hotelImages!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['price'] = price;
+    data['address'] = address;
+    data['longitude'] = longitude;
+    data['latitude'] = latitude;
+    data['rate'] = rate;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (hotelImages != null) {
+      data['hotel_images'] = hotelImages!.map((v) => v.toJson()).toList();
     }
-    if (this.hotelFacilities != null) {
+    if (hotelFacilities != null) {
       data['hotel_facilities'] =
-          this.hotelFacilities!.map((v) => v.toJson()).toList();
+          hotelFacilities!.map((v) => v.toJson()).toList();
     }
     return data;
   }

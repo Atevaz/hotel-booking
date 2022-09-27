@@ -55,7 +55,7 @@ class HomeHotelsView extends StatelessWidget {
                     );
                   } else {
 
-  final isBooking = BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList).any((element) => int.parse(element.hotelId!) == hotels[index-1].id);
+  final isBooking = BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList).any((element) => int.parse(element.hotelId!) == hotels[index].id);
                     print('adham ==========>>>>>> $isBooking');
                     final hotel = hotels[index];
                     final name = '${hotel.name}';
@@ -66,7 +66,7 @@ class HomeHotelsView extends StatelessWidget {
                     final rate = double.parse(hotel.rate!);
                     final location = '${hotel.address}';
                     final model = HotelModel(
-                      id: !isBooking ? hotels[index-1].id! :BookingCubit.get(context).upcomingBookingList.firstWhere((e)=>int.parse(e.hotelId!) == hotels[index-1].id).id!,
+                      id: !isBooking ? hotels[index].id! :BookingCubit.get(context).upcomingBookingList.firstWhere((e)=>int.parse(e.hotelId!) == hotels[index].id).id!,
                       name: hotel.name!,
                       desc: hotel.description!,
                       price: double.parse(hotel.price!),

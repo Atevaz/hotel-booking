@@ -22,16 +22,8 @@ class HomeScreen extends StatelessWidget {
             builder: (context, state) {
               final cubit = HotelsCubit.get(context);
               bool loading = false;
-              int count = cubit.hotels.length + 1;
-              double great = 0;
-              Hotel? bestHotel;
-              for (int i = 0; i < cubit.hotels.length; i++) {
-                final rate = double.parse(cubit.hotels[i].rate!);
-                if (rate > great) {
-                  great = rate;
-                  bestHotel = cubit.hotels[i];
-                }
-              }
+              int count = cubit.hotels.length;
+
               String? err;
               if (state is GetHotelsLoadingState) {
                 loading = true;
@@ -46,7 +38,6 @@ class HomeScreen extends StatelessWidget {
                 slivers: [
                   //TODO create page view with indicator
                   HomeSliverAppBarView(
-                    hotel: bestHotel,
                   ),
                   HomeHotelsView(
                     count: count,

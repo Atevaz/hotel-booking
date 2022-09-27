@@ -1,3 +1,5 @@
+import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
+
 import 'common_models/status_model.dart';
 
 class BookingModel {
@@ -115,56 +117,56 @@ class User {
 
 }
 
-class Hotel {
-  int? id;
-  String? name;
-  String? description;
-  String? price;
-  String? address;
-  String? longitude;
-  String? latitude;
-  String? rate;
-
-  List<HotelImages>? hotelImages;
-  List<Facilities>? facilities;
-
-  Hotel(
-      {this.id,
-        this.name,
-        this.description,
-        this.price,
-        this.address,
-        this.longitude,
-        this.latitude,
-        this.rate,
-        this.hotelImages,
-        this.facilities});
-
-  Hotel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['description'];
-    price = json['price'];
-    address = json['address'];
-    longitude = json['longitude'];
-    latitude = json['latitude'];
-    rate = json['rate'];
-    if (json['hotel_images'] != null) {
-      hotelImages = <HotelImages>[];
-      json['hotel_images'].forEach((v) {
-        hotelImages!.add(HotelImages.fromJson(v));
-      });
-    }
-    if (json['facilities'] != null) {
-      facilities = <Facilities>[];
-      json['facilities'].forEach((v) {
-        facilities!.add(Facilities.fromJson(v));
-      });
-    }
-  }
-
-
-}
+// class Hotel {
+//   int? id;
+//   String? name;
+//   String? description;
+//   String? price;
+//   String? address;
+//   String? longitude;
+//   String? latitude;
+//   String? rate;
+//
+//   List<HotelImages>? hotelImages;
+//   List<Facilities>? facilities;
+//
+//   Hotel(
+//       {this.id,
+//         this.name,
+//         this.description,
+//         this.price,
+//         this.address,
+//         this.longitude,
+//         this.latitude,
+//         this.rate,
+//         this.hotelImages,
+//         this.facilities});
+//
+//   Hotel.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     name = json['name'];
+//     description = json['description'];
+//     price = json['price'];
+//     address = json['address'];
+//     longitude = json['longitude'];
+//     latitude = json['latitude'];
+//     rate = json['rate'];
+//     if (json['hotel_images'] != null) {
+//       hotelImages = <HotelImages>[];
+//       json['hotel_images'].forEach((v) {
+//         hotelImages!.add(HotelImages.fromJson(v));
+//       });
+//     }
+//     if (json['facilities'] != null) {
+//       facilities = <Facilities>[];
+//       json['facilities'].forEach((v) {
+//         facilities!.add(Facilities.fromJson(v));
+//       });
+//     }
+//   }
+//
+//
+// }
 
 class HotelImages {
   int? id;

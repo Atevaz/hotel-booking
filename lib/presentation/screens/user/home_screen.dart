@@ -1,6 +1,5 @@
 import 'package:booking_hotel/business_logic/hotels_cubit/hotels_cubit.dart';
 import 'package:booking_hotel/core/di/di.dart';
-import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_hotels_view.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_view.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +16,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           final cubit = HotelsCubit.get(context);
           bool loading = false;
-          int count = cubit.hotels.length + 1;
-          double great = 0;
-          Hotel? bestHotel;
-          for (int i = 0; i < cubit.hotels.length; i++) {
-            final rate = double.parse(cubit.hotels[i].rate!);
-            if (rate > great) {
-              great = rate;
-              bestHotel = cubit.hotels[i];
-            }
-          }
+          int count = cubit.hotels.length;
           String? err;
           if (state is GetHotelsLoadingState) {
             loading = true;
@@ -39,10 +29,7 @@ class HomeScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             controller: cubit.listC,
             slivers: [
-              //TODO create page view with indicator
-              HomeSliverAppBarView(
-                hotel: bestHotel,
-              ),
+              const HomeSliverAppBarView(),
               HomeHotelsView(
                 count: count,
                 hotels: cubit.hotels,

@@ -70,12 +70,6 @@ class _SplashScreenState extends State<SplashScreen>
       if (!mounted) {
         return;
       }
-      setState(() {
-        Navigator.pushNamed(
-          context,
-          AppRouterNames.rLoginLayoutRoute,
-        );
-      });
     });
   }
 
@@ -96,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen>
             Future.delayed(const Duration(seconds: 3)).then(
                   (value) => Navigator.pushNamedAndRemoveUntil(
                 context,
-                AppRouterNames.rLoginLayoutRoute,
+                AppRouterNames.rOnBoardingLayoutRoute,
                     (route) => false,
               ),
             );

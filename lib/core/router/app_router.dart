@@ -66,9 +66,11 @@ class AppRouter {
           ),
         );
       case AppRouterNames.rHotelDetailsLayoutRoute:
-        final hotel = settings.arguments as HotelModel;
+        final data =settings.arguments as List ;
+        final hotel = data[0] as HotelModel;
+        final isBooking = data[1] as bool ;
         return MaterialPageRoute(
-          builder: (_) => HotelDetails(hotel: hotel),
+          builder: (_) => HotelDetails(hotel: hotel,isBooking: isBooking,),
         );
       default:
         return null;

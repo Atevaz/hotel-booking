@@ -1,3 +1,4 @@
+import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/business_logic/hotels_cubit/hotels_cubit.dart';
 import 'package:booking_hotel/core/di/di.dart';
 import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
@@ -12,44 +13,50 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<HotelsCubit>()..getHotels(),
-      child: BlocBuilder<HotelsCubit, HotelsState>(
+      create: (context) =>
+      sl<HotelsCubit>()
+        ..getHotels(),
+      child: BlocBuilder<BookingCubit, BookingState>(
         builder: (context, state) {
-          final cubit = HotelsCubit.get(context);
-          bool loading = false;
-          int count = cubit.hotels.length + 1;
-          double great = 0;
-          Hotel? bestHotel;
-          for (int i = 0; i < cubit.hotels.length; i++) {
-            final rate = double.parse(cubit.hotels[i].rate!);
-            if (rate > great) {
-              great = rate;
-              bestHotel = cubit.hotels[i];
-            }
-          }
-          String? err;
-          if (state is GetHotelsLoadingState) {
-            loading = true;
-            count++;
-          }
-          if (state is GetHotelsLoadingErrorState) {
-            err = state.message;
-          }
-          return CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            controller: cubit.listC,
-            slivers: [
-              //TODO create page view with indicator
-              HomeSliverAppBarView(
-                hotel: bestHotel,
-              ),
-              HomeHotelsView(
-                count: count,
-                hotels: cubit.hotels,
-                loading: loading,
-                err: err,
-              ),
-            ],
+          return BlocBuilder<HotelsCubit, HotelsState>(
+            builder: (context, state) {
+              final cubit = HotelsCubit.get(context);
+              bool loading = false;
+              int count = cubit.hotels.length + 1;
+              double great = 0;
+              Hotel? bestHotel;
+              for (int i = 0; i < cubit.hotels.length; i++) {
+                final rate = double.parse(cubit.hotels[i].rate!);
+                if (rate > great) {
+                  great = rate;
+                  bestHotel = cubit.hotels[i];
+                }
+              }
+              String? err;
+              if (state is GetHotelsLoadingState) {
+                loading = true;
+                count++;
+              }
+              if (state is GetHotelsLoadingErrorState) {
+                err = state.message;
+              }
+              return CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                controller: cubit.listC,
+                slivers: [
+                  //TODO create page view with indicator
+                  HomeSliverAppBarView(
+                    hotel: bestHotel,
+                  ),
+                  HomeHotelsView(
+                    count: count,
+                    hotels: cubit.hotels,
+                    loading: loading,
+                    err: err,
+                  ),
+                ],
+              );
+            },
           );
         },
       ),

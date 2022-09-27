@@ -1,5 +1,7 @@
 import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/core/router/app_router_names.dart';
+import 'package:booking_hotel/data/models/booking_model.dart';
+import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_image_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
@@ -56,68 +58,136 @@ class _BookingScreenState extends State<BookingScreen> {
                 ),
                 if (selectedTabBatIndex == 0)
                   ConditionalBuilder(
-                    condition: upcomingCondition,
+                    condition: BookingCubit.get(context)
+                        .upcomingBookingList
+                        .isNotEmpty,
                     builder: (context) => Expanded(
                       child: ListView.separated(
                         physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => HotelCard(
-                          onTap: () => Navigator.pushNamed(
-                            context,
-                            AppRouterNames.rHotelDetailsLayoutRoute,
-                            arguments: HotelModel(
-                              id: upcoming![index].id!,
-                              name: upcoming[index].hotel!.name!,
-                              desc: upcoming[index].hotel!.description!,
-                              price:
-                                  double.parse(upcoming[index].hotel!.price!),
-                              address: upcoming[index].hotel!.address!,
-                              latitude: double.parse(
-                                  upcoming[index].hotel!.latitude!),
-                              longitude: double.parse(
-                                  upcoming[index].hotel!.longitude!),
-                              rate: double.parse(upcoming[index].hotel!.rate!),
-                              images: upcoming[index].hotel!.hotelImages != null
-                                  ? upcoming[index]
+                        itemBuilder: (context, index) {
+                          return HotelCard(
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              AppRouterNames.rHotelDetailsLayoutRoute,
+                              arguments: [
+                                HotelModel(
+                                  id: cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
+                                      .id!,
+                                  name: cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
                                       .hotel!
-                                      .hotelImages!
-                                      .map<HotelImageModel>(
-                                        (e) => HotelImageModel(
-                                          id: e.id!,
-                                          hotelId: int.parse(e.hotelId!),
-                                          image: e.image!,
-                                        ),
-                                      )
-                                      .toList()
-                                  : <HotelImageModel>[],
-                              facilities:
-                                  upcoming[index].hotel!.facilities != null
-                                      ? upcoming[index]
+                                      .name!,
+                                  desc: cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
+                                      .hotel!
+                                      .description!,
+                                  price: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
+                                      .hotel!
+                                      .price!),
+                                  address: cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
+                                      .hotel!
+                                      .address!,
+                                  latitude: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
+                                      .hotel!
+                                      .latitude!),
+                                  longitude: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
+                                      .hotel!
+                                      .longitude!),
+                                  rate: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.upcomingBookingList)[index]
+                                      .hotel!
+                                      .rate!),
+                                  images: cubit
+                                              .removeDuplicates(cubit
+                                                  .upcomingBookingList)[index]
+                                              .hotel!
+                                              .hotelImages !=
+                                          null
+                                      ? cubit
+                                          .removeDuplicates(
+                                              cubit.upcomingBookingList)[index]
                                           .hotel!
-                                          .facilities!
-                                          .map<FacilityModel>(
-                                            (e) => FacilityModel(
+                                          .hotelImages!
+                                          .map<HotelImageModel>(
+                                            (e) => HotelImageModel(
                                               id: e.id!,
-                                              name: e.name!,
+                                              hotelId: int.parse(e.hotelId!),
                                               image: e.image!,
                                             ),
                                           )
                                           .toList()
+                                      : <HotelImageModel>[],
+                                  facilities: cubit
+                                              .removeDuplicates(cubit
+                                                  .upcomingBookingList)[index]
+                                              .hotel!
+                                              .hotelFacilities !=
+                                          null
+                                      ? cubit
+                                          .removeDuplicates(
+                                              cubit.upcomingBookingList)[index]
+                                          .hotel!
+                                          .hotelFacilities!
+                                          .map<FacilityModel>(
+                                            (e) => FacilityModel(
+                                              id: e.id!,
+                                              name: '',
+                                              image: '',
+                                            ),
+                                          )
+                                          .toList()
                                       : <FacilityModel>[],
+                                ),
+                                BookingCubit.get(context)
+                                    .removeDuplicates(BookingCubit.get(context)
+                                        .upcomingBookingList)
+                                    .any((element) =>
+                                        element.hotelId ==
+                                        BookingCubit.get(context)
+                                            .removeDuplicates(
+                                                BookingCubit.get(context)
+                                                    .upcomingBookingList)[index]
+                                            .hotelId)
+                              ],
                             ),
-                          ),
-                          image: upcoming![index].hotel!.hotelImages!.isNotEmpty
-                              ? '${upcoming[index].hotel!.hotelImages![0].image}'
-                              : 'assets/images/hotel.jpg',
-                          address: '${upcoming[index].hotel!.address}',
-                          name: '${upcoming[index].hotel!.name}',
-                          price:
-                              double.parse('${upcoming[index].hotel!.price}'),
-                          rate: double.parse('${upcoming[index].hotel!.rate}'),
-                        ),
+                            image: BookingCubit.get(context)
+                                    .removeDuplicates(BookingCubit.get(context)
+                                        .upcomingBookingList)[index]
+                                    .hotel!
+                                    .hotelImages!
+                                    .isNotEmpty
+                                ? '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList)[index].hotel!.hotelImages![0].image}'
+                                : 'assets/images/hotel.jpg',
+                            address:
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList)[index].hotel!.address}',
+                            name:
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList)[index].hotel!.name}',
+                            price: double.parse(
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList)[index].hotel!.price}'),
+                            rate: double.parse(
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList)[index].hotel!.rate}'),
+                          );
+                        },
                         separatorBuilder: (context, index) => SizedBox(
                           height: 10.h,
                         ),
-                        itemCount: upcoming!.length,
+                        itemCount: BookingCubit.get(context)
+                            .removeDuplicates(
+                                BookingCubit.get(context).upcomingBookingList)
+                            .length,
                       ),
                     ),
                     fallback: (context) => const Center(
@@ -130,25 +200,61 @@ class _BookingScreenState extends State<BookingScreen> {
                     builder: (context) => Expanded(
                       child: ListView.separated(
                         physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => HotelCard(
-                          onTap: () => Navigator.pushNamed(
-                            context,
-                            AppRouterNames.rHotelDetailsLayoutRoute,
-                            arguments: HotelModel(
-                              id: completed![index].id!,
-                              name: completed[index].hotel!.name!,
-                              desc: completed[index].hotel!.description!,
-                              price:
-                                  double.parse(completed[index].hotel!.price!),
-                              address: completed[index].hotel!.address!,
-                              latitude: double.parse(
-                                  completed[index].hotel!.latitude!),
-                              longitude: double.parse(
-                                  completed[index].hotel!.longitude!),
-                              rate: double.parse(completed[index].hotel!.rate!),
-                              images:
-                                  completed[index].hotel!.hotelImages != null
-                                      ? completed[index]
+                        itemBuilder: (context, index) {
+                          return HotelCard(
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              AppRouterNames.rHotelDetailsLayoutRoute,
+                              arguments: [
+                                HotelModel(
+                                  id: int.parse(cubit
+                                      .removeDuplicates(
+                                      cubit.completedBookingList)[index]
+                                      .hotelId!),
+                                  name: cubit
+                                      .removeDuplicates(
+                                          cubit.completedBookingList)[index]
+                                      .hotel!
+                                      .name!,
+                                  desc: cubit
+                                      .removeDuplicates(
+                                          cubit.completedBookingList)[index]
+                                      .hotel!
+                                      .description!,
+                                  price: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.completedBookingList)[index]
+                                      .hotel!
+                                      .price!),
+                                  address: cubit
+                                      .removeDuplicates(
+                                          cubit.completedBookingList)[index]
+                                      .hotel!
+                                      .address!,
+                                  latitude: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.completedBookingList)[index]
+                                      .hotel!
+                                      .latitude!),
+                                  longitude: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.completedBookingList)[index]
+                                      .hotel!
+                                      .longitude!),
+                                  rate: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.completedBookingList)[index]
+                                      .hotel!
+                                      .rate!),
+                                  images: cubit
+                                              .removeDuplicates(cubit
+                                                  .completedBookingList)[index]
+                                              .hotel!
+                                              .hotelImages !=
+                                          null
+                                      ? cubit
+                                          .removeDuplicates(
+                                              cubit.completedBookingList)[index]
                                           .hotel!
                                           .hotelImages!
                                           .map<HotelImageModel>(
@@ -160,38 +266,55 @@ class _BookingScreenState extends State<BookingScreen> {
                                           )
                                           .toList()
                                       : <HotelImageModel>[],
-                              facilities:
-                                  completed[index].hotel!.facilities != null
-                                      ? completed[index]
+                                  facilities: cubit
+                                              .removeDuplicates(cubit
+                                                  .completedBookingList)[index]
+                                              .hotel!
+                                              .hotelFacilities !=
+                                          null
+                                      ? cubit
+                                          .removeDuplicates(
+                                              cubit.completedBookingList)[index]
                                           .hotel!
-                                          .facilities!
+                                          .hotelFacilities!
                                           .map<FacilityModel>(
                                             (e) => FacilityModel(
                                               id: e.id!,
-                                              name: e.name!,
-                                              image: e.image!,
+                                              name: '',
+                                              image: '',
                                             ),
                                           )
                                           .toList()
                                       : <FacilityModel>[],
+                                ),
+                                false
+                              ],
                             ),
-                          ),
-                          image: completed![index]
-                                  .hotel!
-                                  .hotelImages!
-                                  .isNotEmpty
-                              ? '${completed[index].hotel!.hotelImages![0].image}'
-                              : 'assets/images/hotel.jpg',
-                          address: '${completed[index].hotel!.address}',
-                          name: '${completed[index].hotel!.name}',
-                          price:
-                              double.parse('${completed[index].hotel!.price}'),
-                          rate: double.parse('${completed[index].hotel!.rate}'),
-                        ),
+                            image: BookingCubit.get(context)
+                                    .removeDuplicates(BookingCubit.get(context)
+                                        .completedBookingList)[index]
+                                    .hotel!
+                                    .hotelImages!
+                                    .isNotEmpty
+                                ? '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).completedBookingList)[index].hotel!.hotelImages![0].image}'
+                                : 'assets/images/hotel.jpg',
+                            address:
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).completedBookingList)[index].hotel!.address}',
+                            name:
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).completedBookingList)[index].hotel!.name}',
+                            price: double.parse(
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).completedBookingList)[index].hotel!.price}'),
+                            rate: double.parse(
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).completedBookingList)[index].hotel!.rate}'),
+                          );
+                        },
                         separatorBuilder: (context, index) => SizedBox(
                           height: 10.h,
                         ),
-                        itemCount: completed!.length,
+                        itemCount: BookingCubit.get(context)
+                            .removeDuplicates(
+                                BookingCubit.get(context).completedBookingList)
+                            .length,
                       ),
                     ),
                     fallback: (context) => const Center(
@@ -204,73 +327,121 @@ class _BookingScreenState extends State<BookingScreen> {
                     builder: (context) => Expanded(
                       child: ListView.separated(
                         physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => HotelCard(
-                          onTap: () => Navigator.pushNamed(
-                            context,
-                            AppRouterNames.rHotelDetailsLayoutRoute,
-                            arguments: HotelModel(
-                              id: canceled![index].id!,
-                              name: canceled[index].hotel!.name!,
-                              desc: canceled[index].hotel!.description!,
-                              price:
-                                  double.parse(canceled[index].hotel!.price!),
-                              address: canceled[index].hotel!.address!,
-                              latitude: double.parse(
-                                  canceled[index].hotel!.latitude!),
-                              longitude: double.parse(
-                                  canceled[index].hotel!.longitude!),
-                              rate: double.parse(canceled[index].hotel!.rate!),
-                              images: canceled[index].hotel!.hotelImages != null
-                                  ? canceled[index]
+                        itemBuilder: (context, index) {
+                          return HotelCard(
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              AppRouterNames.rHotelDetailsLayoutRoute,
+                              arguments: [
+                                HotelModel(
+                                  id: int.parse(cubit
+                                      .removeDuplicates(
+                                      cubit.cancelledBookingList)[index]
+                                      .hotelId!),
+                                  name: cubit
+                                      .removeDuplicates(
+                                          cubit.cancelledBookingList)[index]
                                       .hotel!
-                                      .hotelImages!
-                                      .map<HotelImageModel>(
-                                        (e) => HotelImageModel(
-                                          id: e.id!,
-                                          hotelId: int.parse(e.hotelId!),
-                                          image: e.image!,
-                                        ),
-                                      )
-                                      .toList()
-                                  : <HotelImageModel>[],
-                              facilities:
-                                  canceled[index].hotel!.facilities != null
-                                      ? canceled[index]
+                                      .name!,
+                                  desc: cubit
+                                      .removeDuplicates(
+                                          cubit.cancelledBookingList)[index]
+                                      .hotel!
+                                      .description!,
+                                  price: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.cancelledBookingList)[index]
+                                      .hotel!
+                                      .price!),
+                                  address: cubit
+                                      .removeDuplicates(
+                                          cubit.cancelledBookingList)[index]
+                                      .hotel!
+                                      .address!,
+                                  latitude: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.cancelledBookingList)[index]
+                                      .hotel!
+                                      .latitude!),
+                                  longitude: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.cancelledBookingList)[index]
+                                      .hotel!
+                                      .longitude!),
+                                  rate: double.parse(cubit
+                                      .removeDuplicates(
+                                          cubit.cancelledBookingList)[index]
+                                      .hotel!
+                                      .rate!),
+                                  images: cubit
+                                              .removeDuplicates(cubit
+                                                  .cancelledBookingList)[index]
+                                              .hotel!
+                                              .hotelImages !=
+                                          null
+                                      ? cubit
+                                          .removeDuplicates(
+                                              cubit.cancelledBookingList)[index]
                                           .hotel!
-                                          .facilities!
-                                          .map<FacilityModel>(
-                                            (e) => FacilityModel(
+                                          .hotelImages!
+                                          .map<HotelImageModel>(
+                                            (e) => HotelImageModel(
                                               id: e.id!,
-                                              name: e.name!,
+                                              hotelId: int.parse(e.hotelId!),
                                               image: e.image!,
                                             ),
                                           )
                                           .toList()
+                                      : <HotelImageModel>[],
+                                  facilities: cubit
+                                              .removeDuplicates(cubit
+                                                  .cancelledBookingList)[index]
+                                              .hotel!
+                                              .hotelFacilities !=
+                                          null
+                                      ? cubit
+                                          .removeDuplicates(
+                                              cubit.cancelledBookingList)[index]
+                                          .hotel!
+                                          .hotelFacilities!
+                                          .map<FacilityModel>(
+                                            (e) => FacilityModel(
+                                              id: e.id!,
+                                              name: '',
+                                              image: '',
+                                            ),
+                                          )
+                                          .toList()
                                       : <FacilityModel>[],
+                                ),
+                                false,
+                              ],
                             ),
-                          ),
-                          image: cubit
-                                  .cancelledBookingModel!
-                                  .data!
-                                  .dataList![index]
-                                  .hotel!
-                                  .hotelImages!
-                                  .isNotEmpty
-                              ? '${cubit.cancelledBookingModel!.data!.dataList![index].hotel!.hotelImages![0].image}'
-                              : 'assets/images/hotel.jpg',
-                          address:
-                              '${cubit.cancelledBookingModel!.data!.dataList![index].hotel!.address}',
-                          name:
-                              '${cubit.cancelledBookingModel!.data!.dataList![index].hotel!.name}',
-                          price: double.parse(
-                              '${cubit.cancelledBookingModel!.data!.dataList![index].hotel!.price}'),
-                          rate: double.parse(
-                              '${cubit.cancelledBookingModel!.data!.dataList![index].hotel!.rate}'),
-                        ),
+                            image: BookingCubit.get(context)
+                                    .removeDuplicates(BookingCubit.get(context)
+                                        .cancelledBookingList)[index]
+                                    .hotel!
+                                    .hotelImages!
+                                    .isNotEmpty
+                                ? '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).cancelledBookingList)[index].hotel!.hotelImages![0].image}'
+                                : 'assets/images/hotel.jpg',
+                            address:
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).cancelledBookingList)[index].hotel!.address}',
+                            name:
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).cancelledBookingList)[index].hotel!.name}',
+                            price: double.parse(
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).cancelledBookingList)[index].hotel!.price}'),
+                            rate: double.parse(
+                                '${BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).cancelledBookingList)[index].hotel!.rate}'),
+                          );
+                        },
                         separatorBuilder: (context, index) => SizedBox(
                           height: 10.h,
                         ),
-                        itemCount: canceled!.length,
+                        itemCount: BookingCubit.get(context)
+                            .removeDuplicates(
+                                BookingCubit.get(context).cancelledBookingList)
+                            .length,
                       ),
                     ),
                     fallback: (context) => const Center(

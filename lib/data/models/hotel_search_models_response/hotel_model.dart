@@ -2,7 +2,7 @@ import 'package:booking_hotel/data/models/hotel_search_models_response/facility_
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_image_model.dart';
 
 class HotelModel {
-  final int id;
+  int? id;
   final String name;
   final String desc;
   final double price;
@@ -13,7 +13,7 @@ class HotelModel {
   final List<HotelImageModel> images;
   final List<FacilityModel> facilities;
 
-  const HotelModel({
+  HotelModel({
     required this.id,
     required this.name,
     required this.desc,

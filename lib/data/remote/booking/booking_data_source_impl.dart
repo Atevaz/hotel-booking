@@ -44,7 +44,7 @@ class BookingDataSourceImpl implements BookingDataSource {
         },
       ),
     );
-    final response = StatusModel.fromJson(result);
+    final response = StatusModel.fromJson(result['status']);
     return response;
   }
 
@@ -58,7 +58,7 @@ class BookingDataSourceImpl implements BookingDataSource {
         data: {'booking_id': bookingId, 'type': type},
       ),
     );
-    final response = StatusModel.fromJson(result);
+    final response = StatusModel.fromJson(result['status']);
     return response;
   }
 }

@@ -1,5 +1,8 @@
+import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/core/router/app_router_names.dart';
+import 'package:booking_hotel/data/models/booking_model.dart';
 import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
+import 'package:booking_hotel/data/models/hotel_data/hotel_images.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_image_model.dart';
 import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
@@ -51,6 +54,9 @@ class HomeHotelsView extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   } else {
+
+  final isBooking = BookingCubit.get(context).removeDuplicates(BookingCubit.get(context).upcomingBookingList).any((element) => int.parse(element.hotelId!) == hotels[index-1].id);
+                    print('adham ==========>>>>>> $isBooking');
                     final hotel = hotels[index];
                     final name = '${hotel.name}';
                     final image = hotel.hotelImages!.isNotEmpty
@@ -60,7 +66,7 @@ class HomeHotelsView extends StatelessWidget {
                     final rate = double.parse(hotel.rate!);
                     final location = '${hotel.address}';
                     final model = HotelModel(
-                      id: hotel.id!,
+                      id: !isBooking ? hotels[index-1].id! :BookingCubit.get(context).upcomingBookingList.firstWhere((e)=>int.parse(e.hotelId!) == hotels[index-1].id).id!,
                       name: hotel.name!,
                       desc: hotel.description!,
                       price: double.parse(hotel.price!),
@@ -99,7 +105,10 @@ class HomeHotelsView extends StatelessWidget {
                       onTap: () => Navigator.pushNamed(
                         context,
                         AppRouterNames.rHotelDetailsLayoutRoute,
-                        arguments: model,
+                        arguments: [
+                        model,
+                        isBooking,
+                        ],
                       ),
                     );
                   }

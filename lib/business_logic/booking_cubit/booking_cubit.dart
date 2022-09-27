@@ -15,10 +15,12 @@ class BookingCubit extends Cubit<BookingState> {
   static BookingCubit get(BuildContext context) => BlocProvider.of(context);
 
   BookingModel? completedBookingModel;
-
   BookingModel? upcommingBookingModel;
-
   BookingModel? cancelledBookingModel;
+
+  List<DataList> completedBookingList = [];
+  List<DataList> upcomingBookingList = [];
+  List<DataList> cancelledBookingList = [];
 
   int selectedBookingToggleTabBar = 0;
 
@@ -37,8 +39,8 @@ class BookingCubit extends Cubit<BookingState> {
       },
       (r) {
         completedBookingModel = r;
-        debugPrint(
-            ' hotel name ===>> ${completedBookingModel!.data!.dataList!.isNotEmpty ? completedBookingModel!.data!.dataList![0].hotel!.name : ''}');
+        completedBookingList = r.data!.dataList!;
+
         emit(GetCompletedBookingSuccessState());
       },
     );
@@ -54,8 +56,7 @@ class BookingCubit extends Cubit<BookingState> {
       },
       (r) {
         upcommingBookingModel = r;
-        debugPrint(
-            ' hotel name ===>> ${upcommingBookingModel!.data!.dataList!.isNotEmpty ? upcommingBookingModel!.data!.dataList![0].hotel!.name : ''}');
+        upcomingBookingList = r.data!.dataList!.where((element) => element.type == 'upcomming').toList();
         emit(GetUpcomingBookingSuccessState());
       },
     );
@@ -71,8 +72,7 @@ class BookingCubit extends Cubit<BookingState> {
       },
       (r) {
         cancelledBookingModel = r;
-        debugPrint(
-            ' hotel name ===>> ${cancelledBookingModel!.data!.dataList!.isNotEmpty ? cancelledBookingModel!.data!.dataList![0].hotel!.name : ''}');
+        cancelledBookingList = r.data!.dataList!;
         emit(GetCancelledBookingSuccessState());
       },
     );
@@ -84,10 +84,10 @@ class BookingCubit extends Cubit<BookingState> {
     debugPrint('my token ==>> $token');
     result.fold(
       (l) {
-        emit(CreateBookingErrorState());
+        emit(CreateBookingErrorState(l));
       },
       (r) {
-        emit(CreateBookingSuccessState());
+        emit(CreateBookingSuccessState(r.enMessage));
         getUpcomingBooking();
       },
     );
@@ -98,11 +98,34 @@ class BookingCubit extends Cubit<BookingState> {
     final result = await repositoryBooking.updateBooking(token, hotelId, type);
     result.fold(
       (l) {
-        emit(UpdateBookingErrorState());
+        emit(UpdateBookingErrorState(l));
       },
       (r) {
-        emit(UpdateBookingSuccessState());
+        getCancelledBooking();
+        getUpcomingBooking();
+        emit(UpdateBookingSuccessState(r.enMessage));
       },
     );
   }
+
+
+
+
+  List<DataList> removeDuplicates(List<DataList> upcomingBooking) {
+    //create one list to store the distinct models
+    List<DataList> distinct = [];
+
+
+    for(int i = 0; i < upcomingBooking.length; i++) {
+      if (!distinct.any((element) => element.hotelId == upcomingBooking[i].hotelId)){
+        distinct.add(upcomingBooking[i]);
+      }
+    }
+    print('------------------------- amr $distinct');
+    return distinct.map((e) => e).toList();
+  }
+
+
+
+
 }

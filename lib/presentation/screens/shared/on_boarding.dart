@@ -2,6 +2,7 @@ import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/caption_of_onboarding.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -54,7 +55,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
         child: Column(
@@ -71,11 +71,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               child: PageView.builder(
                 physics: const BouncingScrollPhysics(),
                 controller: boardController,
-
                 itemBuilder: (context, index) {
                   return buildOnBoarding(boarding[index]);
-                }
-                    ,
+                },
                 itemCount: boarding.length,
               ),
             ),
@@ -97,7 +95,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               height: 10,
             ),
             MyButton(
-              text: 'Get Started'  ,
+              text: 'Get Started',
               onPressed: () => Navigator.pushReplacementNamed(
                 context,
                 AppRouterNames.rLoginLayoutRoute,
@@ -109,7 +107,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Don\'t has any account ?'),
+                const MediumText(
+                  text: 'Don\'t has any account ?',
+                  fontSize: 16,
+                ),
                 DefaultTextButton(
                   onPressed: () => Navigator.pushNamedAndRemoveUntil(
                     context,

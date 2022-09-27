@@ -53,6 +53,21 @@ class HomeCardView extends StatelessWidget {
                       : image.isNotEmpty
                           ? "$baseApiUrl$apiImagesVersion/$image"
                           : myImage,
+                  loadingBuilder: (ctx, child, event) {
+                    if (event == null) return child;
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  errorBuilder: (ctx, child, err) {
+                    if (err == null) return child as Widget;
+                    return const Center(
+                      child: Icon(
+                        Icons.error,
+                        size: 30,
+                      ),
+                    );
+                  },
                   fit: BoxFit.cover,
                   height: 160,
                 ),

@@ -39,9 +39,39 @@ class HotelCard extends StatelessWidget {
         child: Column(
           children: [
             image.contains("http")
-                ? Image.network(image)
+                ? Image.network(
+                    image,
+                    loadingBuilder: (ctx, child, event) => event == null
+                        ? child
+                        : const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                    errorBuilder: (ctx, child, err) => err == null
+                        ? (child as Widget)
+                        : const Center(
+                            child: Icon(
+                              Icons.error,
+                              size: 30,
+                            ),
+                          ),
+                  )
                 : !image.contains("assets") && image.isNotEmpty
-                    ? Image.network("$baseApiUrl$apiImagesVersion/$image")
+                    ? Image.network(
+                        "$baseApiUrl$apiImagesVersion/$image",
+                        loadingBuilder: (ctx, child, event) => event == null
+                            ? child
+                            : const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                        errorBuilder: (ctx, child, err) => err == null
+                            ? (child as Widget)
+                            : const Center(
+                                child: Icon(
+                                  Icons.error,
+                                  size: 30,
+                                ),
+                              ),
+                      )
                     : Image.asset(
                         'assets/images/hotel.jpg',
                       ),

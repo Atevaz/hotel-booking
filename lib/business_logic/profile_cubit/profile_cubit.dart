@@ -72,6 +72,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       },
           (r) {
         userModel = r ;
+        path = '';
         emit(UpdateProfileSuccessState());
       },
     );

@@ -7,13 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class HomeSliverAppBarBackgroundView extends StatelessWidget {
   const HomeSliverAppBarBackgroundView({
     Key? key,
-    this.name = "Cape Town",
-    this.desc = "Extraordinary five-stars outdoor activities",
     required this.viewHotels,
   }) : super(key: key);
 
-  final String name;
-  final String desc;
+  final String name = 'Motel';
+  final String desc = 'Book one of your unique hotel to escape the ordinary';
   final Function() viewHotels;
 
   @override
@@ -33,22 +31,19 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
             HeadLineText(
               text: name,
               fontSize: 28.sp,
-              color: AppColor.white,
               isUpper: false,
+              color: AppColor.white,
             ),
             SizedBox(
               height: 15.h,
             ),
-            SizedBox(
-              width: 250.w,
-              child: MediumText(
-                text: desc,
-                fontSize: 20.sp,
-                color: AppColor.white,
-              ),
+            MediumText(
+              text: desc,
+              fontSize: 20.sp,
+              color: AppColor.lightGrey,
             ),
             SizedBox(
-              height: 15.h,
+              height: 20.h,
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -63,7 +58,7 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
               ),
               onPressed: viewHotels,
               child: MediumText(
-                text: "View Hotels",
+                text: "Search Hotels",
                 color: AppColor.white,
                 fontSize: 20.sp,
               ),

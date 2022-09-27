@@ -1,7 +1,6 @@
 import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/business_logic/hotels_cubit/hotels_cubit.dart';
 import 'package:booking_hotel/core/di/di.dart';
-import 'package:booking_hotel/data/models/hotel_data/hotel.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_hotels_view.dart';
 import 'package:booking_hotel/presentation/view/home_views/home_sliver_app_bar_view.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +56,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               );
             },
+
           );
         },
       ),

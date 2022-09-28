@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/styles/colors.dart';
 import 'headline_text.dart';
 
-
 class MyButton extends StatelessWidget {
   final Color color;
 
@@ -13,16 +12,18 @@ class MyButton extends StatelessWidget {
   final String text;
 
   final double width;
-  final bool isUpper ;
+  final bool isUpper;
 
+  final double borderRadius;
 
   const MyButton({
     Key? key,
     this.color = AppColor.teal,
     required this.onPressed,
     required this.text,
-     this.width = double.infinity,
+    this.width = double.infinity,
     this.isUpper = true,
+    this.borderRadius = 12,
   }) : super(key: key);
 
   @override
@@ -31,7 +32,7 @@ class MyButton extends StatelessWidget {
       width: width,
       height: 54.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(borderRadius.r),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: MaterialButton(

@@ -22,9 +22,18 @@ class _BookingScreenState extends State<BookingScreen> {
       builder: (context, state) {
         final cubit = BookingCubit.get(context);
         final selectedTabBatIndex = cubit.selectedBookingToggleTabBar;
-        final upcomingCondition = state is GetUpcomingBookingLoadingState;
-        final completedCondition = state is GetCompletedBookingLoadingState;
-        final canceledCondition = state is GetCancelledBookingLoadingState;
+        bool upcomingCondition = false;
+        if (state is GetUpcomingBookingLoadingState) {
+          upcomingCondition = true;
+        }
+        bool completedCondition = false;
+        if (state is GetCompletedBookingLoadingState) {
+          completedCondition = true;
+        }
+        bool canceledCondition = false;
+        if (state is GetCancelledBookingLoadingState) {
+          canceledCondition = true;
+        }
         final upcoming = cubit.upcomingBookingList;
         final completed = cubit.completedBookingList;
         final canceled = cubit.cancelledBookingList;

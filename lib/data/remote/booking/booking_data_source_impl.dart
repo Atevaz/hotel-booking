@@ -1,9 +1,18 @@
 import 'package:booking_hotel/core/constants/end_points.dart';
 import 'package:booking_hotel/core/dio_service/dio_service.dart';
 import 'package:booking_hotel/core/utils/dio_method.dart';
-import 'package:booking_hotel/data/models/booking_model.dart';
-import 'package:booking_hotel/data/models/common_models/status_model.dart';
-import 'package:booking_hotel/data/remote/booking/booking_data_source.dart';
+
+import 'package:booking_hotel/data/model/common_models/status_model.dart';
+
+import 'package:booking_hotel/data/model/param_models/booking_create_param_model.dart';
+
+import 'package:booking_hotel/data/model/param_models/booking_fetch_param_model.dart';
+
+import 'package:booking_hotel/data/model/param_models/booking_update_param_model.dart';
+
+import 'package:booking_hotel/data/model/response_models/booking_response_model.dart';
+
+import 'booking_data_source.dart';
 
 class BookingDataSourceImpl implements BookingDataSource {
   @override
@@ -12,36 +21,13 @@ class BookingDataSourceImpl implements BookingDataSource {
   BookingDataSourceImpl({required this.dioService});
 
   @override
-  Future<BookingModel> getBooking(
-    String token,
-    String type,
-    int count,
-    int page,
-  ) async {
-    final result = await serverRequest(
-      call: () async => await dioService.get(
-        endPoint: bookingsGetEndPoint,
-        token: token,
-        query: {
-          'type': type,
-          'count': count,
-          'page': page,
-        },
-      ),
-    );
-    final response = BookingModel.fromJson(result);
-    return response;
-  }
-
-  @override
-  Future<StatusModel> createBooking(String token, int hotelId) async {
+  Future<StatusModel> createBooking(
+      BookingCreateParamModel bookingCreateParamModel) async {
     final result = await serverRequest(
       call: () async => await dioService.post(
         endPoint: bookingCreateEndPoint,
-        token: token,
-        data: {
-          'hotel_id': hotelId,
-        },
+        token: bookingCreateParamModel.token,
+        data: bookingCreateParamModel.toJson(),
       ),
     );
     final response = StatusModel.fromJson(result['status']);
@@ -49,13 +35,27 @@ class BookingDataSourceImpl implements BookingDataSource {
   }
 
   @override
+  Future<BookingResponseModel> getBooking(
+      BookingFetchParamModel bookingFetchParamModel) async {
+    final result = await serverRequest(
+      call: () async => await dioService.get(
+        endPoint: bookingsGetEndPoint,
+        token: bookingFetchParamModel.token,
+        query: bookingFetchParamModel.toJson(),
+      ),
+    );
+    final response = BookingResponseModel.fromJson(result);
+    return response;
+  }
+
+  @override
   Future<StatusModel> updateBooking(
-      String token, int bookingId, String type) async {
+      BookingUpdateParamModel bookingUpdateParamModel) async {
     final result = await serverRequest(
       call: () async => await dioService.post(
         endPoint: bookingsUpdateEndPoint,
-        token: token,
-        data: {'booking_id': bookingId, 'type': type},
+        token: bookingUpdateParamModel.token,
+        data: bookingUpdateParamModel.toJson(),
       ),
     );
     final response = StatusModel.fromJson(result['status']);

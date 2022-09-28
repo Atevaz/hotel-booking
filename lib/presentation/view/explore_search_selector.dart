@@ -7,7 +7,8 @@ class ExploreSearchSelector extends StatelessWidget {
     Key? key,
     required this.show,
     required this.onChange,
-    required this.currentValue, required this.color,
+    required this.currentValue,
+    required this.color,
   }) : super(key: key);
 
   final bool show;

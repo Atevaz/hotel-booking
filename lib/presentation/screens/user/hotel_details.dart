@@ -1,7 +1,6 @@
-import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
-import 'package:booking_hotel/data/models/booking_model.dart';
-import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
+import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
+import 'package:booking_hotel/data/model/hotel_model.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
@@ -12,8 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HotelDetails extends StatelessWidget {
-  const HotelDetails({super.key, required this.hotel, required this.isBooking});
+  const HotelDetails({
+    super.key,
+    this.bookingId,
+    required this.hotel,
+    required this.isBooking,
+  });
 
+  final int? bookingId;
   final HotelModel hotel;
   final bool isBooking;
 
@@ -21,40 +26,32 @@ class HotelDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<BookingCubit, BookingState>(
       listener: (context, state) {
-        if (state is UpdateBookingSuccessState ) {
+        if (state is UpdateBookingSuccessState) {
           Navigator.pop(context);
-          showToast(
-              text: state.message ,
-              state: ToastStates.SUCCESS);
+          showToast(text: state.message, state: ToastStates.SUCCESS);
         }
         if (state is UpdateBookingErrorState) {
           Navigator.pop(context);
-          showToast(
-              text: state.message,
-              state: ToastStates.ERROR);
+          showToast(text: state.message, state: ToastStates.ERROR);
         }
-        if (state is CreateBookingSuccessState ) {
+        if (state is CreateBookingSuccessState) {
           Navigator.pop(context);
-          showToast(
-              text: state.message ,
-              state: ToastStates.SUCCESS);
+          showToast(text: state.message, state: ToastStates.SUCCESS);
         }
         if (state is CreateBookingErrorState) {
           Navigator.pop(context);
-          showToast(
-              text: state.message,
-              state: ToastStates.ERROR);
+          showToast(text: state.message, state: ToastStates.ERROR);
         }
-
       },
       builder: (context, state) {
+        final cubit = BookingCubit.get(context);
         return Scaffold(
           body: Stack(
             children: [
               Image(
                 image: NetworkImage(
-                  hotel.images.isNotEmpty
-                      ? 'http://api.mahmoudtaha.com/images/${hotel.images[0].image}'
+                  hotel.hotelImages != null && hotel.hotelImages!.isNotEmpty
+                      ? 'http://api.mahmoudtaha.com/images/${hotel.hotelImages![0].image}'
                       : "https://images.unsplash.com/photo-1529619768328-e37af76c6fe5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
                 ),
                 fit: BoxFit.cover,
@@ -126,35 +123,15 @@ class HotelDetails extends StatelessWidget {
                         text: !isBooking ? 'Book now' : 'Cancelled Booking',
                         onPressed: () {
                           if (!isBooking) {
-                            BookingCubit.get(context).createBooking(hotel.id!);
+                            cubit.createBooking(hotel.id);
                           } else {
-                            BookingCubit.get(context)
-                                .updateBooking(hotel.id!, 'cancelled');
+                            cubit.updateBooking(
+                              bookingId!,
+                              'cancelled',
+                            );
                           }
                         }),
                   ),
-                  // Expanded(
-                  //   child: Padding(
-                  //     padding: EdgeInsets.only(
-                  //       top: 20.h,
-                  //       bottom: 90.h,
-                  //       left: 20.w,
-                  //       right: 20.w,
-                  //     ),
-                  //     child: MediaQuery.removePadding(
-                  //       context: context,
-                  //       removeTop: true,
-                  //       child: ListView.separated(
-                  //         physics: const BouncingScrollPhysics(),
-                  //         itemBuilder: (context, index) => const ReviewWidget(),
-                  //         separatorBuilder: (context, index) => SizedBox(
-                  //           height: 25.h,
-                  //         ),
-                  //         itemCount: 6,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
               Positioned(
@@ -185,15 +162,6 @@ class HotelDetails extends StatelessWidget {
               ),
             ],
           ),
-          // floatingActionButton: Padding(
-          //   padding: EdgeInsets.only(left: 35.0.r),
-          //   child: MyButton(
-          //     text: 'Book now',
-          //     onPressed: () {
-          //       BookingCubit.get(context).createBooking(hotel.id);
-          //     },
-          //   ),
-          // ),
         );
       },
     );

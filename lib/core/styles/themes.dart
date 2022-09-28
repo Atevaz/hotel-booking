@@ -69,17 +69,11 @@ ThemeData lightTheme = ThemeData(
 
 ThemeData darkTheme = ThemeData(
   primarySwatch: Colors.blue,
-  /* bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: AppColor.black
-  ),*/
   scaffoldBackgroundColor: AppColor.black,
   appBarTheme: const AppBarTheme(
     titleSpacing: 12,
-    //backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.black,
-      // statusBarColor: Color(0xff242526),
-      //HexColor('#18191a'),//#1c1c1c 0xff18191a
       statusBarBrightness: Brightness.light,
     ),
     backgroundColor: AppColor.black,

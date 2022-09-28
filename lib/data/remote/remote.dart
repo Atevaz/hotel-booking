@@ -1,5 +1,3 @@
-export 'auth/auth.dart';
-export 'explore/explore.dart';
-export 'hotels/hotels.dart';
+export 'user/user.dart';
+export 'hotel/hotel.dart';
 export 'booking/booking.dart';
-export 'profile/profile.dart';

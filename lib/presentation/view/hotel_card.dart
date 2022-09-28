@@ -9,10 +9,10 @@ class HotelCard extends StatelessWidget {
   const HotelCard({
     Key? key,
     required this.onTap,
-    this.name = 'Grand Royal Hotel',
-    this.address = 'Haram, Giza',
-    this.price = 180,
-    this.rate = 4.5,
+    required this.name,
+    required this.address,
+    required this.price,
+    required this.rate,
     this.image = 'assets/images/hotel.jpg',
     this.distance = 2.0,
   }) : super(key: key);

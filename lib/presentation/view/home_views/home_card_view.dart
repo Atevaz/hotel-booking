@@ -88,67 +88,72 @@ class HomeCardView extends StatelessWidget {
                             text: name,
                             fontSize: 19.sp,
                             isUpper: false,
+                            maxLines: 1,
                           ),
                           MediumText(
                             text: address,
                             fontSize: 17.sp,
                             color: AppColor.grey,
+                            maxLines: 1,
                           ),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    color: AppColor.teal,
-                                    size: 25.r,
-                                  ),
-                                  MediumText(
-                                    text: location,
-                                    color: AppColor.grey,
-                                    fontSize: 15.sp,
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              AppCustomRateBar(
-                                rate: rate,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
                           Expanded(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                HeadLineText(
-                                  text: "\$${price.toInt()}",
-                                  fontSize: 20.sp,
-                                  isUpper: false,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.location_on,
+                                      color: AppColor.teal,
+                                      size: 25.r,
+                                    ),
+                                    Expanded(
+                                      child: MediumText(
+                                        text: location,
+                                        color: AppColor.grey,
+                                        fontSize: 15.sp,
+                                        maxLines: 1,
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 5.h,
                                 ),
-                                MediumText(
-                                  text: "/per night",
-                                  fontSize: 16.sp,
-                                  color: Colors.grey,
-                                )
+                                AppCustomRateBar(
+                                  rate: rate,
+                                ),
                               ],
                             ),
+                          ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              HeadLineText(
+                                text: "\$${price.toInt()}",
+                                fontSize: 20.sp,
+                                isUpper: false,
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              MediumText(
+                                text: "/per night",
+                                fontSize: 16.sp,
+                                color: Colors.grey,
+                              )
+                            ],
                           ),
                         ],
                       ),

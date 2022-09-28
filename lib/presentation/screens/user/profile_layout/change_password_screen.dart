@@ -20,9 +20,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final passC = TextEditingController();
   final confirmPassC = TextEditingController();
   bool hidePass = true;
+  bool secretePass = true;
 
   final String changePassText =
-      "Enter your new password  and confirm you password";
+      "Enter your new password and confirm you password";
 
   @override
   Widget build(BuildContext context) {
@@ -93,13 +94,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       validateText: confirmPassC.text,
                       inputType: TextInputType.text,
                       hintText: "Confirm Password",
-                      isPassword: hidePass,
+                      isPassword: secretePass,
                       prefix: Icons.password_outlined,
                       suffix:
-                          hidePass ? Icons.visibility_off : Icons.visibility,
+                          secretePass ? Icons.visibility_off : Icons.visibility,
                       suffixPressed: () {
                         setState(() {
-                          hidePass = !hidePass;
+                          secretePass = !secretePass;
                         });
                       },
                     ),
@@ -114,7 +115,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           email: cubit.user!.email,
                         );
                       },
-                      text: "Apply",
+                      text: "Change",
                     ),
                   ],
                 ),

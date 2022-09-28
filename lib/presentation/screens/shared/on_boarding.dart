@@ -36,19 +36,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       image: 'assets/images/onboarding1.png',
       title: 'Book Your Hotel From Your Device',
       body:
-          'we are constantly adding your Favorite restaurant throughout the territory and arount your area carefully selected',
+          'we are constantly adding your Favorite restaurant throughout the territory and around your area carefully selected',
     ),
     BoardingModel(
       image: 'assets/images/onboarding2.png',
       title: 'Hotel EveryWere And Anytime',
       body:
-          'we are constantly adding your Favorite restaurant throughout the territory and arount your area carefully selected',
+          'we are constantly adding your Favorite restaurant throughout the territory and around your area carefully selected',
     ),
     BoardingModel(
       image: 'assets/images/onboarding3.png',
       title: 'Your Comfortable Here In Our Hotels',
       body:
-          'we are constantly adding your Favorite restaurant throughout the territory and arount your area carefully selected',
+          'we are constantly adding your Favorite restaurant throughout the territory and around your area carefully selected',
     ),
   ];
 
@@ -112,7 +112,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const MediumText(
-                  text: 'Don\'t has any account ?',
+                  text: 'Don\'t have any account ?',
                   fontSize: 16,
                 ),
                 DefaultTextButton(

@@ -1,6 +1,5 @@
-import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
-import 'package:booking_hotel/business_logic/global_cubit/global_state.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
 import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:booking_hotel/presentation/widget/profile_screen_component.dart';
 import 'package:flutter/material.dart';

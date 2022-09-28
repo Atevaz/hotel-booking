@@ -1,4 +1,4 @@
-import 'package:booking_hotel/business_logic/profile_cubit/profile_cubit.dart';
+import 'package:booking_hotel/business_logic/user_cubit/user_cubit.dart';
 import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/default_text_form_field.dart';
@@ -26,14 +26,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileCubit, ProfileState>(
+    return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is ChangePasswordSuccessState) {
           showToast(text: 'Password Changed', state: ToastStates.SUCCESS);
+          UserCubit.get(context).updateCachedUser(
+            UserCubit.get(context).user!.email,
+            passC.text,
+          );
           Navigator.pop(context);
         }
       },
       builder: (context, state) {
+        final cubit = UserCubit.get(context);
         return Scaffold(
           appBar: PreferredSize(
             preferredSize: AppBar().preferredSize,
@@ -67,7 +72,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     MyFormField(
                       controller: passC,
-                      validateText: "validateText",
+                      validateText: passC.text,
                       inputType: TextInputType.text,
                       hintText: "Password",
                       isPassword: hidePass,
@@ -85,7 +90,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     MyFormField(
                       controller: confirmPassC,
-                      validateText: "validateText",
+                      validateText: confirmPassC.text,
                       inputType: TextInputType.text,
                       hintText: "Confirm Password",
                       isPassword: hidePass,
@@ -103,11 +108,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     MyButton(
                       onPressed: () {
-                        ProfileCubit.get(context).changePassword(
+                        cubit.changePassword(
                           password: passC.text,
                           confirmedPassword: confirmPassC.text,
-                          email:
-                              ProfileCubit.get(context).userModel!.user.email,
+                          email: cubit.user!.email,
                         );
                       },
                       text: "Apply",

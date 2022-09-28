@@ -1,5 +1,5 @@
-import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/presentation/view/explore_search_selector.dart';
 import 'package:booking_hotel/presentation/widget/default_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ExploreSearchBar extends StatelessWidget {
   const ExploreSearchBar({
     Key? key,
-    required this.explore,
     required this.show,
+    required this.cubit,
   }) : super(key: key);
 
-  final ExploreCubit explore;
+  final HotelCubit cubit;
   final bool show;
 
   @override
@@ -25,7 +25,7 @@ class ExploreSearchBar extends StatelessWidget {
         height: show ? null : 0,
         padding: EdgeInsets.symmetric(
           horizontal: 10.w,
-          vertical: explore.currentLayoutIndex == 0 ? 0 : 10.h,
+          vertical: cubit.currentLayoutIndex == 0 ? 0 : 10.h,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -38,18 +38,18 @@ class ExploreSearchBar extends StatelessWidget {
                     children: [
                       MyFormField(
                         borderRadius: 40.r,
-                        controller: explore.searchC,
+                        controller: cubit.searchC,
                         prefix: null,
-                        validateText: explore.searchC.text,
+                        validateText: cubit.searchC.text,
                         inputType: TextInputType.text,
                         hintText: "Search...",
                         suffix: Icons.arrow_downward_outlined,
-                        suffixPressed: explore.toggleSearchTypes,
+                        suffixPressed: cubit.toggleSearchTypes,
                       ),
                       ExploreSearchSelector(
-                        show: explore.showSearchTypes,
-                        onChange: explore.updateSelectedSearchType,
-                        currentValue: explore.searchType,
+                        show: cubit.showSearchTypes,
+                        onChange: cubit.updateSelectedSearchType,
+                        currentValue: cubit.searchType,
                         color: Theme.of(context).cardColor,
                       ),
                     ],
@@ -63,7 +63,7 @@ class ExploreSearchBar extends StatelessWidget {
                   color: AppColor.teal,
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
-                    onTap: explore.search,
+                    onTap: cubit.search,
                     child: SizedBox(
                       width: 60.w,
                       height: 60.h,

@@ -1,2 +1,2 @@
-export 'repository_booking.dart';
-export 'repository_booking_impl.dart';
+export 'booking_repository.dart';
+export 'booking_repository_impl.dart';

@@ -1,8 +1,7 @@
+import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../business_logic/global_cubit/global_cubit.dart';
-import '../../core/styles/colors.dart';
 
 class MyFormField extends StatelessWidget {
   final IconData? prefix;
@@ -10,7 +9,6 @@ class MyFormField extends StatelessWidget {
 
   final TextEditingController controller;
 
-  //final VoidCallback? onTap ;
   final String validateText;
 
   final bool isPassword;
@@ -25,11 +23,9 @@ class MyFormField extends StatelessWidget {
   final String? labelText;
   final TextAlign textAlign;
 
-  //final Color? color;
   final Function()? suffixPressed;
 
   const MyFormField({
-
     Key? key,
     this.borderRadius = 15,
     required this.controller,
@@ -43,8 +39,6 @@ class MyFormField extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.readOnly = false,
     this.labelText,
-    //this.color ,
-    //this.onTap ,
   }) : super(key: key);
 
   @override
@@ -65,7 +59,6 @@ class MyFormField extends StatelessWidget {
         keyboardType: inputType,
         textAlign: textAlign,
         decoration: InputDecoration(
-
           suffixIcon: IconButton(
             onPressed: suffixPressed,
             icon: Icon(

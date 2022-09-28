@@ -1,78 +1,187 @@
-import 'package:booking_hotel/data/models/booking_model.dart';
-import 'package:booking_hotel/data/repository/booking/repository_booking.dart';
+import 'package:booking_hotel/data/model/booking_model.dart';
+import 'package:booking_hotel/data/model/param_models/booking_create_param_model.dart';
+import 'package:booking_hotel/data/model/param_models/booking_fetch_param_model.dart';
+import 'package:booking_hotel/data/model/param_models/booking_update_param_model.dart';
+import 'package:booking_hotel/data/repository/booking/booking_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../core/constants/constant.dart';
 
 part 'booking_state.dart';
 
 class BookingCubit extends Cubit<BookingState> {
-  final RepositoryBooking repositoryBooking;
+  final BookingRepository bookingRepository;
 
-  BookingCubit({required this.repositoryBooking}) : super(BookingInitial());
+  BookingCubit({required this.bookingRepository})
+      : super(BookingInitialState());
 
   static BookingCubit get(BuildContext context) => BlocProvider.of(context);
 
-  BookingModel? completedBookingModel;
-  BookingModel? upcommingBookingModel;
-  BookingModel? cancelledBookingModel;
+  late String token;
 
-  List<DataList> completedBookingList = [];
-  List<DataList> upcomingBookingList = [];
-  List<DataList> cancelledBookingList = [];
+  void setUpToken(String myToken) {
+    token = myToken;
+    emit(BookingIUpdateCubitState());
+  }
+
+  List<BookingModel> completedBookingList = [];
+  List<BookingModel> upcomingBookingList = [];
+  List<BookingModel> cancelledBookingList = [];
 
   int selectedBookingToggleTabBar = 0;
+
+  ScrollController? upcomingC;
+  ScrollController? completedC;
+  ScrollController? canceledC;
+
+  int? upcomingLastPage;
+  int? completedLastPage;
+  int? canceledLastPage;
+  int completedPage = 1;
+  int upcomingPage = 1;
+  int canceledPage = 1;
+  final int count = 5;
+
+  onLogoutReset() {
+    completedBookingList.clear();
+    upcomingBookingList.clear();
+    cancelledBookingList.clear();
+
+    selectedBookingToggleTabBar = 0;
+
+    upcomingC = null;
+    completedC = null;
+    canceledC = null;
+
+    upcomingLastPage = null;
+    completedLastPage = null;
+    canceledLastPage = null;
+    completedPage = 1;
+    upcomingPage = 1;
+    canceledPage = 1;
+    emit(BookingIUpdateCubitState());
+  }
+
+  Future initBooking(String myToken) async {
+    setUpToken(myToken);
+    await getUpcomingBooking();
+    await getCompletedBooking();
+    await getCancelledBooking();
+  }
+
+  addListeners() {
+    if (upcomingC == null && completedC == null && canceledC == null) {
+      upcomingC = ScrollController();
+      completedC = ScrollController();
+      canceledC = ScrollController();
+      upcomingC!.addListener(_bookingListener);
+      completedC!.addListener(_bookingListener);
+      canceledC!.addListener(_bookingListener);
+      emit(BookingIUpdateCubitState());
+    }
+  }
+
+  _bookingListener() {
+    if (upcomingC!.position.pixels > 0 &&
+        upcomingC!.position.atEdge &&
+        upcomingLastPage != null &&
+        upcomingPage < upcomingLastPage!) {
+      upcomingPage++;
+      getUpcomingBooking(true);
+    }
+    if (completedC!.position.pixels > 0 &&
+        completedC!.position.atEdge &&
+        completedLastPage != null &&
+        completedPage < completedLastPage!) {
+      completedPage++;
+      getCompletedBooking(true);
+    }
+    if (canceledC!.position.pixels > 0 &&
+        canceledC!.position.atEdge &&
+        canceledLastPage != null &&
+        canceledPage < canceledLastPage!) {
+      canceledPage++;
+      getCancelledBooking(true);
+    }
+  }
 
   void changeSelectedBookingTabBar(index) {
     selectedBookingToggleTabBar = index;
     emit(ChangeSelectedToggleTabBarState());
   }
 
-  Future getCompletedBooking() async {
+  Future getCompletedBooking([bool update = false]) async {
+    if (!update) {
+      completedPage = 1;
+    }
     emit(GetCompletedBookingLoadingState());
-    final result =
-        await repositoryBooking.getBooking(token, 'completed', 10, 1);
+    final param = BookingFetchParamModel(
+      token: token,
+      type: 'completed',
+      count: count,
+      page: completedPage,
+    );
+    final result = await bookingRepository.getBooking(param);
     result.fold(
       (l) {
-        emit(GetCompletedBookingErrorState());
+        emit(GetCompletedBookingErrorState(l));
       },
       (r) {
-        completedBookingModel = r;
-        completedBookingList = r.data!.dataList!;
-
+        if (!update) {
+          completedBookingList.clear();
+        }
+        completedBookingList.addAll(r.bookings);
         emit(GetCompletedBookingSuccessState());
       },
     );
   }
 
-  Future getUpcomingBooking() async {
+  Future getUpcomingBooking([bool update = false]) async {
+    if (!update) {
+      upcomingPage = 1;
+    }
     emit(GetUpcomingBookingLoadingState());
-    final result =
-        await repositoryBooking.getBooking(token, 'upcomming', 15, 1);
+    final param = BookingFetchParamModel(
+      token: token,
+      type: 'upcomming',
+      count: count,
+      page: upcomingPage,
+    );
+    final result = await bookingRepository.getBooking(param);
     result.fold(
       (l) {
-        emit(GetUpcomingBookingErrorState());
+        emit(GetUpcomingBookingErrorState(l));
       },
       (r) {
-        upcommingBookingModel = r;
-        upcomingBookingList = r.data!.dataList!.where((element) => element.type == 'upcomming').toList();
+        if (!update) {
+          upcomingBookingList.clear();
+        }
+        upcomingBookingList.addAll(r.bookings);
         emit(GetUpcomingBookingSuccessState());
       },
     );
   }
 
-  Future getCancelledBooking() async {
+  Future getCancelledBooking([bool update = false]) async {
+    if (!update) {
+      canceledPage = 1;
+    }
     emit(GetCancelledBookingLoadingState());
-    final result =
-        await repositoryBooking.getBooking(token, 'cancelled', 10, 1);
+    final param = BookingFetchParamModel(
+      token: token,
+      type: 'cancelled',
+      count: count,
+      page: canceledPage,
+    );
+    final result = await bookingRepository.getBooking(param);
     result.fold(
       (l) {
-        emit(GetCancelledBookingErrorState());
+        emit(GetCancelledBookingErrorState(l));
       },
       (r) {
-        cancelledBookingModel = r;
-        cancelledBookingList = r.data!.dataList!;
+        if (!update) {
+          cancelledBookingList.clear();
+        }
+        cancelledBookingList.addAll(r.bookings);
         emit(GetCancelledBookingSuccessState());
       },
     );
@@ -80,8 +189,8 @@ class BookingCubit extends Cubit<BookingState> {
 
   Future createBooking(int hotelId) async {
     emit(CreateBookingLoadingState());
-    final result = await repositoryBooking.createBooking(token, hotelId);
-    debugPrint('my token ==>> $token');
+    final param = BookingCreateParamModel(token: token, hotelId: hotelId);
+    final result = await bookingRepository.createBooking(param);
     result.fold(
       (l) {
         emit(CreateBookingErrorState(l));
@@ -93,9 +202,14 @@ class BookingCubit extends Cubit<BookingState> {
     );
   }
 
-  Future updateBooking(int hotelId, String type) async {
+  Future updateBooking(int bookingId, String type) async {
     emit(UpdateBookingLoadingState());
-    final result = await repositoryBooking.updateBooking(token, hotelId, type);
+    final param = BookingUpdateParamModel(
+      token: token,
+      type: type,
+      bookingId: bookingId,
+    );
+    final result = await bookingRepository.updateBooking(param);
     result.fold(
       (l) {
         emit(UpdateBookingErrorState(l));
@@ -107,25 +221,4 @@ class BookingCubit extends Cubit<BookingState> {
       },
     );
   }
-
-
-
-
-  List<DataList> removeDuplicates(List<DataList> upcomingBooking) {
-    //create one list to store the distinct models
-    List<DataList> distinct = [];
-
-
-    for(int i = 0; i < upcomingBooking.length; i++) {
-      if (!distinct.any((element) => element.hotelId == upcomingBooking[i].hotelId)){
-        distinct.add(upcomingBooking[i]);
-      }
-    }
-    print('------------------------- amr $distinct');
-    return distinct.map((e) => e).toList();
-  }
-
-
-
-
 }

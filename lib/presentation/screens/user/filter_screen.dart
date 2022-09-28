@@ -1,4 +1,4 @@
-import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
+import 'package:booking_hotel/data/model/facility_mode.dart';
 import 'package:booking_hotel/presentation/view/my_app_bar.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_check_box.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
@@ -103,7 +103,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       itemBuilder: (_, index) => AppCustomCheckBox(
                         checked: selectedFacilities
                             .contains(widget.facilities[index]),
-                        text: widget.facilities[index].name,
+                        text: '${widget.facilities[index].name}',
                         onTap: () {
                           setState(() {
                             if (!selectedFacilities

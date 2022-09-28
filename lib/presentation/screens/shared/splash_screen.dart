@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'package:booking_hotel/business_logic/auth_cubit/auth_cubit.dart';
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/business_logic/business_logic.dart';
+import 'package:booking_hotel/presentation/widget/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SplashScreen extends StatefulWidget  {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -28,7 +29,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void initState() {
-
     super.initState();
 
     _controller =
@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Timer(const Duration(seconds:3), () {
+    Timer(const Duration(seconds: 3), () {
       if (!mounted) {
         return;
       }
@@ -84,100 +84,117 @@ class _SplashScreenState extends State<SplashScreen>
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return BlocListener<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is LoginSavedLoadingErrorState) {
+    return BlocListener<UserCubit, UserState>(
+      listener: (context, state) {
+        if (state is LoginSavedLoadingErrorState) {
+          showToast(
+            text: state.message,
+            state: ToastStates.ERROR,
+          );
+        } else if (state is LoginSavedLoadedState) {
+          if (state.responseModel == null) {
             Future.delayed(const Duration(seconds: 3)).then(
-                  (value) => Navigator.pushNamedAndRemoveUntil(
+              (value) => Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRouterNames.rOnBoardingLayoutRoute,
-                    (route) => false,
+                (route) => false,
               ),
             );
-          } else if (state is LoginSavedLoadedState) {
+          } else {
+            HotelCubit.get(context).initHomeScreen();
+            HotelCubit.get(context).initSearchScreen();
+            BookingCubit.get(context).initBooking(
+              state.responseModel!.user.token,
+            );
+            UserCubit.get(context).getProfile();
             Future.delayed(const Duration(seconds: 3)).then(
-                  (value) => Navigator.pushNamedAndRemoveUntil(
+              (value) => Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRouterNames.rHomeLayoutRoute,
-                    (route) => false,
+                (route) => false,
               ),
             );
           }
-        },
-        child: Scaffold(
-            body: Stack(children: [
-              Column(
-                children: [
-                  AnimatedContainer(
-                      duration: const Duration(milliseconds: 4000),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                      height: height / _fontSize),
-                  AnimatedOpacity(
-                      duration: const Duration(milliseconds: 4000),
-                      opacity: _textOpacity,
-                      child: RichText(
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.end,
-                        textDirection: TextDirection.rtl,
-                        softWrap: true,
-                        maxLines: 1,
-                        textScaleFactor: 1,
-                        text: const TextSpan(
-                          text: 'Hotel',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Cairo',
-                              fontSize: 22,
-                              color: AppColor.blue),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'To',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Cairo',
-                                  fontSize: 22,
-                                  color: AppColor.yellow),
-                            ),
-                            TextSpan(
-                              text: 'night',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Cairo',
-                                  fontSize: 22,
-                                  color: AppColor.darkRed),
-                            ),
-                          ],
-                        ),
-                      )),
-                ],
-              ),
-              Center(
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 4000),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  opacity: _containerOpacity,
-                  child: AnimatedContainer(
+        }
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                AnimatedContainer(
                     duration: const Duration(milliseconds: 4000),
                     curve: Curves.fastLinearToSlowEaseIn,
-                    height: width / _containerSize,
-                    width: width / _containerSize,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: Image.asset(
-                        'assets/images/HotelTonight.png',
-                        fit: BoxFit.fill,
+                    height: height / _fontSize),
+                AnimatedOpacity(
+                    duration: const Duration(milliseconds: 4000),
+                    opacity: _textOpacity,
+                    child: RichText(
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.end,
+                      textDirection: TextDirection.rtl,
+                      softWrap: true,
+                      maxLines: 1,
+                      textScaleFactor: 1,
+                      text: const TextSpan(
+                        text: 'Hotel',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Cairo',
+                            fontSize: 22,
+                            color: AppColor.blue),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'To',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Cairo',
+                                fontSize: 22,
+                                color: AppColor.yellow),
+                          ),
+                          TextSpan(
+                            text: 'night',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Cairo',
+                                fontSize: 22,
+                                color: AppColor.darkRed),
+                          ),
+                        ],
                       ),
+                    )),
+              ],
+            ),
+            Center(
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 4000),
+                curve: Curves.fastLinearToSlowEaseIn,
+                opacity: _containerOpacity,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 4000),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: width / _containerSize,
+                  width: width / _containerSize,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Image.asset(
+                      'assets/images/HotelTonight.png',
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
               ),
-            ])));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -186,21 +203,21 @@ class PageTransition extends PageRouteBuilder {
 
   PageTransition(this.page)
       : super(
-    pageBuilder: (context, animation, anotherAnimation) => page,
-    transitionDuration: const Duration(milliseconds: 3000),
-    transitionsBuilder: (context, animation, anotherAnimation, child) {
-      animation = CurvedAnimation(
-        curve: Curves.easeInOutCirc,
-        parent: animation,
-      );
-      return Align(
-        alignment: Alignment.center,
-        child: SizeTransition(
-          sizeFactor: animation,
-          axisAlignment: 0,
-          child: page,
-        ),
-      );
-    },
-  );
+          pageBuilder: (context, animation, anotherAnimation) => page,
+          transitionDuration: const Duration(milliseconds: 3000),
+          transitionsBuilder: (context, animation, anotherAnimation, child) {
+            animation = CurvedAnimation(
+              curve: Curves.easeInOutCirc,
+              parent: animation,
+            );
+            return Align(
+              alignment: Alignment.center,
+              child: SizeTransition(
+                sizeFactor: animation,
+                axisAlignment: 0,
+                child: page,
+              ),
+            );
+          },
+        );
 }

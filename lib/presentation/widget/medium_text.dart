@@ -1,7 +1,6 @@
+import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../business_logic/global_cubit/global_cubit.dart';
 
 class MediumText extends StatelessWidget {
   final String text;
@@ -23,11 +22,12 @@ class MediumText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = GlobalCubit.get(context);
     return Text(
       text,
       textAlign: textAlign,
       style: TextStyle(
-        color: color ?? GlobalCubit.get(context).mediumTextColor,
+        color: color ?? cubit.mediumTextColor,
         fontFamily: 'Medium',
         fontSize: fontSize.sp,
         overflow: overflow,

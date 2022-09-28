@@ -1,12 +1,12 @@
-import 'package:booking_hotel/data/models/hotel_search_models_response/facility_model.dart';
-import 'package:booking_hotel/data/models/hotel_search_models_response/hotel_model.dart';
-import 'package:booking_hotel/presentation/screens/shared/home_layout/home_layout_screen.dart';
+import 'package:booking_hotel/data/model/facility_mode.dart';
+import 'package:booking_hotel/data/model/hotel_model.dart';
+import 'package:booking_hotel/presentation/screens/shared/auth_layout/login_screen.dart';
+import 'package:booking_hotel/presentation/screens/shared/auth_layout/register_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/on_boarding.dart';
 import 'package:booking_hotel/presentation/screens/shared/splash_screen.dart';
-import 'package:booking_hotel/presentation/screens/user/auth_layout/login_screen.dart';
-import 'package:booking_hotel/presentation/screens/user/auth_layout/register_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/explore_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/filter_screen.dart';
+import 'package:booking_hotel/presentation/screens/user/home_layout/home_layout_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/hotel_details.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/change_password_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/update_profile.dart';
@@ -66,11 +66,16 @@ class AppRouter {
           ),
         );
       case AppRouterNames.rHotelDetailsLayoutRoute:
-        final data =settings.arguments as List ;
-        final hotel = data[0] as HotelModel;
-        final isBooking = data[1] as bool ;
+        final data = settings.arguments as List;
+        final bookingId = data[0] as int?;
+        final hotel = data[1] as HotelModel;
+        final isBooking = data[2] as bool;
         return MaterialPageRoute(
-          builder: (_) => HotelDetails(hotel: hotel,isBooking: isBooking,),
+          builder: (_) => HotelDetails(
+            bookingId: bookingId,
+            hotel: hotel,
+            isBooking: isBooking,
+          ),
         );
       default:
         return null;

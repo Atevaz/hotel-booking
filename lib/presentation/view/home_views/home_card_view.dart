@@ -11,11 +11,11 @@ class HomeCardView extends StatelessWidget {
     Key? key,
     required this.onTap,
     this.image = myImage,
-    this.name = "Grand Royal Hotel",
-    this.location = "2.0 km to city",
-    this.address = "Wembley, London",
-    this.rate = 4.5,
-    this.price = 180,
+    required this.name,
+    required this.location,
+    required this.address,
+    required this.rate,
+    required this.price,
     this.onDoubleTap,
   }) : super(key: key);
 

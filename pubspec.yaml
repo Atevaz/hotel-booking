@@ -45,6 +45,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/json/
+    - assets/font/
 
   fonts:
     - family: Medium

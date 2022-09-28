@@ -1,5 +1,4 @@
 import 'package:booking_hotel/core/styles/colors.dart';
-import 'package:booking_hotel/core/styles/constant.dart';
 import 'package:booking_hotel/data/repository/global/global_repository.dart';
 import 'package:booking_hotel/presentation/screens/user/booking_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
@@ -7,16 +6,15 @@ import 'package:booking_hotel/presentation/screens/user/profile_layout/profile_s
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'global_state.dart';
+part 'global_state.dart';
 
 class GlobalCubit extends Cubit<GlobalState> {
   Locale locale = const Locale("en");
+  ThemeMode appMode = ThemeMode.light;
   bool isDark = false;
   final GlobalRepository globalRepository;
 
-  GlobalCubit({required this.globalRepository}) : super(GlobalInitial()) {
-    _initApp();
-  }
+  GlobalCubit({required this.globalRepository}) : super(GlobalInitialState());
 
   static GlobalCubit get(context) => BlocProvider.of(context);
   Color cardColor = AppColor.white;
@@ -26,7 +24,7 @@ class GlobalCubit extends Cubit<GlobalState> {
   Color headLineTextColor = AppColor.white;
   Color mediumTextColor = AppColor.white;
 
-  Future<void> _initApp() async {
+  Future<void> initApp() async {
     isDark = await globalRepository.isDarkMode();
     locale = await globalRepository.appLang();
     _updateCurrentMode();
@@ -90,6 +88,11 @@ class GlobalCubit extends Cubit<GlobalState> {
     const BookingScreen(),
     const ProfileScreen(),
   ];
+
+  onLogoutReset() {
+    currentIndex = 0;
+    emit(ChangeNavBarState());
+  }
 
   Object? val = 'light';
 

@@ -1,16 +1,17 @@
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeSliverAppBarBackgroundView extends StatelessWidget {
-  const HomeSliverAppBarBackgroundView({
+  HomeSliverAppBarBackgroundView({
     Key? key,
     required this.viewHotels,
   }) : super(key: key);
 
-  final String name = 'Motel';
+  final String name = 'HotelTonight';
   final String desc = 'Book one of your unique hotel to escape the ordinary';
   final Function() viewHotels;
 
@@ -22,6 +23,7 @@ class HomeSliverAppBarBackgroundView extends StatelessWidget {
         padding: EdgeInsets.only(
           bottom: 30.h,
           left: 20.w,
+          right: 20.w,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,

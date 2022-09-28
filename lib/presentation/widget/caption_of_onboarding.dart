@@ -1,4 +1,5 @@
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CaptionOfOnBoarding extends StatelessWidget {
@@ -23,6 +24,6 @@ class CaptionOfOnBoarding extends StatelessWidget {
       maxLines: 3,
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.center,
-    );
+    ).tr();
   }
 }

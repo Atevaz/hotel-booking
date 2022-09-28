@@ -1,3 +1,5 @@
+import 'package:booking_hotel/presentation/widget/headline_text.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,7 +33,7 @@ class MyAppBar extends StatelessWidget {
               }
             },
             icon: leadingIcon),
-        title: title != null ? Text(title!) : const Text(''),
+        title: title != null ? HeadLineText(text:title!,isUpper: false,) : const Text(''),
         actions: actions,
         centerTitle: centerTitle,
         // backgroundColor: AppColor.black,
@@ -50,7 +52,7 @@ class MyAppBar extends StatelessWidget {
         );
       } else {
         return AppBar(
-          title: Text(title!),
+          title: HeadLineText(text:title!,isUpper: false,),
           titleSpacing: 25.w,
         );
       }

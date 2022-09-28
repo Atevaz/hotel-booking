@@ -8,6 +8,7 @@ import 'package:booking_hotel/data/model/hotel_model.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -149,8 +150,8 @@ class HotelMoreDetailsView extends StatelessWidget {
                                 fontFamily: 'Medium',
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              trimExpandedText: ' less',
-                              trimCollapsedText: ' more',
+                              trimExpandedText: ' less'.tr(),
+                              trimCollapsedText: ' more'.tr(),
                               trimMode: TrimMode.Line,
                               moreStyle: TextStyle(
                                 fontSize: 18.sp,

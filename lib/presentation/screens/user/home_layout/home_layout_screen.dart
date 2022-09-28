@@ -1,5 +1,6 @@
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,18 +18,18 @@ class HomeLayoutScreen extends StatelessWidget {
             unselectedItemColor: AppColor.grey,
             currentIndex: global.currentIndex,
             onTap: global.changeNavBar,
-            items: const [
+            items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_rounded),
-                label: 'Home',
+                label: 'Home'.tr(),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.bookmark_add_outlined),
-                label: 'Booking',
+                label: 'Booking'.tr(),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outlined),
-                label: 'Me',
+                label: 'Me'.tr(),
               ),
             ],
           ),

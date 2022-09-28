@@ -4,7 +4,9 @@ import 'package:booking_hotel/presentation/widget/caption_of_onboarding.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BoardingModel {
@@ -62,7 +64,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             Expanded(
               flex: 1,
               child: Image.asset(
-                'assets/images/logo.png',
+                'assets/images/HotelTonight.png',
+                width: 150.w,
+                height: 150.h,
                 color: AppColor.teal,
               ),
             ),
@@ -141,7 +145,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
-          ),
+          ).tr(),
           const SizedBox(
             height: 10,
           ),

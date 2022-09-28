@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -40,9 +41,10 @@ class MyButton extends StatelessWidget {
         height: 52.h,
         onPressed: onPressed,
         child: HeadLineText(
-          text: isUpper ? text.toUpperCase() : text,
+          text: text.tr(),
           color: AppColor.white,
           fontSize: 20.sp,
+          isUpper: isUpper,
         ),
       ),
     );

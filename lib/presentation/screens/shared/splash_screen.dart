@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-
+    UserCubit.get(context).loginSaved();
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
 

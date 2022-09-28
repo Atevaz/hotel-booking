@@ -1,4 +1,5 @@
 import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,6 +34,6 @@ class MediumText extends StatelessWidget {
         overflow: overflow,
       ),
       maxLines: maxLines,
-    );
+    ).tr();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:booking_hotel/data/model/facility_mode.dart';
+import 'package:booking_hotel/data/model/hotel_image_model.dart';
 import 'package:booking_hotel/data/model/hotel_model.dart';
 import 'package:booking_hotel/presentation/screens/shared/auth_layout/login_screen.dart';
 import 'package:booking_hotel/presentation/screens/shared/auth_layout/register_screen.dart';
@@ -11,6 +12,7 @@ import 'package:booking_hotel/presentation/screens/user/hotel_details.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/change_password_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/update_profile.dart';
 import 'package:booking_hotel/presentation/screens/user/settings_screen.dart';
+import 'package:booking_hotel/presentation/view/app_image_view.dart';
 import 'package:flutter/material.dart';
 import 'app_router_names.dart';
 
@@ -75,6 +77,13 @@ class AppRouter {
             bookingId: bookingId,
             hotel: hotel,
             isBooking: isBooking,
+          ),
+        );
+      case AppRouterNames.rHotelImagesLayoutRoute:
+        final data = settings.arguments as List<HotelImageModel>;
+        return MaterialPageRoute(
+          builder: (_) => AppImageViewer(
+            images: data,
           ),
         );
       default:

@@ -12,4 +12,5 @@ class AppRouterNames {
   static const rUpdateProfileLayoutRoute = '/profile-update';
   static const rBookingsLayoutRoute = '/bookings';
   static const rExploreLayoutRoute = '/explore';
+  static const rHotelImagesLayoutRoute = '/hotel-images';
 }

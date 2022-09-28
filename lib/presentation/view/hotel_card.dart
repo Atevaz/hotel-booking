@@ -1,6 +1,7 @@
 import 'package:booking_hotel/core/constants/end_points.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
+import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,62 +78,91 @@ class HotelCard extends StatelessWidget {
                       ),
             Padding(
               padding: EdgeInsets.all(15.0.r),
-              child: Column(
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      MediumText(text: name),
-                      const Spacer(),
-                      MediumText(text: "\$$price"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      RichText(
-                        text: TextSpan(
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HeadLineText(
+                          text: name,
+                          maxLines: 1,
+                          fontSize: 20,
+                          isUpper: false,
+                        ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Row(
                           children: [
-                            WidgetSpan(
+                            Expanded(
                               child: MediumText(
                                 text: address,
-                                fontSize: 16,
+                                fontSize: 17,
                                 color: AppColor.grey,
+                                maxLines: 1,
                               ),
                             ),
-                            const WidgetSpan(
-                              child: Icon(
-                                Icons.location_on,
-                                color: AppColor.teal,
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  const WidgetSpan(
+                                    child: Icon(
+                                      Icons.location_on,
+                                      color: AppColor.teal,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  WidgetSpan(
+                                    child: MediumText(
+                                      text: '$distance km to city',
+                                      fontSize: 16,
+                                      color: AppColor.grey,
+                                      maxLines: 1,
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            WidgetSpan(
-                              child: MediumText(
-                                text: '$distance km to city',
-                                fontSize: 16,
-                                color: AppColor.grey,
-                              ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Row(
+                          children: [
+                            AppCustomRateBar(rate: rate),
+                            const MediumText(
+                              text: ' 80 Reviews',
+                              fontSize: 17,
+                              color: AppColor.grey,
                             )
                           ],
                         ),
-                      ),
-                      const Spacer(),
-                      const MediumText(
-                        text: '/per night',
-                        fontSize: 16,
-                        color: AppColor.grey,
-                      )
-                    ],
+                      ],
+                    ),
                   ),
                   SizedBox(
-                    height: 10.h,
+                    width: 10.w,
                   ),
-                  Row(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AppCustomRateBar(rate: rate),
+                      HeadLineText(
+                        text: "\$$price",
+                        maxLines: 1,
+                        fontSize: 20,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
                       const MediumText(
-                        text: ' 80 Reviews',
-                        fontSize: 16,
+                        text: '/per night',
+                        fontSize: 17,
                         color: AppColor.grey,
-                      )
+                        maxLines: 1,
+                      ),
                     ],
                   ),
                 ],

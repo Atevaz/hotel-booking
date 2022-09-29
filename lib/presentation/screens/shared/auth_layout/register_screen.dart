@@ -24,10 +24,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passC = TextEditingController();
   final confirmPassC = TextEditingController();
   bool hidePass = true;
+  bool secretePass = true;
 
   final agreedText =
       "By signing up, you agreed with our terms of services and privacy policy";
-  final haveAccountText = "Already hav account? ";
+  final haveAccountText = "Already have account? ";
   final loginText = "Login";
   final signupText = "Sign Up";
   final nameText = "User Name";
@@ -117,12 +118,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       inputType: TextInputType.text,
                       hintText: confirmedPassText,
                       prefix: Icons.password_outlined,
-                      isPassword: hidePass,
+                      isPassword: secretePass,
                       suffix:
-                          hidePass ? Icons.visibility_off : Icons.visibility,
+                          secretePass ? Icons.visibility_off : Icons.visibility,
                       suffixPressed: () {
                         setState(() {
-                          hidePass = !hidePass;
+                          secretePass = !secretePass;
                         });
                       },
                       borderRadius: 30.r,

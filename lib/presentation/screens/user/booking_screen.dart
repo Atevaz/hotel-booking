@@ -66,24 +66,27 @@ class _BookingScreenState extends State<BookingScreen> {
                         itemBuilder: (context, index) {
                           final isBooking = upcoming.any((element) =>
                               element.hotelId == upcoming[index].hotelId);
-                          return HotelCard(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              AppRouterNames.rHotelDetailsLayoutRoute,
-                              arguments: [
-                                upcoming[index].id,
-                                upcoming[index].hotel,
-                                isBooking
-                              ],
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 6.w),
+                            child: HotelCard(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                AppRouterNames.rHotelDetailsLayoutRoute,
+                                arguments: [
+                                  upcoming[index].id,
+                                  upcoming[index].hotel,
+                                  isBooking
+                                ],
+                              ),
+                              image: upcoming[index].hotel.hotelImages!.isNotEmpty
+                                  ? upcoming[index].hotel.hotelImages![0].image
+                                  : 'assets/images/hotel.jpg',
+                              address: upcoming[index].hotel.address,
+                              name: upcoming[index].hotel.name,
+                              price:
+                                  double.parse('${upcoming[index].hotel.price}'),
+                              rate: double.parse('${upcoming[index].hotel.rate}'),
                             ),
-                            image: upcoming[index].hotel.hotelImages!.isNotEmpty
-                                ? upcoming[index].hotel.hotelImages![0].image
-                                : 'assets/images/hotel.jpg',
-                            address: upcoming[index].hotel.address,
-                            name: upcoming[index].hotel.name,
-                            price:
-                                double.parse('${upcoming[index].hotel.price}'),
-                            rate: double.parse('${upcoming[index].hotel.rate}'),
                           );
                         },
                         separatorBuilder: (context, index) => SizedBox(
@@ -104,28 +107,31 @@ class _BookingScreenState extends State<BookingScreen> {
                         controller: cubit.completedC,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return HotelCard(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              AppRouterNames.rHotelDetailsLayoutRoute,
-                              arguments: [
-                                completed[index].id,
-                                completed[index].hotel.id,
-                                false
-                              ],
+                          return Padding(
+                            padding:  EdgeInsets.symmetric(horizontal:6.w),
+                            child: HotelCard(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                AppRouterNames.rHotelDetailsLayoutRoute,
+                                arguments: [
+                                  completed[index].id,
+                                  completed[index].hotel.id,
+                                  false
+                                ],
+                              ),
+                              image: completed[index]
+                                      .hotel
+                                      .hotelImages!
+                                      .isNotEmpty
+                                  ? completed[index].hotel.hotelImages![0].image
+                                  : 'assets/images/hotel.jpg',
+                              address: completed[index].hotel.address,
+                              name: completed[index].hotel.name,
+                              price:
+                                  double.parse('${completed[index].hotel.price}'),
+                              rate:
+                                  double.parse('${completed[index].hotel.rate}'),
                             ),
-                            image: completed[index]
-                                    .hotel
-                                    .hotelImages!
-                                    .isNotEmpty
-                                ? completed[index].hotel.hotelImages![0].image
-                                : 'assets/images/hotel.jpg',
-                            address: completed[index].hotel.address,
-                            name: completed[index].hotel.name,
-                            price:
-                                double.parse('${completed[index].hotel.price}'),
-                            rate:
-                                double.parse('${completed[index].hotel.rate}'),
                           );
                         },
                         separatorBuilder: (context, index) => SizedBox(
@@ -146,24 +152,27 @@ class _BookingScreenState extends State<BookingScreen> {
                         controller: cubit.canceledC,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return HotelCard(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              AppRouterNames.rHotelDetailsLayoutRoute,
-                              arguments: [
-                                canceled[index].id,
-                                canceled[index].hotel,
-                                false,
-                              ],
+                          return Padding(
+                            padding:  EdgeInsets.symmetric(horizontal:6.w),
+                            child: HotelCard(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                AppRouterNames.rHotelDetailsLayoutRoute,
+                                arguments: [
+                                  canceled[index].id,
+                                  canceled[index].hotel,
+                                  false,
+                                ],
+                              ),
+                              image: canceled[index].hotel.hotelImages!.isNotEmpty
+                                  ? canceled[index].hotel.hotelImages![0].image
+                                  : 'assets/images/hotel.jpg',
+                              address: canceled[index].hotel.address,
+                              name: canceled[index].hotel.name,
+                              price:
+                                  double.parse('${canceled[index].hotel.price}'),
+                              rate: double.parse('${canceled[index].hotel.rate}'),
                             ),
-                            image: canceled[index].hotel.hotelImages!.isNotEmpty
-                                ? canceled[index].hotel.hotelImages![0].image
-                                : 'assets/images/hotel.jpg',
-                            address: canceled[index].hotel.address,
-                            name: canceled[index].hotel.name,
-                            price:
-                                double.parse('${canceled[index].hotel.price}'),
-                            rate: double.parse('${canceled[index].hotel.rate}'),
                           );
                         },
                         separatorBuilder: (context, index) => SizedBox(

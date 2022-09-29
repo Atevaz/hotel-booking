@@ -58,7 +58,7 @@ class HotelMoreDetailsView extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: context.screenWidth,
-                    height: 150.h,
+                    height: 200.h,
                     child: Image(
                       image: NetworkImage(
                         hotel.hotelImages != null &&
@@ -73,7 +73,7 @@ class HotelMoreDetailsView extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: EdgeInsets.all(15.r),
+                        padding: EdgeInsets.all(20.r),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -114,9 +114,9 @@ class HotelMoreDetailsView extends StatelessWidget {
                                               .replaceFarsiNumber(),
                                       fontSize: 22.sp,
                                     ),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
+                                    // SizedBox(
+                                    //   height: 10.h,
+                                    // ),
                                     const MediumText(
                                       text: '/per night',
                                       color: AppColor.grey,
@@ -125,15 +125,21 @@ class HotelMoreDetailsView extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
                             const Divider(
                               color: AppColor.grey,
+                            ),
+                            SizedBox(
+                              height: 10.h,
                             ),
                             Container(
                               decoration: BoxDecoration(
                                 color: AppColor.grey.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(15.r),
                               ),
-                              padding: EdgeInsets.symmetric(horizontal: 10.w),
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
                               child: Column(
                                 children: [
                                   Row(
@@ -149,7 +155,7 @@ class HotelMoreDetailsView extends StatelessWidget {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 10.w),
+                                            horizontal: 20.w),
                                         child: const MediumText(
                                           text: 'Overall rating',
                                           textAlign: TextAlign.center,

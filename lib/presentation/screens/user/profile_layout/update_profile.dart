@@ -188,7 +188,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           height: 10.h,
                         ),
                         MyFormField(
-                          // initialValue: cubit.userModel!.user.email,
                           hintText: '',
                           controller: emailC,
                           validateText: emailC.text,

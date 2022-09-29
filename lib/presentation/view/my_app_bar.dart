@@ -36,7 +36,6 @@ class MyAppBar extends StatelessWidget {
         title: title != null ? HeadLineText(text:title!,isUpper: false,) : const Text(''),
         actions: actions,
         centerTitle: centerTitle,
-        // backgroundColor: AppColor.black,
       );
     } else {
       if (isBack!) {

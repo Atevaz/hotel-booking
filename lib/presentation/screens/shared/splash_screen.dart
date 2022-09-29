@@ -117,6 +117,7 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             Column(
               children: [
+///
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 4000),
                   curve: Curves.fastLinearToSlowEaseIn,

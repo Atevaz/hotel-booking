@@ -60,11 +60,11 @@ business_logic
 ```
 
 ### core
-*<<<<<<<<<<<<<<write desctiption here>>>>>>>>>>>*
+This folder contains all services and tools related to the application
 ```
 core
-├── constant                # containes constants used in the project
-├── di                      # containes depedency injection
+├── constant               
+├── di                      
 ├── dio_service             
 ├── exceptions             
 ├── network_service         
@@ -75,7 +75,7 @@ core
 ```
 
 ### data
-*<<<<<<<<<<<<<<write desctiption here>>>>>>>>>>>*
+This folder contains all data and operations done to that data
 ```
 data
 ├── local

@@ -5,8 +5,6 @@ abstract class GlobalState {}
 
 class GlobalInitialState extends GlobalState {}
 
-class GlobalInitState extends GlobalState {}
-
 class GlobalChangePasswordVisibilityState extends GlobalState {}
 
 class GlobalChangeConfirmPasswordVisibilityState extends GlobalState {}

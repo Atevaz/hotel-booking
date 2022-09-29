@@ -1,5 +1,6 @@
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -70,7 +71,7 @@ class MyFormField extends StatelessWidget {
             prefix,
             color: GlobalCubit.get(context).mediumTextColor,
           ),
-          hintText: hintText,
+          hintText: hintText!.tr(),
           labelText: labelText,
           labelStyle:
               TextStyle(color: GlobalCubit.get(context).regularTextColor),

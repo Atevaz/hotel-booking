@@ -1,4 +1,5 @@
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,14 +15,7 @@ class DefaultTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-            color: color,
-            fontFamily: 'SemiBold',
-            fontSize: 20.sp
-        ),
-      ),
+      child: MediumText(text: text,color: color,),
     );
   }
 }

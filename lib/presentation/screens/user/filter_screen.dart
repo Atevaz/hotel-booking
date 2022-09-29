@@ -6,6 +6,7 @@ import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/price_slider.dart';
 import 'package:booking_hotel/presentation/widget/slider_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -66,7 +67,7 @@ class _FilterScreenState extends State<FilterScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const HeadLineText(text: 'Filter'),
+            HeadLineText(text: 'Filter'.tr()),
             SizedBox(
               height: 20.h,
             ),

@@ -13,6 +13,7 @@ class SliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slider(
+      label: '${currentValue.toInt()}',
       value: currentValue,
       max: 5000,
       divisions: 1000,

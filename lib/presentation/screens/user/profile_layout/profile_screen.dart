@@ -3,6 +3,7 @@ import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
+import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/profile_screen_component.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -34,71 +35,91 @@ class ProfileScreen extends StatelessWidget {
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 12.0.w,
+                horizontal: 10.w,
                 vertical: 20.h,
               ),
               child: SingleChildScrollView(
                 child: ConditionalBuilder(
                   condition: cubit.user != null,
                   builder: (context) => Column(children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 10.w),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                HeadLineText(
-                                  text: cubit.user!.name,
-                                  isUpper: false,
-                                ),
-                                DefaultTextButton(
-                                  text: 'View and Edit profile',
-                                  color: AppColor.grey,
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      AppRouterNames.rUpdateProfileLayoutRoute,
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage: cubit.user!.image == null ||
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundImage: cubit.user!.image == null ||
                                     cubit.user!.image ==
                                         'http://api.mahmoudtaha.com/images'
-                                ? const AssetImage('assets/images/user.jpg')
-                                : Image.network(
-                                    !cubit.user!.image!.contains("http")
-                                        ? "$baseApiUrl$apiImagesVersion/${cubit.user!.image!}"
-                                        : cubit.user!.image!,
-                                    loadingBuilder: (ctx, child, event) =>
-                                        event == null
-                                            ? child
-                                            : const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              ),
-                                    errorBuilder: (ctx, child, err) =>
-                                        err == null
-                                            ? (child as Widget)
-                                            : const Center(
-                                                child: Icon(
-                                                  Icons.error,
-                                                  size: 30,
-                                                ),
-                                              ),
-                                  ).image,
+                                    ? const AssetImage('assets/images/user.jpg')
+                                    : Image.network(
+                                  !cubit.user!.image!.contains("http")
+                                      ? "$baseApiUrl$apiImagesVersion/${cubit.user!.image!}"
+                                      : cubit.user!.image!,
+                                  loadingBuilder: (ctx, child, event) =>
+                                  event == null
+                                      ? child
+                                      : const Center(
+                                    child:
+                                    CircularProgressIndicator(),
+                                  ),
+                                  errorBuilder: (ctx, child, err) =>
+                                  err == null
+                                      ? (child as Widget)
+                                      : const Center(
+                                    child: Icon(
+                                      Icons.error,
+                                      size: 30,
+                                    ),
+                                  ),
+                                ).image,
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              HeadLineText(
+                                text: cubit.user!.name,
+                                isUpper: false,
+                              ),
+
+                              // InkWell(
+                              //   onTap: (){
+                              //     Navigator.pushNamed(
+                              //       context,
+                              //       AppRouterNames.rUpdateProfileLayoutRoute,
+                              //     );
+                              //   },
+                              //   child: const MediumText(
+                              //     text: 'View and Edit profile',
+                              //     color: AppColor.teal,
+                              //   ),
+                              // ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 20.h),
+                    ProfileScreenComponent(
+                      componentTitle: 'Edit Profile',
+                      componentIcon: Icon(
+                        Icons.edit,
+                        size: 30,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      onTap: (){
+                        Navigator.pushNamed(
+                          context,
+                          AppRouterNames.rUpdateProfileLayoutRoute,
+                        );
+                      },
+                    ),
+                    const Divider(
+                      color: AppColor.grey,
+                      thickness: 1,
+                    ),
                     ProfileScreenComponent(
                       onTap: () {
                         Navigator.pushNamed(
@@ -115,54 +136,46 @@ class ProfileScreen extends StatelessWidget {
                       color: AppColor.grey,
                       thickness: 1,
                     ),
-                    ProfileScreenComponent(
-                      componentTitle: 'Invite Friend',
-                      componentIcon: Icon(
-                        Icons.people,
-                        size: 30,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                    ),
-                    const Divider(
-                      color: AppColor.grey,
-                      thickness: 1,
-                    ),
-                    ProfileScreenComponent(
-                      componentTitle: 'Credit & Coupons',
-                      componentIcon: Icon(
-                        Icons.card_giftcard,
-                        size: 30,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                    ),
-                    const Divider(
-                      color: AppColor.grey,
-                      thickness: 1,
-                    ),
-                    ProfileScreenComponent(
-                      componentTitle: 'Help Center',
-                      componentIcon: Icon(
-                        Icons.help,
-                        size: 30,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                    ),
-                    const Divider(
-                      color: AppColor.grey,
-                      thickness: 1,
-                    ),
-                    ProfileScreenComponent(
-                      componentTitle: 'Payment',
-                      componentIcon: Icon(
-                        Icons.wallet,
-                        size: 30,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                    ),
-                    const Divider(
-                      color: AppColor.grey,
-                      thickness: 1,
-                    ),
+                    // const Divider(
+                    //   color: AppColor.grey,
+                    //   thickness: 1,
+                    // ),
+                    // ProfileScreenComponent(
+                    //   componentTitle: 'Credit & Coupons',
+                    //   componentIcon: Icon(
+                    //     Icons.card_giftcard,
+                    //     size: 30,
+                    //     color: Theme.of(context).iconTheme.color,
+                    //   ),
+                    // ),
+                    // const Divider(
+                    //   color: AppColor.grey,
+                    //   thickness: 1,
+                    // ),
+                    // ProfileScreenComponent(
+                    //   componentTitle: 'Help Center',
+                    //   componentIcon: Icon(
+                    //     Icons.help,
+                    //     size: 30,
+                    //     color: Theme.of(context).iconTheme.color,
+                    //   ),
+                    // ),
+                    // const Divider(
+                    //   color: AppColor.grey,
+                    //   thickness: 1,
+                    // ),
+                    // ProfileScreenComponent(
+                    //   componentTitle: 'Payment',
+                    //   componentIcon: Icon(
+                    //     Icons.wallet,
+                    //     size: 30,
+                    //     color: Theme.of(context).iconTheme.color,
+                    //   ),
+                    // ),
+                    // const Divider(
+                    //   color: AppColor.grey,
+                    //   thickness: 1,
+                    // ),
                     ProfileScreenComponent(
                       onTap: () => Navigator.pushNamed(
                         context,

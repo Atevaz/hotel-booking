@@ -2,10 +2,13 @@ import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/caption_of_onboarding.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
+import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/text_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'dart:ui' as ui;
 
 class BoardingModel {
   final String image;
@@ -27,8 +30,6 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  int currentIndex = 0;
-
   final List<BoardingModel> boarding = [
     BoardingModel(
       image: 'assets/images/onboarding1.png',
@@ -49,79 +50,83 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           'we are constantly adding your Favorite restaurant throughout the territory and arount your area carefully selected',
     ),
   ];
-
   final boardController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Image.asset(
-                'assets/images/logo.png',
-                color: AppColor.teal,
+    return Directionality(
+      textDirection: ui.TextDirection.ltr,
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Image.asset(
+                  'assets/images/HotelTonight.png',
+                  width: 150.w,
+                  height: 150.h,
+                  color: AppColor.teal,
+                ),
               ),
-            ),
-            Expanded(
-              flex: 2,
-              child: PageView.builder(
-                physics: const BouncingScrollPhysics(),
+              Expanded(
+                flex: 2,
+                child: PageView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  controller: boardController,
+                  itemBuilder: (context, index) {
+                    return buildOnBoarding(boarding[index]);
+                  },
+                  itemCount: boarding.length,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SmoothPageIndicator(
                 controller: boardController,
-                itemBuilder: (context, index) {
-                  return buildOnBoarding(boarding[index]);
-                },
-                itemCount: boarding.length,
+                count: boarding.length,
+                axisDirection: Axis.horizontal,
+                effect: const ExpandingDotsEffect(
+                    spacing: 4,
+                    radius: 10,
+                    dotWidth: 15,
+                    dotHeight: 5.0,
+                    activeDotColor: AppColor.teal),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SmoothPageIndicator(
-              controller: boardController,
-              count: boarding.length,
-              axisDirection: Axis.horizontal,
-              effect: const ExpandingDotsEffect(
-                  spacing: 4,
-                  radius: 10,
-                  dotWidth: 15,
-                  dotHeight: 5.0,
-                  activeDotColor: AppColor.teal),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            MyButton(
-              text: 'Get Started',
-              onPressed: () => Navigator.pushReplacementNamed(
-                context,
-                AppRouterNames.rLoginLayoutRoute,
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const MediumText(
-                  text: 'Don\'t has any account ?',
-                  fontSize: 16,
+              MyButton(
+                text: 'Get Started',
+                onPressed: () => Navigator.pushReplacementNamed(
+                  context,
+                  AppRouterNames.rLoginLayoutRoute,
                 ),
-                DefaultTextButton(
-                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    AppRouterNames.rRegisterLayoutRoute,
-                    (route) => false,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const MediumText(
+                    text: 'Don\'t has any account ?',
+                    fontSize: 16,
                   ),
-                  text: 'Register',
-                ),
-              ],
-            ),
-          ],
+                  DefaultTextButton(
+                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRouterNames.rRegisterLayoutRoute,
+                      (route) => false,
+                    ),
+                    text: 'Register',
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -134,12 +139,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               model.image,
             ),
           ),
-          Text(
-            model.title,
-            style: const TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+          HeadLineText(
+            text: model.title,
+            fontSize: 25,
+            isUpper: false,
+            maxLines: 3,
             textAlign: TextAlign.center,
           ),
           const SizedBox(

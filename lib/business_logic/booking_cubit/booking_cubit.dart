@@ -10,9 +10,15 @@ part 'booking_state.dart';
 
 class BookingCubit extends Cubit<BookingState> {
   final BookingRepository bookingRepository;
+  bool isEng = true;
 
   BookingCubit({required this.bookingRepository})
       : super(BookingInitialState());
+
+  void updateAppLang(bool isEnglish) {
+    isEng = isEnglish;
+    emit(BookingInitialState());
+  }
 
   static BookingCubit get(BuildContext context) => BlocProvider.of(context);
 
@@ -120,7 +126,7 @@ class BookingCubit extends Cubit<BookingState> {
       count: count,
       page: completedPage,
     );
-    final result = await bookingRepository.getBooking(param);
+    final result = await bookingRepository.getBooking(param, isEng: isEng);
     result.fold(
       (l) {
         emit(GetCompletedBookingErrorState(l));
@@ -130,7 +136,8 @@ class BookingCubit extends Cubit<BookingState> {
           completedBookingList.clear();
         }
         completedBookingList.addAll(r.bookings);
-        emit(GetCompletedBookingSuccessState());
+        emit(GetCompletedBookingSuccessState(
+            isEng ? r.status.enMessage : r.status.arMessage));
       },
     );
   }
@@ -146,7 +153,7 @@ class BookingCubit extends Cubit<BookingState> {
       count: count,
       page: upcomingPage,
     );
-    final result = await bookingRepository.getBooking(param);
+    final result = await bookingRepository.getBooking(param, isEng: isEng);
     result.fold(
       (l) {
         emit(GetUpcomingBookingErrorState(l));
@@ -156,7 +163,8 @@ class BookingCubit extends Cubit<BookingState> {
           upcomingBookingList.clear();
         }
         upcomingBookingList.addAll(r.bookings);
-        emit(GetUpcomingBookingSuccessState());
+        emit(GetUpcomingBookingSuccessState(
+            isEng ? r.status.enMessage : r.status.arMessage));
       },
     );
   }
@@ -172,7 +180,7 @@ class BookingCubit extends Cubit<BookingState> {
       count: count,
       page: canceledPage,
     );
-    final result = await bookingRepository.getBooking(param);
+    final result = await bookingRepository.getBooking(param, isEng: isEng);
     result.fold(
       (l) {
         emit(GetCancelledBookingErrorState(l));
@@ -182,7 +190,8 @@ class BookingCubit extends Cubit<BookingState> {
           cancelledBookingList.clear();
         }
         cancelledBookingList.addAll(r.bookings);
-        emit(GetCancelledBookingSuccessState());
+        emit(GetCancelledBookingSuccessState(
+            isEng ? r.status.enMessage : r.status.arMessage));
       },
     );
   }
@@ -190,13 +199,13 @@ class BookingCubit extends Cubit<BookingState> {
   Future createBooking(int hotelId) async {
     emit(CreateBookingLoadingState());
     final param = BookingCreateParamModel(token: token, hotelId: hotelId);
-    final result = await bookingRepository.createBooking(param);
+    final result = await bookingRepository.createBooking(param, isEng: isEng);
     result.fold(
       (l) {
         emit(CreateBookingErrorState(l));
       },
       (r) {
-        emit(CreateBookingSuccessState(r.enMessage));
+        emit(CreateBookingSuccessState(isEng ? r.enMessage : r.arMessage));
         getUpcomingBooking();
       },
     );
@@ -209,7 +218,7 @@ class BookingCubit extends Cubit<BookingState> {
       type: type,
       bookingId: bookingId,
     );
-    final result = await bookingRepository.updateBooking(param);
+    final result = await bookingRepository.updateBooking(param, isEng: isEng);
     result.fold(
       (l) {
         emit(UpdateBookingErrorState(l));
@@ -217,7 +226,7 @@ class BookingCubit extends Cubit<BookingState> {
       (r) {
         getCancelledBooking();
         getUpcomingBooking();
-        emit(UpdateBookingSuccessState(r.enMessage));
+        emit(UpdateBookingSuccessState(isEng ? r.enMessage : r.arMessage));
       },
     );
   }

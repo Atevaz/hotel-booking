@@ -28,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final agreedText =
       "By signing up, you agreed with our terms of services and privacy policy";
   final haveAccountText = "Already hav account? ";
-  final loginText = "Log in";
+  final loginText = "Login";
   final signupText = "Sign Up";
   final nameText = "User Name";
   final emailText = "Email Address";

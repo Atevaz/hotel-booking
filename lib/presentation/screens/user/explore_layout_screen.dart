@@ -82,10 +82,19 @@ class ExploreLayoutScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                MediumText(
-                                  text:
-                                      "${hotelCubit.searchHotels.length} Hotel Found",
-                                  fontSize: 20.sp,
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    MediumText(
+                                      text:
+                                          "${hotelCubit.searchHotels.length} ",
+                                      fontSize: 20.sp,
+                                    ),
+                                    MediumText(
+                                      text: "Hotel Found",
+                                      fontSize: 20.sp,
+                                    ),
+                                  ],
                                 ),
                                 InkWell(
                                   onTap: () {

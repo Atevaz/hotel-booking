@@ -40,6 +40,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
           nameC.text = cubit.user!.name;
           emailC.text = cubit.user!.email;
         }
+        bool loading = false;
+        if (state is UpdateProfileLoadingState) {
+          loading = true;
+        }
         String? err;
         if (state is UpdateProfileErrorState) {
           err = state.message;
@@ -108,7 +112,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return Container(
-                                          height: 200,
+                                          height: 150,
                                           color: Colors.white,
                                           child: Center(
                                             child: Column(
@@ -165,7 +169,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       children: [
                         const MediumText(text: 'Name'),
                         SizedBox(
-                          height: 25.h,
+                          height: 10.h,
                         ),
                         MyFormField(
                           hintText: '',
@@ -175,16 +179,15 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           borderRadius: 30.r,
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 20.h,
                         ),
                         const MediumText(
                           text: 'Email',
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 10.h,
                         ),
                         MyFormField(
-                          // initialValue: cubit.userModel!.user.email,
                           hintText: '',
                           controller: emailC,
                           validateText: emailC.text,
@@ -205,9 +208,16 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   )
                                 ],
                               )
-                            : Container(),
+                            : loading
+                                ? Padding(
+                                    padding: EdgeInsets.only(top: 10.r),
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  )
+                                : Container(),
                         SizedBox(
-                          height: 30.h,
+                          height: 70.h,
                         ),
                         MyButton(
                           onPressed: () async {

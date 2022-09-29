@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 abstract class GlobalRepository {
   late PreferenceHelper helper;
 
-  Future<bool> isDarkMode();
+  Future<bool?> isDarkMode();
 
-  Future<Locale> appLang();
+  Future<Locale?> appLang();
+
+  Future<bool> appFirstUse();
 
   Future<Either<String, bool>> saveMode({
     required bool isDark,

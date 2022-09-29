@@ -54,9 +54,11 @@ class HomeHotelsView extends StatelessWidget {
                     final isBooking = cubit.upcomingBookingList
                         .any((element) => element.hotelId == hotels[index].id);
                     final bookingId = isBooking
-                        ? cubit.upcomingBookingList.firstWhere(
-                            (element) => element.hotel.id == hotels[index].id,
-                          )
+                        ? cubit.upcomingBookingList
+                            .firstWhere(
+                              (element) => element.hotel.id == hotels[index].id,
+                            )
+                            .id
                         : null;
                     final hotel = hotels[index];
                     item = HomeCardView(

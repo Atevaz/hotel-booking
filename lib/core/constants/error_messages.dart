@@ -23,6 +23,3 @@ const String Remove_User_Ar_Err = 'غير قادر على إزالة المست�
 
 const String Invalid_Email_Format_En_Err = 'Invalid email format!';
 const String Invalid_Email_Format_Ar_Err = 'تنسيق بريد إلكتروني غير صالح!';
-
-const String Password_not_matching_En_Err = 'Passwords do NOT match';
-const String Password_not_matching_Ar_Err = 'كلمات المرور غير متطابقة';

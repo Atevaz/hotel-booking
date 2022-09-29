@@ -4,6 +4,7 @@ import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/core/utils/media_query_extension.dart';
+import 'package:booking_hotel/core/utils/string_extension.dart';
 import 'package:booking_hotel/data/model/hotel_model.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
@@ -12,6 +13,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:ui' as ui;
 
 class HotelMoreDetailsView extends StatelessWidget {
   const HotelMoreDetailsView({
@@ -31,6 +33,15 @@ class HotelMoreDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEng = GlobalCubit.get(context).isEng;
+    final facilities = HotelCubit.get(context).facilities;
+    final myFacilities = facilities
+        .where(
+          (e) => hotel.hotelFacilities!.any(
+            (element) => element.facilityId == e.id || element.id == e.id,
+          ),
+        )
+        .toList();
     return Align(
       alignment: Alignment.bottomCenter,
       child: SizeTransition(
@@ -47,7 +58,7 @@ class HotelMoreDetailsView extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: context.screenWidth,
-                    height: 150.h,
+                    height: 200.h,
                     child: Image(
                       image: NetworkImage(
                         hotel.hotelImages != null &&
@@ -62,7 +73,7 @@ class HotelMoreDetailsView extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: EdgeInsets.all(15.r),
+                        padding: EdgeInsets.all(20.r),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -77,6 +88,8 @@ class HotelMoreDetailsView extends StatelessWidget {
                                       HeadLineText(
                                         text: hotel.name,
                                         fontSize: 22.sp,
+                                        overflow: TextOverflow.visible,
+                                        maxLines: 100,
                                       ),
                                       SizedBox(
                                         height: 5.h,
@@ -85,6 +98,8 @@ class HotelMoreDetailsView extends StatelessWidget {
                                         text: hotel.address,
                                         color: AppColor.grey,
                                         fontSize: 17.sp,
+                                        overflow: TextOverflow.visible,
+                                        maxLines: 100,
                                       )
                                     ],
                                   ),
@@ -93,11 +108,11 @@ class HotelMoreDetailsView extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     HeadLineText(
-                                      text: '\$${hotel.price.toInt()}',
+                                      text: isEng
+                                          ? '\$${hotel.price.toInt()}'
+                                          : '\$${hotel.price.toInt()}'
+                                              .replaceFarsiNumber(),
                                       fontSize: 22.sp,
-                                    ),
-                                    SizedBox(
-                                      height: 10.h,
                                     ),
                                     const MediumText(
                                       text: '/per night',
@@ -107,25 +122,78 @@ class HotelMoreDetailsView extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
                             const Divider(
                               color: AppColor.grey,
                             ),
-                            Text.rich(
-                              TextSpan(
-                                text: '${hotel.rate}',
-                                style: TextStyle(
-                                  fontSize: 40.sp,
-                                  color: AppColor.teal,
-                                  fontWeight: FontWeight.w800,
-                                  fontFamily: 'sans-serif',
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: AppColor.grey.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(15.r),
+                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              child: Column(
                                 children: [
-                                  WidgetSpan(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 15.h),
-                                      child: const MediumText(
-                                        text: '    Overall rating',
+                                  Row(
+                                    children: [
+                                      HeadLineText(
+                                        text: isEng
+                                            ? '${hotel.rate}'
+                                            : '${hotel.rate}'
+                                                .replaceFarsiNumber(),
+                                        textAlign: TextAlign.center,
+                                        color: AppColor.teal,
+                                        fontSize: 40,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20.w),
+                                        child: const MediumText(
+                                          text: 'Overall rating',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: myFacilities.length > 4
+                                        ? 130.h
+                                        : myFacilities.isNotEmpty
+                                            ? 100.h
+                                            : 0,
+                                    child: GridView.builder(
+                                      padding: EdgeInsets.zero,
+                                      itemCount: myFacilities.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        mainAxisExtent: 40,
+                                      ),
+                                      itemBuilder: (_, index) => Row(
+                                        children: [
+                                          MediumText(
+                                              text:
+                                                  '${myFacilities[index].name}'),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          CircleAvatar(
+                                            radius: 15.r,
+                                            backgroundColor: AppColor.teal,
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.check_outlined,
+                                                color: AppColor.white,
+                                                size: 25.r,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -226,10 +294,50 @@ class HotelMoreDetailsView extends StatelessWidget {
                               height: 20.h,
                             ),
                             MyButton(
-                              text:
-                                  !isBooking ? 'Book now' : 'Cancelled Booking',
-                              onPressed: book,
+                              text: !isBooking ? 'Book now' : 'Cancel Booking',
+                              onPressed: !isBooking
+                                  ? book
+                                  : () => showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
+                                            ),
+                                            title: const HeadLineText(
+                                              text: 'Cancel Booking',
+                                              isUpper: false,
+                                            ),
+                                            backgroundColor:
+                                                Theme.of(context).cardColor,
+                                            actionsOverflowButtonSpacing: 10.r,
+                                            actions: [
+                                              MyButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  book();
+                                                },
+                                                text: 'Ok',
+                                                isUpper: false,
+                                              ),
+                                              MyButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                text: 'Cancel',
+                                                isUpper: false,
+                                              ),
+                                            ],
+                                            content: const MediumText(
+                                              text:
+                                                  'Are you sure you want to cancel this booking?',
+                                            ),
+                                          );
+                                        },
+                                      ),
                               borderRadius: 25,
+                              isUpper: false,
+                              color: !isBooking ? AppColor.teal : Colors.red,
                             )
                           ],
                         ),
@@ -245,9 +353,7 @@ class HotelMoreDetailsView extends StatelessWidget {
                 child: Material(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   borderRadius: BorderRadius.circular(25.r),
-                  color: GlobalCubit.get(context).isDark
-                      ? AppColor.white
-                      : Colors.grey.shade400,
+                  color: Colors.black.withOpacity(0.7),
                   child: InkWell(
                     onTap: animate,
                     child: Padding(
@@ -258,17 +364,20 @@ class HotelMoreDetailsView extends StatelessWidget {
                           MediumText(
                             text: 'Less Details',
                             fontSize: 18.sp,
-                            color: AppColor.black,
+                            color: AppColor.white,
                           ),
                           SizedBox(
                             width: 5.w,
                           ),
-                          Transform.rotate(
-                            angle: 270 * pi / 180,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              size: 20.r,
-                              color: AppColor.black,
+                          Directionality(
+                            textDirection: ui.TextDirection.ltr,
+                            child: Transform.rotate(
+                              angle: 270 * pi / 180,
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 20.r,
+                                color: AppColor.white,
+                              ),
                             ),
                           ),
                         ],

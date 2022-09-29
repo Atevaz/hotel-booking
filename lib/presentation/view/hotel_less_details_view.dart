@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/core/utils/media_query_extension.dart';
+import 'package:booking_hotel/core/utils/string_extension.dart';
 import 'package:booking_hotel/data/model/hotel_model.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
 import 'package:booking_hotel/presentation/widget/custom_button.dart';
@@ -9,6 +11,7 @@ import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:ui' as ui;
 
 class HotelLessDetailsView extends StatelessWidget {
   const HotelLessDetailsView({
@@ -28,6 +31,7 @@ class HotelLessDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEng = GlobalCubit.get(context).isEng;
     return Align(
       alignment: Alignment.topCenter,
       child: SizeTransition(
@@ -100,7 +104,10 @@ class HotelLessDetailsView extends StatelessWidget {
                                   Column(
                                     children: [
                                       MediumText(
-                                        text: '\$${hotel.price.toInt()}',
+                                        text: isEng
+                                            ? '\$${hotel.price.toInt()}'
+                                            : '\$${hotel.price.toInt()}'
+                                                .replaceFarsiNumber(),
                                         fontSize: 23.sp,
                                       ),
                                       MediumText(
@@ -118,8 +125,19 @@ class HotelLessDetailsView extends StatelessWidget {
                               Row(
                                 children: [
                                   AppCustomRateBar(rate: hotel.rate),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  MediumText(
+                                    text: isEng
+                                        ? '80'
+                                        : '80'.replaceFarsiNumber(),
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
                                   const MediumText(
-                                    text: ' 80 Reviews',
+                                    text: 'Reviews',
                                     fontSize: 16,
                                   )
                                 ],
@@ -130,9 +148,48 @@ class HotelLessDetailsView extends StatelessWidget {
                             height: 10.h,
                           ),
                           MyButton(
-                            text: !isBooking ? 'Book now' : 'Cancelled Booking',
-                            onPressed: book,
+                            text: !isBooking ? 'Book now' : 'Cancel Booking',
+                            onPressed: !isBooking
+                                ? book
+                                : () => showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20.r),
+                                          ),
+                                          title: const HeadLineText(
+                                            text: 'Cancel Booking',
+                                            isUpper: false,
+                                          ),
+                                          backgroundColor: Theme.of(context).cardColor,
+                                          actionsOverflowButtonSpacing: 10.r,
+                                          actions: [
+                                            MyButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                                book();
+                                              },
+                                              text: 'Ok',
+                                              isUpper: false,
+                                            ),
+                                            MyButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              text: 'Cancel',
+                                              isUpper: false,
+                                            ),
+                                          ],
+                                          content: const MediumText(
+                                            text:
+                                                'Are you sure you want to cancel this booking?',
+                                          ),
+                                        );
+                                      },
+                                    ),
                             borderRadius: 25,
+                            color: !isBooking ? AppColor.teal : Colors.red,
+                            isUpper: false,
                           ),
                         ],
                       ),
@@ -142,7 +199,7 @@ class HotelLessDetailsView extends StatelessWidget {
                       child: Material(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         borderRadius: BorderRadius.circular(25.r),
-                        color: Theme.of(context).cardColor,
+                        color: Colors.black.withOpacity(0.7),
                         child: InkWell(
                           onTap: animate,
                           child: Padding(
@@ -153,15 +210,20 @@ class HotelLessDetailsView extends StatelessWidget {
                                 MediumText(
                                   text: 'More Details',
                                   fontSize: 18.sp,
+                                  color: AppColor.white,
                                 ),
                                 SizedBox(
                                   width: 5.w,
                                 ),
-                                Transform.rotate(
-                                  angle: 90 * pi / 180,
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 20.r,
+                                Directionality(
+                                  textDirection: ui.TextDirection.ltr,
+                                  child: Transform.rotate(
+                                    angle: 90 * pi / 180,
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 20.r,
+                                      color: AppColor.white,
+                                    ),
                                   ),
                                 ),
                               ],

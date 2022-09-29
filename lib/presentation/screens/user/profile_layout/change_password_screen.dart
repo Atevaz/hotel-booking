@@ -30,7 +30,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is ChangePasswordSuccessState) {
-          showToast(text: 'Password Changed', state: ToastStates.SUCCESS);
+          showToast(
+            text: state.message,
+            state: ToastStates.SUCCESS,
+          );
           UserCubit.get(context).updateCachedUser(
             UserCubit.get(context).user!.email,
             passC.text,
@@ -40,6 +43,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       },
       builder: (context, state) {
         final cubit = UserCubit.get(context);
+        bool loading = false;
+        if (state is ChangePasswordLoadingState) {
+          loading = true;
+        }
+        String? err;
+        if (state is ChangePasswordErrorState) {
+          err = state.message;
+        }
         return Scaffold(
           appBar: PreferredSize(
             preferredSize: AppBar().preferredSize,
@@ -104,6 +115,28 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         });
                       },
                     ),
+                    err != null
+                        ? Column(
+                            children: [
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Center(
+                                child: MediumText(
+                                  text: err,
+                                  color: Colors.red,
+                                ),
+                              )
+                            ],
+                          )
+                        : loading
+                            ? Padding(
+                                padding: EdgeInsets.only(top: 10.r),
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : Container(),
                     SizedBox(
                       height: 20.h,
                     ),

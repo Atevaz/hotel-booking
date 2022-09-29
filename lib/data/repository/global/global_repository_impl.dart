@@ -17,32 +17,29 @@ class GlobalRepositoryImpl implements GlobalRepository {
   });
 
   @override
-  Future<Locale> appLang() async {
-    Locale result = const Locale("en");
+  Future<Locale?> appLang() async {
     try {
+      Locale? result;
       String? lang = await helper.getString(key: Current_Language_Key);
       if (lang != null) {
-        result = Locale(lang);
+        result =
+            lang == 'en' ? const Locale('en', 'US') : const Locale('ar', 'EG');
       }
       return result;
     } catch (e) {
       debugPrint('$e');
-      return result;
+      return null;
     }
   }
 
   @override
-  Future<bool> isDarkMode() async {
-    bool result = false;
+  Future<bool?> isDarkMode() async {
     try {
       bool? isDark = await helper.getBool(key: Current_Theme_Mode_Key);
-      if (isDark != null) {
-        result = isDark;
-      }
-      return result;
+      return isDark;
     } catch (e) {
       debugPrint('$e');
-      return result;
+      return null;
     }
   }
 
@@ -87,6 +84,23 @@ class GlobalRepositoryImpl implements GlobalRepository {
       return Right(result);
     } on PreferenceException catch (e) {
       return Left(isEng ? e.enMessage : e.arMessage);
+    }
+  }
+
+  @override
+  Future<bool> appFirstUse() async {
+    try {
+      bool? firstUser = await helper.getBool(key: App_First_User_Key);
+      if (firstUser == null) {
+        await helper.saveDataSharedPreference(
+          key: App_First_User_Key,
+          value: false,
+        );
+        firstUser = true;
+      }
+      return firstUser;
+    } catch (e) {
+      return true;
     }
   }
 }

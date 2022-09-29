@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/data/repository/global/global_repository.dart';
 import 'package:booking_hotel/presentation/screens/user/booking_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/home_screen.dart';
 import 'package:booking_hotel/presentation/screens/user/profile_layout/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'global_state.dart';
@@ -12,6 +15,8 @@ class GlobalCubit extends Cubit<GlobalState> {
   Locale locale = const Locale("en");
   ThemeMode appMode = ThemeMode.light;
   bool isDark = false;
+  bool isEng = true;
+  bool firstUse = false;
   final GlobalRepository globalRepository;
 
   GlobalCubit({required this.globalRepository}) : super(GlobalInitialState());
@@ -25,16 +30,44 @@ class GlobalCubit extends Cubit<GlobalState> {
   Color mediumTextColor = AppColor.white;
 
   Future<void> initApp() async {
-    isDark = await globalRepository.isDarkMode();
-    locale = await globalRepository.appLang();
+    firstUse = await globalRepository.appFirstUse();
+    final sysIsDark = _getSysThemeMode();
+    final sysLocale = _getSysLocale();
+    final myIsDark = await globalRepository.isDarkMode();
+    final myLocale = await globalRepository.appLang();
+    isDark = myIsDark ?? sysIsDark;
+    locale = myLocale ?? sysLocale;
+    isEng = locale.languageCode == 'en';
+    await _updateAppLocale();
     _updateCurrentMode();
-    emit(GlobalInitState());
+    await _updateAppMode();
+  }
+
+  Locale _getSysLocale() {
+    final sysLocalName = Platform.localeName;
+    if (sysLocalName.contains('ar')) {
+      return const Locale('ar', 'EG');
+    }
+    return const Locale('en', 'US');
+  }
+
+  bool _getSysThemeMode() {
+    final sysThemeMode = SchedulerBinding.instance.window.platformBrightness;
+    if (sysThemeMode == Brightness.light) {
+      return false;
+    }
+    return true;
   }
 
   Future<void> changeAppLocale() async {
     locale = locale == const Locale('ar', 'EG')
         ? const Locale('en', 'US')
         : const Locale('ar', 'EG');
+    isEng = locale.languageCode == 'en';
+    await _updateAppLocale();
+  }
+
+  Future _updateAppLocale() async {
     final result = await globalRepository.saveLang(locale: locale.languageCode);
     result.fold((l) {
       emit(AppLocaleSaveErrorState(l));
@@ -68,6 +101,10 @@ class GlobalCubit extends Cubit<GlobalState> {
   Future<void> changeAppMode() async {
     isDark = !isDark;
     _updateCurrentMode();
+    await _updateAppMode();
+  }
+
+  Future _updateAppMode() async {
     final result = await globalRepository.saveMode(isDark: isDark);
     result.fold((l) {
       emit(AppModeSaveErrorState(l));
@@ -92,42 +129,5 @@ class GlobalCubit extends Cubit<GlobalState> {
   onLogoutReset() {
     currentIndex = 0;
     emit(ChangeNavBarState());
-  }
-
-  Object? val = 'light';
-
-  void changeValueOfRadioButton(value) {
-    val = value;
-    emit(ChangeValueOfRadioButtonAndCloseBottomSheetState());
-  }
-
-  void showThemeBottomSheet() {
-    emit(ShowThemeBottomSheet());
-  }
-
-  void closeThemeBottomSheet() {
-    emit(CloseThemeBottomSheet());
-  }
-
-  IconData suffixForPassword = Icons.visibility_outlined;
-  bool obscureForPassword = true;
-
-  void changePasswordVisibility() {
-    obscureForPassword = !obscureForPassword;
-    suffixForPassword = obscureForPassword
-        ? Icons.visibility_outlined
-        : Icons.visibility_off_outlined;
-    emit(GlobalChangePasswordVisibilityState());
-  }
-
-  IconData suffixForConfirmPassword = Icons.visibility_outlined;
-  bool obscureForConfirmPassword = true;
-
-  void changeConfirmPasswordVisibility() {
-    obscureForConfirmPassword = !obscureForConfirmPassword;
-    suffixForConfirmPassword = obscureForConfirmPassword
-        ? Icons.visibility_outlined
-        : Icons.visibility_off_outlined;
-    emit(GlobalChangeConfirmPasswordVisibilityState());
   }
 }

@@ -14,10 +14,16 @@ part 'hotel_state.dart';
 
 class HotelCubit extends Cubit<HotelState> {
   final HotelRepository hotelRepository;
+  bool isEng = true;
 
   static HotelCubit get(context) => BlocProvider.of(context);
 
   HotelCubit({required this.hotelRepository}) : super(HotelInitialState());
+
+  void updateAppLang(bool isEnglish) {
+    isEng = isEnglish;
+    emit(HotelInitialState());
+  }
 
   /// common
   final int count = 5;
@@ -100,8 +106,7 @@ class HotelCubit extends Cubit<HotelState> {
     emit(GetHotelsLoadingState());
     final param = HotelQueryParamsModel(count: count, page: homeHotelsPage);
     final result = await hotelRepository.getHotels(
-      hotelQueryParamsModel: param,
-    );
+        hotelQueryParamsModel: param, isEng: isEng);
     result.fold((l) {
       emit(GetHotelsLoadingErrorState(l));
     }, (r) {
@@ -306,7 +311,7 @@ class HotelCubit extends Cubit<HotelState> {
 
   Future _getFacilities() async {
     emit(GetFacilitiesLoadingState());
-    final result = await hotelRepository.getFacilities();
+    final result = await hotelRepository.getFacilities(isEng: isEng);
     result.fold((l) {
       emit(GetFacilitiesLoadingErrorState(l));
     }, (r) {
@@ -322,8 +327,7 @@ class HotelCubit extends Cubit<HotelState> {
   ]) async {
     emit(SearchHotelsLoadingState());
     final result = await hotelRepository.searchHotels(
-      hotelQueryParamsModel: paramsModel,
-    );
+        hotelQueryParamsModel: paramsModel, isEng: isEng);
     result.fold((l) {
       emit(SearchHotelsLoadingErrorState(l));
     }, (r) {

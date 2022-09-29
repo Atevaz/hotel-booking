@@ -16,6 +16,7 @@ part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final UserRepository userRepository;
+  bool isEng = true;
   UserModel? user;
 
   UserCubit({required this.userRepository}) : super(UserInitialState());
@@ -24,6 +25,11 @@ class UserCubit extends Cubit<UserState> {
 
   String path = '';
   final ImagePicker _picker = ImagePicker();
+
+  void updateAppLang(bool isEnglish) {
+    isEng = isEnglish;
+    emit(UserInitialState());
+  }
 
   Future pickImage(ImageSource source) async {
     final XFile? photo = await _picker.pickImage(source: source);
@@ -35,7 +41,7 @@ class UserCubit extends Cubit<UserState> {
 
   Future getProfile() async {
     emit(GetProfileLoadingState());
-    final result = await userRepository.getProfile(user!.token);
+    final result = await userRepository.getProfile(user!.token, isEng: isEng);
     result.fold(
       (l) {
         emit(GetProfileErrorState(l));
@@ -59,7 +65,7 @@ class UserCubit extends Cubit<UserState> {
       confirmationPassword: confirmedPassword,
       email: email,
     );
-    final result = await userRepository.changePassword(param);
+    final result = await userRepository.changePassword(param, isEng: isEng);
     result.fold(
       (l) {
         emit(ChangePasswordErrorState(l));
@@ -77,13 +83,21 @@ class UserCubit extends Cubit<UserState> {
     MultipartFile? image,
   }) async {
     emit(UpdateProfileLoadingState());
+    if (email.isNotEmpty && !email.isValidEmail()) {
+      emit(
+        UpdateProfileErrorState(
+          isEng ? Invalid_Email_Format_En_Err : Invalid_Email_Format_Ar_Err,
+        ),
+      );
+      return;
+    }
     final param = ProfileUpdateParamModel(
       token: user!.token,
       name: name,
       email: email,
       image: image,
     );
-    final result = await userRepository.updateProfile(param);
+    final result = await userRepository.updateProfile(param, isEng: isEng);
     result.fold(
       (l) {
         emit(UpdateProfileErrorState(l));
@@ -96,11 +110,9 @@ class UserCubit extends Cubit<UserState> {
     );
   }
 
-  Future loginSaved({
-    bool isEng = true,
-  }) async {
+  Future loginSaved() async {
     emit(LoginSavedLoadingState());
-    final result = await userRepository.loginSaved();
+    final result = await userRepository.loginSaved(isEng: isEng);
     result.fold(
       (l) {
         emit(LoginSavedLoadingErrorState(l));
@@ -114,9 +126,8 @@ class UserCubit extends Cubit<UserState> {
 
   Future login(
     LoginParamModel paramModel,
-    bool rememberMe, {
-    bool isEng = true,
-  }) async {
+    bool rememberMe,
+  ) async {
     emit(LoginLoadingState());
     if (paramModel.email.isNotEmpty && !paramModel.email.isValidEmail()) {
       emit(
@@ -126,7 +137,8 @@ class UserCubit extends Cubit<UserState> {
       );
       return;
     }
-    final result = await userRepository.login(paramModel, rememberMe);
+    final result =
+        await userRepository.login(paramModel, rememberMe, isEng: isEng);
     result.fold(
       (l) {
         emit(LoginLoadingErrorState(l));
@@ -138,11 +150,9 @@ class UserCubit extends Cubit<UserState> {
     );
   }
 
-  Future logout({
-    bool isEng = true,
-  }) async {
+  Future logout() async {
     emit(LogoutLoadingState());
-    final result = await userRepository.logout();
+    final result = await userRepository.logout(isEng: isEng);
     result.fold(
       (l) {
         emit(LogoutLoadingErrorState(l));
@@ -155,9 +165,8 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future register(
-    RegisterParamModel paramModel, {
-    bool isEng = true,
-  }) async {
+    RegisterParamModel paramModel,
+  ) async {
     emit(RegisterLoadingState());
     if (paramModel.email.isNotEmpty && !paramModel.email.isValidEmail()) {
       emit(
@@ -167,7 +176,7 @@ class UserCubit extends Cubit<UserState> {
       );
       return;
     }
-    final result = await userRepository.register(paramModel);
+    final result = await userRepository.register(paramModel, isEng: isEng);
     result.fold(
       (l) {
         emit(RegisterLoadingErrorState(l));
@@ -184,6 +193,7 @@ class UserCubit extends Cubit<UserState> {
     final result = await userRepository.updateCachedUser(
       email: email,
       password: pass,
+      isEng: isEng,
     );
     result.fold(
       (l) {

@@ -1,5 +1,7 @@
+import 'package:booking_hotel/business_logic/global_cubit/global_cubit.dart';
 import 'package:booking_hotel/core/constants/end_points.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/core/utils/string_extension.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
@@ -28,6 +30,7 @@ class HotelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEng = GlobalCubit.get(context).isEng;
     return Material(
       color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
@@ -94,38 +97,25 @@ class HotelCard extends StatelessWidget {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: MediumText(
-                                text: address,
-                                fontSize: 17,
-                                color: AppColor.grey,
-                                maxLines: 1,
+                        Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: AppColor.teal,
+                                size: 20.r,
                               ),
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  const WidgetSpan(
-                                    child: Icon(
-                                      Icons.location_on,
-                                      color: AppColor.teal,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  WidgetSpan(
-                                    child: MediumText(
-                                      text: '$distance km to city',
-                                      fontSize: 16,
-                                      color: AppColor.grey,
-                                      maxLines: 1,
-                                    ),
-                                  )
-                                ],
+                              Expanded(
+                                child: MediumText(
+                                  text: address,
+                                  fontSize: 17,
+                                  color: AppColor.grey,
+                                  maxLines: 1,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 5.h,
@@ -133,9 +123,20 @@ class HotelCard extends StatelessWidget {
                         Row(
                           children: [
                             AppCustomRateBar(rate: rate),
-                            const MediumText(
-                              text: ' 80 Reviews',
-                              fontSize: 17,
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            MediumText(
+                              text: isEng ? '80' : '80'.replaceFarsiNumber(),
+                              fontSize: 17.sp,
+                              color: AppColor.grey,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            MediumText(
+                              text: 'Reviews',
+                              fontSize: 17.sp,
                               color: AppColor.grey,
                             )
                           ],
@@ -150,7 +151,9 @@ class HotelCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       HeadLineText(
-                        text: "\$$price",
+                        text: isEng
+                            ? "\$$price"
+                            : "\$$price".replaceFarsiNumber(),
                         maxLines: 1,
                         fontSize: 20,
                       ),

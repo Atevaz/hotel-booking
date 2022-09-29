@@ -37,20 +37,25 @@ class AppImageViewer extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 8.0.w),
+                  padding: EdgeInsets.only(left: 12.w),
                   child: SizedBox(
                     width: 45.w,
                     height: 45.h,
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColor.teal,
-                      size: 30.r,
+                    child: Center(
+                      child: Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: AppColor.teal,
+                          size: 30.r,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

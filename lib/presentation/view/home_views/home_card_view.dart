@@ -1,4 +1,6 @@
+import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
+import 'package:booking_hotel/core/utils/string_extension.dart';
 import 'package:booking_hotel/presentation/widget/app_custom_rate_bar.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/medium_text.dart';
@@ -33,6 +35,7 @@ class HomeCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEng = GlobalCubit.get(context).isEng;
     return Material(
       elevation: 5.r,
       borderRadius: BorderRadius.circular(20.r),
@@ -141,7 +144,9 @@ class HomeCardView extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               HeadLineText(
-                                text: "\$${price.toInt()}",
+                                text: isEng
+                                    ? "\$${price.toInt()}"
+                                    : "\$${price.toInt()}".replaceFarsiNumber(),
                                 fontSize: 20.sp,
                                 isUpper: false,
                               ),

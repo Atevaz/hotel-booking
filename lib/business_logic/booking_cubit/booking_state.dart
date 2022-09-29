@@ -9,7 +9,11 @@ class BookingIUpdateCubitState extends BookingState {}
 
 class GetCompletedBookingLoadingState extends BookingState {}
 
-class GetCompletedBookingSuccessState extends BookingState {}
+class GetCompletedBookingSuccessState extends BookingState {
+  final String message;
+
+  GetCompletedBookingSuccessState(this.message);
+}
 
 class GetCompletedBookingErrorState extends BookingState {
   final String message;
@@ -19,7 +23,11 @@ class GetCompletedBookingErrorState extends BookingState {
 
 class GetCancelledBookingLoadingState extends BookingState {}
 
-class GetCancelledBookingSuccessState extends BookingState {}
+class GetCancelledBookingSuccessState extends BookingState {
+  final String message;
+
+  GetCancelledBookingSuccessState(this.message);
+}
 
 class GetCancelledBookingErrorState extends BookingState {
   final String message;
@@ -29,7 +37,11 @@ class GetCancelledBookingErrorState extends BookingState {
 
 class GetUpcomingBookingLoadingState extends BookingState {}
 
-class GetUpcomingBookingSuccessState extends BookingState {}
+class GetUpcomingBookingSuccessState extends BookingState {
+  final String message;
+
+  GetUpcomingBookingSuccessState(this.message);
+}
 
 class GetUpcomingBookingErrorState extends BookingState {
   final String message;

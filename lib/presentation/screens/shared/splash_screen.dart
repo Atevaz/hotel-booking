@@ -2,9 +2,13 @@ import 'dart:async';
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
+import 'package:booking_hotel/core/utils/media_query_extension.dart';
 import 'package:booking_hotel/presentation/widget/toast.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:ui' as ui;
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -30,10 +34,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    UserCubit.get(context).loginSaved();
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
-
     animation1 = Tween<double>(begin: 40, end: 20).animate(CurvedAnimation(
         parent: _controller, curve: Curves.fastLinearToSlowEaseIn))
       ..addListener(() {
@@ -44,9 +46,7 @@ class _SplashScreenState extends State<SplashScreen>
           _textOpacity = 1.0;
         });
       });
-
     _controller.forward();
-
     Timer(const Duration(seconds: 3), () {
       if (!mounted) {
         return;
@@ -55,7 +55,6 @@ class _SplashScreenState extends State<SplashScreen>
         _fontSize = 1.06;
       });
     });
-
     Timer(const Duration(seconds: 3), () {
       if (!mounted) {
         return;
@@ -65,7 +64,6 @@ class _SplashScreenState extends State<SplashScreen>
         _containerOpacity = 1;
       });
     });
-
     Timer(const Duration(seconds: 5), () {
       if (!mounted) {
         return;
@@ -81,9 +79,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
         if (state is LoginSavedLoadingErrorState) {
@@ -93,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen>
           );
         } else if (state is LoginSavedLoadedState) {
           if (state.responseModel == null) {
-            Future.delayed(const Duration(seconds: 3)).then(
+            Future.delayed(const Duration(seconds: 4)).then(
               (value) => Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRouterNames.rOnBoardingLayoutRoute,
@@ -107,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen>
               state.responseModel!.user.token,
             );
             UserCubit.get(context).getProfile();
-            Future.delayed(const Duration(seconds: 3)).then(
+            Future.delayed(const Duration(seconds: 4)).then(
               (value) => Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRouterNames.rHomeLayoutRoute,
@@ -123,46 +118,48 @@ class _SplashScreenState extends State<SplashScreen>
             Column(
               children: [
                 AnimatedContainer(
-                    duration: const Duration(milliseconds: 4000),
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    height: height / _fontSize),
+                  duration: const Duration(milliseconds: 4000),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: context.screenHeight / _fontSize,
+                ),
                 AnimatedOpacity(
-                    duration: const Duration(milliseconds: 4000),
-                    opacity: _textOpacity,
-                    child: RichText(
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.end,
-                      textDirection: TextDirection.rtl,
-                      softWrap: true,
-                      maxLines: 1,
-                      textScaleFactor: 1,
-                      text: const TextSpan(
-                        text: 'Hotel',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Cairo',
-                            fontSize: 22,
-                            color: AppColor.blue),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'To',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Cairo',
-                                fontSize: 22,
-                                color: AppColor.yellow),
-                          ),
-                          TextSpan(
-                            text: 'night',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Cairo',
-                                fontSize: 22,
-                                color: AppColor.darkRed),
-                          ),
-                        ],
-                      ),
-                    )),
+                  duration: const Duration(milliseconds: 4000),
+                  opacity: _textOpacity,
+                  child: RichText(
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.end,
+                    textDirection: ui.TextDirection.rtl,
+                    softWrap: true,
+                    maxLines: 1,
+                    textScaleFactor: 1,
+                    text: TextSpan(
+                      text: 'splash1'.tr(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Cairo',
+                          fontSize: 22.sp,
+                          color: AppColor.blue),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'splash2'.tr(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo',
+                              fontSize: 22.sp,
+                              color: AppColor.yellow),
+                        ),
+                        TextSpan(
+                          text: 'splash3'.tr(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo',
+                              fontSize: 22.sp,
+                              color: AppColor.darkRed),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
             Center(
@@ -173,8 +170,8 @@ class _SplashScreenState extends State<SplashScreen>
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 4000),
                   curve: Curves.fastLinearToSlowEaseIn,
-                  height: width / _containerSize,
-                  width: width / _containerSize,
+                  height: context.screenHeight / _containerSize,
+                  width: context.screenWidth / _containerSize,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: AppColor.white,

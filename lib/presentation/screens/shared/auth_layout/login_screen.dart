@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           email: email,
                           password: pass,
                         );
-                        auth.login(param, checked,);
+                        auth.login(param, checked);
                       },
                       text: loginText,
                     ),

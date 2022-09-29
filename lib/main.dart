@@ -20,11 +20,9 @@ Future<void> main() async {
         providers: [
           BlocProvider(
             create: (context) => serviceLocator<GlobalCubit>()..initApp(),
-            lazy: false,
           ),
           BlocProvider(
             create: (_) => serviceLocator<UserCubit>()..loginSaved(),
-            lazy: false,
           ),
           BlocProvider(
             create: (_) => serviceLocator<HotelCubit>(),
@@ -33,7 +31,7 @@ Future<void> main() async {
             create: (_) => serviceLocator<BookingCubit>(),
           ),
         ],
-        child: MyApp(),
+        child: const MyApp(),
       ),
     ),
   );
@@ -44,14 +42,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final isEng = GlobalCubit.get(context).isEng;
+    // UserCubit.get(context).updateAppLang(isEng);
+    // BookingCubit.get(context).updateAppLang(isEng);
+    // HotelCubit.get(context).updateAppLang(isEng);
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       builder: (context, child) {
         return BlocConsumer<GlobalCubit, GlobalState>(
-          listener: (context,state) {
-            debugPrint('helloooooooooooooooooooooooo $state');
-            if(state is AppLocaleSavedState) {
+          listener: (context, state) {
+            if (state is AppLocaleSavedState) {
               context.setLocale(GlobalCubit.get(context).locale);
+              final isEng = GlobalCubit.get(context).isEng;
+              UserCubit.get(context).updateAppLang(isEng);
+              BookingCubit.get(context).updateAppLang(isEng);
+              HotelCubit.get(context).updateAppLang(isEng);
             }
           },
           builder: (context, state) {

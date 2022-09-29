@@ -40,6 +40,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
           nameC.text = cubit.user!.name;
           emailC.text = cubit.user!.email;
         }
+        bool loading = false;
+        if (state is UpdateProfileLoadingState) {
+          loading = true;
+        }
         String? err;
         if (state is UpdateProfileErrorState) {
           err = state.message;
@@ -205,7 +209,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   )
                                 ],
                               )
-                            : Container(),
+                            : loading
+                                ? Padding(
+                                    padding: EdgeInsets.only(top: 10.r),
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  )
+                                : Container(),
                         SizedBox(
                           height: 30.h,
                         ),

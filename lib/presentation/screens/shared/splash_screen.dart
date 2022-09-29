@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
@@ -81,17 +82,23 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
-        if (state is LoginSavedLoadingErrorState) {
+        if (state is LoginSavedLoadingErrorState &&
+            (state.message == Network_Connection_En_Error ||
+                state.message == Network_Connection_Ar_Error)) {
           showToast(
             text: state.message,
             state: ToastStates.ERROR,
           );
         } else if (state is LoginSavedLoadedState) {
           if (state.responseModel == null) {
+            final firstUse = GlobalCubit.get(context).firstUse;
+            print(firstUse);
             Future.delayed(const Duration(seconds: 4)).then(
               (value) => Navigator.pushNamedAndRemoveUntil(
                 context,
-                AppRouterNames.rOnBoardingLayoutRoute,
+                firstUse
+                    ? AppRouterNames.rOnBoardingLayoutRoute
+                    : AppRouterNames.rLoginLayoutRoute,
                 (route) => false,
               ),
             );

@@ -80,7 +80,7 @@ class HomeCardView extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(10.r),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
@@ -93,6 +93,9 @@ class HomeCardView extends StatelessWidget {
                             isUpper: false,
                             maxLines: 1,
                           ),
+                          SizedBox(
+                            height: 8.h,
+                          ),
                           MediumText(
                             text: address,
                             fontSize: 17.sp,
@@ -100,6 +103,9 @@ class HomeCardView extends StatelessWidget {
                             maxLines: 1,
                           ),
                         ],
+                      ),
+                      SizedBox(
+                        height: 15.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

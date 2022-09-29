@@ -132,7 +132,7 @@ class HotelCard extends StatelessWidget {
                               color: AppColor.grey,
                             ),
                             SizedBox(
-                              width: 10.w,
+                              width: 5.w,
                             ),
                             MediumText(
                               text: 'Reviews',
@@ -158,7 +158,7 @@ class HotelCard extends StatelessWidget {
                         fontSize: 20,
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 3.h,
                       ),
                       const MediumText(
                         text: '/per night',

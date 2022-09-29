@@ -112,7 +112,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return Container(
-                                          height: 200,
+                                          height: 150,
                                           color: Colors.white,
                                           child: Center(
                                             child: Column(
@@ -169,7 +169,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       children: [
                         const MediumText(text: 'Name'),
                         SizedBox(
-                          height: 25.h,
+                          height: 10.h,
                         ),
                         MyFormField(
                           hintText: '',
@@ -179,13 +179,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           borderRadius: 30.r,
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 20.h,
                         ),
                         const MediumText(
                           text: 'Email',
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 10.h,
                         ),
                         MyFormField(
                           // initialValue: cubit.userModel!.user.email,
@@ -218,7 +218,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   )
                                 : Container(),
                         SizedBox(
-                          height: 30.h,
+                          height: 70.h,
                         ),
                         MyButton(
                           onPressed: () async {

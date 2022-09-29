@@ -16,6 +16,7 @@ class GlobalCubit extends Cubit<GlobalState> {
   ThemeMode appMode = ThemeMode.light;
   bool isDark = false;
   bool isEng = true;
+  bool firstUse = false;
   final GlobalRepository globalRepository;
 
   GlobalCubit({required this.globalRepository}) : super(GlobalInitialState());
@@ -29,6 +30,7 @@ class GlobalCubit extends Cubit<GlobalState> {
   Color mediumTextColor = AppColor.white;
 
   Future<void> initApp() async {
+    firstUse = await globalRepository.appFirstUse();
     final sysIsDark = _getSysThemeMode();
     final sysLocale = _getSysLocale();
     final myIsDark = await globalRepository.isDarkMode();

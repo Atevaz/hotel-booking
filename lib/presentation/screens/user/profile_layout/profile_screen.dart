@@ -3,9 +3,7 @@ import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
-import 'package:booking_hotel/presentation/widget/medium_text.dart';
 import 'package:booking_hotel/presentation/widget/profile_screen_component.dart';
-import 'package:booking_hotel/presentation/widget/text_button.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,19 +81,6 @@ class ProfileScreen extends StatelessWidget {
                                 text: cubit.user!.name,
                                 isUpper: false,
                               ),
-
-                              // InkWell(
-                              //   onTap: (){
-                              //     Navigator.pushNamed(
-                              //       context,
-                              //       AppRouterNames.rUpdateProfileLayoutRoute,
-                              //     );
-                              //   },
-                              //   child: const MediumText(
-                              //     text: 'View and Edit profile',
-                              //     color: AppColor.teal,
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),
@@ -136,46 +121,6 @@ class ProfileScreen extends StatelessWidget {
                       color: AppColor.grey,
                       thickness: 1,
                     ),
-                    // const Divider(
-                    //   color: AppColor.grey,
-                    //   thickness: 1,
-                    // ),
-                    // ProfileScreenComponent(
-                    //   componentTitle: 'Credit & Coupons',
-                    //   componentIcon: Icon(
-                    //     Icons.card_giftcard,
-                    //     size: 30,
-                    //     color: Theme.of(context).iconTheme.color,
-                    //   ),
-                    // ),
-                    // const Divider(
-                    //   color: AppColor.grey,
-                    //   thickness: 1,
-                    // ),
-                    // ProfileScreenComponent(
-                    //   componentTitle: 'Help Center',
-                    //   componentIcon: Icon(
-                    //     Icons.help,
-                    //     size: 30,
-                    //     color: Theme.of(context).iconTheme.color,
-                    //   ),
-                    // ),
-                    // const Divider(
-                    //   color: AppColor.grey,
-                    //   thickness: 1,
-                    // ),
-                    // ProfileScreenComponent(
-                    //   componentTitle: 'Payment',
-                    //   componentIcon: Icon(
-                    //     Icons.wallet,
-                    //     size: 30,
-                    //     color: Theme.of(context).iconTheme.color,
-                    //   ),
-                    // ),
-                    // const Divider(
-                    //   color: AppColor.grey,
-                    //   thickness: 1,
-                    // ),
                     ProfileScreenComponent(
                       onTap: () => Navigator.pushNamed(
                         context,

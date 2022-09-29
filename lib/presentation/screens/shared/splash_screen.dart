@@ -92,7 +92,6 @@ class _SplashScreenState extends State<SplashScreen>
         } else if (state is LoginSavedLoadedState) {
           if (state.responseModel == null) {
             final firstUse = GlobalCubit.get(context).firstUse;
-            print(firstUse);
             Future.delayed(const Duration(seconds: 4)).then(
               (value) => Navigator.pushNamedAndRemoveUntil(
                 context,

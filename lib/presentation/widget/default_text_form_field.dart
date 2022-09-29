@@ -55,7 +55,6 @@ class MyFormField extends StatelessWidget {
           }
           return null;
         },
-        //onTap: onTap,
         obscureText: isPassword,
         keyboardType: inputType,
         textAlign: textAlign,

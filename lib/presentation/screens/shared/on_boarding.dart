@@ -98,43 +98,39 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               const SizedBox(
                 height: 10,
               ),
-<<<<<<< HEAD
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const MediumText(
-                  text: 'Don\'t have any account ?',
-                  fontSize: 16,
-=======
-              MyButton(
-                text: 'Get Started',
-                onPressed: () => Navigator.pushReplacementNamed(
-                  context,
-                  AppRouterNames.rLoginLayoutRoute,
->>>>>>> master
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const MediumText(
-                    text: 'Don\'t has any account ?',
+                    text: 'Don\'t have any account ?',
                     fontSize: 16,
                   ),
-                  DefaultTextButton(
-                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                  MyButton(
+                    text: 'Get Started',
+                    onPressed: () => Navigator.pushReplacementNamed(
                       context,
-                      AppRouterNames.rRegisterLayoutRoute,
-                      (route) => false,
+                      AppRouterNames.rLoginLayoutRoute,
                     ),
-                    text: 'Register',
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const MediumText(
+                        text: 'Don\'t has any account ?',
+                        fontSize: 16,
+                      ),
+                      DefaultTextButton(
+                        onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          AppRouterNames.rRegisterLayoutRoute,
+                          (route) => false,
+                        ),
+                        text: 'Register',
+                      ),
+                    ],
                   ),
                 ],
               ),

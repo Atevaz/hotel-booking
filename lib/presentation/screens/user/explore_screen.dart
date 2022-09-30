@@ -35,10 +35,6 @@ class ExploreScreen extends StatelessWidget {
                         ? hotelCubit.searchHotels.length + 1
                         : hotelCubit.searchHotels.length,
                     itemBuilder: (context, index) {
-                      final isBooking = bookCubit.upcomingBookingList.any(
-                          (element) =>
-                              element.hotelId ==
-                              hotelCubit.searchHotels[index].id);
                       if (index == hotelCubit.searchHotels.length) {
                         return const Padding(
                           padding: EdgeInsets.only(bottom: 20),
@@ -47,6 +43,10 @@ class ExploreScreen extends StatelessWidget {
                           ),
                         );
                       }
+                      final isBooking = bookCubit.upcomingBookingList.any(
+                          (element) =>
+                              element.hotelId ==
+                              hotelCubit.searchHotels[index].id);
                       return Padding(
                         padding: !searching &&
                                 index == hotelCubit.searchHotels.length - 1
@@ -60,7 +60,8 @@ class ExploreScreen extends StatelessWidget {
                                         null &&
                                     hotelCubit.searchHotels[index].hotelImages!
                                         .isNotEmpty
-                                ? hotelCubit.searchHotels[index].hotelImages![0].image
+                                ? hotelCubit
+                                    .searchHotels[index].hotelImages![0].image
                                 : "",
                             rate: hotelCubit.searchHotels[index].rate,
                             onTap: () {

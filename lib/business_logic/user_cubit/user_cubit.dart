@@ -72,7 +72,8 @@ class UserCubit extends Cubit<UserState> {
       },
       (r) {
         user = r.user;
-        emit(ChangePasswordSuccessState(r.status.arMessage));
+        emit(ChangePasswordSuccessState(
+            isEng ? r.status.enMessage : r.status.arMessage));
       },
     );
   }
@@ -105,7 +106,8 @@ class UserCubit extends Cubit<UserState> {
       (r) {
         user = r.user;
         path = '';
-        emit(UpdateProfileSuccessState(r.status.arMessage));
+        emit(UpdateProfileSuccessState(
+            isEng ? r.status.enMessage : r.status.arMessage));
       },
     );
   }
@@ -159,7 +161,10 @@ class UserCubit extends Cubit<UserState> {
       },
       (r) {
         user = null;
-        emit(LogoutLoadedState());
+        const logoutSuccessArMessage = 'تم تسجيل الخروج';
+        const logoutSuccessEnMessage = 'You have logged out successfully';
+        emit(LogoutLoadedState(
+            isEng ? logoutSuccessEnMessage : logoutSuccessArMessage));
       },
     );
   }

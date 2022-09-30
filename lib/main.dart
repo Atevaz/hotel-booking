@@ -22,7 +22,7 @@ Future<void> main() async {
             create: (context) => serviceLocator<GlobalCubit>()..initApp(),
           ),
           BlocProvider(
-            create: (_) => serviceLocator<UserCubit>()..loginSaved(),
+            create: (_) => serviceLocator<UserCubit>(),
           ),
           BlocProvider(
             create: (_) => serviceLocator<HotelCubit>(),

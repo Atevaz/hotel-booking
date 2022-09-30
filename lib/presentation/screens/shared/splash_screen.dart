@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:booking_hotel/business_logic/booking_cubit/booking_cubit.dart';
 import 'package:booking_hotel/business_logic/hotel_cubit/hotel_cubit.dart';
 import 'package:booking_hotel/business_logic/user_cubit/user_cubit.dart';
+import 'package:booking_hotel/core/constants/error_messages.dart';
 import 'package:booking_hotel/core/router/app_router_names.dart';
 import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/presentation/widget/toast.dart';
@@ -60,8 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
 
     Timer(const Duration(seconds: 4), () {
-      setState(() {
-      });
+      setState(() {});
     });
   }
 
@@ -78,7 +78,9 @@ class _SplashScreenState extends State<SplashScreen>
 
     return BlocListener<UserCubit, UserState>(
         listener: (context, state) {
-          if (state is LoginSavedLoadingErrorState) {
+          if (state is LoginSavedLoadingErrorState &&
+              (state.message == Network_Connection_En_Error ||
+                  state.message == Network_Connection_Ar_Error)) {
             showToast(
               text: state.message,
               state: ToastStates.ERROR,
@@ -86,10 +88,10 @@ class _SplashScreenState extends State<SplashScreen>
           } else if (state is LoginSavedLoadedState) {
             if (state.responseModel == null) {
               Future.delayed(const Duration(seconds: 4)).then(
-                    (value) => Navigator.pushNamedAndRemoveUntil(
+                (value) => Navigator.pushNamedAndRemoveUntil(
                   context,
                   AppRouterNames.rOnBoardingLayoutRoute,
-                      (route) => false,
+                  (route) => false,
                 ),
               );
             } else {
@@ -100,10 +102,10 @@ class _SplashScreenState extends State<SplashScreen>
               );
               UserCubit.get(context).getProfile();
               Future.delayed(const Duration(seconds: 4)).then(
-                    (value) => Navigator.pushNamedAndRemoveUntil(
+                (value) => Navigator.pushNamedAndRemoveUntil(
                   context,
                   AppRouterNames.rHomeLayoutRoute,
-                      (route) => false,
+                  (route) => false,
                 ),
               );
             }
@@ -111,78 +113,78 @@ class _SplashScreenState extends State<SplashScreen>
         },
         child: Scaffold(
             body: Stack(children: [
-              Column(
-                children: [
-                  AnimatedContainer(
-                      duration: const Duration(milliseconds: 5000),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                      height: height / _fontSize),
-                  AnimatedOpacity(
-                      duration: const Duration(milliseconds: 5000),
-                      opacity: _textOpacity,
-                      child: RichText(
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.end,
-                        textDirection: TextDirection.rtl,
-                        softWrap: true,
-                        maxLines: 1,
-                        textScaleFactor: 1,
-                        text: const TextSpan(
-                          text: 'Hotel',
+          Column(
+            children: [
+              AnimatedContainer(
+                  duration: const Duration(milliseconds: 5000),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: height / _fontSize),
+              AnimatedOpacity(
+                  duration: const Duration(milliseconds: 5000),
+                  opacity: _textOpacity,
+                  child: RichText(
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.end,
+                    textDirection: TextDirection.rtl,
+                    softWrap: true,
+                    maxLines: 1,
+                    textScaleFactor: 1,
+                    text: const TextSpan(
+                      text: 'Hotel',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Cairo',
+                          fontSize: 22,
+                          color: AppColor.blue),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'To',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Cairo',
                               fontSize: 22,
-                              color: AppColor.blue),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'To',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Cairo',
-                                  fontSize: 22,
-                                  color: AppColor.yellow),
-                            ),
-                            TextSpan(
-                              text: 'night',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Cairo',
-                                  fontSize: 22,
-                                  color: AppColor.darkRed),
-                            ),
-                          ],
+                              color: AppColor.yellow),
                         ),
-                      )),
-                ],
-              ),
-              Center(
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 4000),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  opacity: _containerOpacity,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 4000),
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    height: width / _containerSize,
-                    width: width / _containerSize,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.circular(30),
+                        TextSpan(
+                          text: 'night',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo',
+                              fontSize: 22,
+                              color: AppColor.darkRed),
+                        ),
+                      ],
                     ),
-                    child: SizedBox(
-                      width: 120,
-                      height: 120,
-                      child: Image.asset(
-                        'assets/images/HotelTonight.png',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                  )),
+            ],
+          ),
+          Center(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 4000),
+              curve: Curves.fastLinearToSlowEaseIn,
+              opacity: _containerOpacity,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 4000),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: width / _containerSize,
+                width: width / _containerSize,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: SizedBox(
+                  width: 120,
+                  height: 120,
+                  child: Image.asset(
+                    'assets/images/HotelTonight.png',
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
-            ])));
+            ),
+          ),
+        ])));
   }
 }
 
@@ -191,22 +193,21 @@ class PageTransition extends PageRouteBuilder {
 
   PageTransition(this.page)
       : super(
-    pageBuilder: (context, animation, anotherAnimation) => page,
-    transitionDuration: const Duration(milliseconds: 5000),
-    transitionsBuilder: (context, animation, anotherAnimation, child) {
-      animation = CurvedAnimation(
-        curve: Curves.easeInOutCirc,
-        parent: animation,
-      );
-      return Align(
-        alignment: Alignment.center,
-        child: SizeTransition(
-          sizeFactor: animation,
-          axisAlignment: 0,
-          child: page,
-        ),
-      );
-    },
-  );
+          pageBuilder: (context, animation, anotherAnimation) => page,
+          transitionDuration: const Duration(milliseconds: 5000),
+          transitionsBuilder: (context, animation, anotherAnimation, child) {
+            animation = CurvedAnimation(
+              curve: Curves.easeInOutCirc,
+              parent: animation,
+            );
+            return Align(
+              alignment: Alignment.center,
+              child: SizeTransition(
+                sizeFactor: animation,
+                axisAlignment: 0,
+                child: page,
+              ),
+            );
+          },
+        );
 }
-

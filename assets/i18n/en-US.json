@@ -1,5 +1,4 @@
 {
-
   "HotelTonight": "HotelTonight",
   "Search Hotels": "Search Hotels",
   "Search": "Search",
@@ -19,6 +18,7 @@
   "Settings": "Settings",
   "Logout": "Logout",
   "Enter your new password": "Enter your new password",
+  "Enter your new password and confirm you password": "Enter your new password and confirm you password",
   "Password": "Password",
   "Confirm Password": "Confirm Password",
   "Apply": "Apply",
@@ -76,5 +76,4 @@
   "Are you sure you want to cancel this booking?": "Are you sure you want to cancel this booking?",
   "Ok": "Ok",
   "Cancel": "Cancel"
-
 }

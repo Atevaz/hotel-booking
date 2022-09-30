@@ -141,6 +141,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       height: 20.h,
                     ),
                     MyButton(
+                      isUpper: false,
                       onPressed: () {
                         cubit.changePassword(
                           password: passC.text,
@@ -148,7 +149,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           email: cubit.user!.email,
                         );
                       },
-                      text: "Change",
+                      text: "Apply",
                     ),
                   ],
                 ),

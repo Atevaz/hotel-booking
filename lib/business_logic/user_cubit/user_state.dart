@@ -99,7 +99,11 @@ class UpdateCachedUserLoadingErrorState extends UserState {
 
 class LogoutLoadingState extends UserState {}
 
-class LogoutLoadedState extends UserState {}
+class LogoutLoadedState extends UserState {
+  final String message;
+
+  LogoutLoadedState(this.message);
+}
 
 class LogoutLoadingErrorState extends UserState {
   final String message;

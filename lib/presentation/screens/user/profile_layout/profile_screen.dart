@@ -4,6 +4,7 @@ import 'package:booking_hotel/core/styles/colors.dart';
 import 'package:booking_hotel/business_logic/business_logic.dart';
 import 'package:booking_hotel/presentation/widget/headline_text.dart';
 import 'package:booking_hotel/presentation/widget/profile_screen_component.dart';
+import 'package:booking_hotel/presentation/widget/toast.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,7 @@ class ProfileScreen extends StatelessWidget {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is LogoutLoadedState) {
+          showToast(text: state.message, state: ToastStates.SUCCESS);
           BookingCubit.get(context).onLogoutReset();
           HotelCubit.get(context).onLogoutReset();
           GlobalCubit.get(context).onLogoutReset();
@@ -49,30 +51,30 @@ class ProfileScreen extends StatelessWidget {
                               CircleAvatar(
                                 radius: 60,
                                 backgroundImage: cubit.user!.image == null ||
-                                    cubit.user!.image ==
-                                        'http://api.mahmoudtaha.com/images'
+                                        cubit.user!.image ==
+                                            'http://api.mahmoudtaha.com/images'
                                     ? const AssetImage('assets/images/user.jpg')
                                     : Image.network(
-                                  !cubit.user!.image!.contains("http")
-                                      ? "$baseApiUrl$apiImagesVersion/${cubit.user!.image!}"
-                                      : cubit.user!.image!,
-                                  loadingBuilder: (ctx, child, event) =>
-                                  event == null
-                                      ? child
-                                      : const Center(
-                                    child:
-                                    CircularProgressIndicator(),
-                                  ),
-                                  errorBuilder: (ctx, child, err) =>
-                                  err == null
-                                      ? (child as Widget)
-                                      : const Center(
-                                    child: Icon(
-                                      Icons.error,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ).image,
+                                        !cubit.user!.image!.contains("http")
+                                            ? "$baseApiUrl$apiImagesVersion/${cubit.user!.image!}"
+                                            : cubit.user!.image!,
+                                        loadingBuilder: (ctx, child, event) =>
+                                            event == null
+                                                ? child
+                                                : const Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  ),
+                                        errorBuilder: (ctx, child, err) =>
+                                            err == null
+                                                ? (child as Widget)
+                                                : const Center(
+                                                    child: Icon(
+                                                      Icons.error,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                      ).image,
                               ),
                               SizedBox(
                                 height: 10.h,
@@ -94,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                         size: 30,
                         color: Theme.of(context).iconTheme.color,
                       ),
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(
                           context,
                           AppRouterNames.rUpdateProfileLayoutRoute,

@@ -42,10 +42,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isEng = GlobalCubit.get(context).isEng;
-    // UserCubit.get(context).updateAppLang(isEng);
-    // BookingCubit.get(context).updateAppLang(isEng);
-    // HotelCubit.get(context).updateAppLang(isEng);
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       builder: (context, child) {

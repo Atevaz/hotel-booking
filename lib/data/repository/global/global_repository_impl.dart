@@ -86,4 +86,21 @@ class GlobalRepositoryImpl implements GlobalRepository {
       return Left(isEng ? e.enMessage : e.arMessage);
     }
   }
+
+  @override
+  Future<bool> appFirstUse() async {
+    try {
+      bool? firstUser = await helper.getBool(key: App_First_User_Key);
+      if (firstUser == null) {
+        await helper.saveDataSharedPreference(
+          key: App_First_User_Key,
+          value: false,
+        );
+        firstUser = true;
+      }
+      return firstUser;
+    } catch (e) {
+      return true;
+    }
+  }
 }

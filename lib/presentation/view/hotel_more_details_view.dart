@@ -114,9 +114,6 @@ class HotelMoreDetailsView extends StatelessWidget {
                                               .replaceFarsiNumber(),
                                       fontSize: 22.sp,
                                     ),
-                                    // SizedBox(
-                                    //   height: 10.h,
-                                    // ),
                                     const MediumText(
                                       text: '/per night',
                                       color: AppColor.grey,

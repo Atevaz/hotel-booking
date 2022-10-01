@@ -4,10 +4,10 @@ HotelTonight is a mobile application developed using Flutter. It supports both A
 HotelTonight is a hotel booking application. It allows the user to find hotels, book hotels, search for specific hotel, and filter hotels by different filterations like: price, location, and facilities.
 
 ## Table of contents
-- ### [main packages used](https://github.com/Atevaz/hotel-booking/edit/master/README.md#main-packages-used-1)
-- ### [Folder structure](https://github.com/Atevaz/hotel-booking/edit/master/README.md#folder-structure-1)
-- ### [Screenshots 📷](https://github.com/Atevaz/hotel-booking/edit/master/README.md#screenshots-1)
-- ### [Demo video 📹](https://github.com/Atevaz/hotel-booking/edit/master/README.md#demo-video-1)
+- ### [main packages used](https://github.com/Atevaz/hotel-booking/blob/master/README.md#main-packages-used-1)
+- ### [Folder structure](https://github.com/Atevaz/hotel-booking/blob/master/README.md#folder-structure-1)
+- ### [Screenshots 📷](https://github.com/Atevaz/hotel-booking/blob/master/README.md#screenshots-1)
+- ### [Demo video 📹](https://github.com/Atevaz/hotel-booking/blob/master/README.md#demo-video-1)
 
 ## Main packages used
 - [dio](https://pub.dev/packages/dio) to make integration with API

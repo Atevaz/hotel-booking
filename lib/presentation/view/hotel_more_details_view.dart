@@ -295,6 +295,7 @@ class HotelMoreDetailsView extends StatelessWidget {
                             ),
                             MyButton(
                               text: !isBooking ? 'Book now' : 'Cancel Booking',
+                              ///
                               onPressed: !isBooking
                                   ? book
                                   : () => showDialog(

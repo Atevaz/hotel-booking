@@ -107,3 +107,5 @@ Here are some screeshots for the application
 
 ## Demo Video
 
+https://user-images.githubusercontent.com/76849157/193379725-e6e5ad68-cc3d-4199-822a-1337da8e22a5.mp4
+

@@ -45,7 +45,7 @@ class HomeCardView extends StatelessWidget {
         onDoubleTap: onDoubleTap,
         onTap: onTap,
         child: SizedBox(
-          height: 160.h,
+          height: 170.h,
           child: Row(
             children: [
               Expanded(

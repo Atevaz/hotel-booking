@@ -65,8 +65,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 flex: 1,
                 child: Image.asset(
                   'assets/images/HotelTonight.png',
-                  width: 150.w,
-                  height: 150.h,
+                  width: 120.w,
+                  height: 120.h,
                   color: AppColor.teal,
                 ),
               ),
@@ -98,24 +98,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               const SizedBox(
                 height: 10,
               ),
-<<<<<<< HEAD
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const MediumText(
-                  text: 'Don\'t have any account ?',
-                  fontSize: 16,
-=======
               MyButton(
                 text: 'Get Started',
                 onPressed: () => Navigator.pushReplacementNamed(
                   context,
                   AppRouterNames.rLoginLayoutRoute,
->>>>>>> master
                 ),
               ),
               const SizedBox(
@@ -125,14 +112,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const MediumText(
-                    text: 'Don\'t has any account ?',
+                    text: 'Don\'t have any account ?',
                     fontSize: 16,
+                  ),
+
+                  const SizedBox(
+                    height: 10,
                   ),
                   DefaultTextButton(
                     onPressed: () => Navigator.pushNamedAndRemoveUntil(
                       context,
                       AppRouterNames.rRegisterLayoutRoute,
-                      (route) => false,
+                          (route) => false,
                     ),
                     text: 'Register',
                   ),
